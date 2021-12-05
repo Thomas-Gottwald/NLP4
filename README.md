@@ -1,4 +1,4 @@
-# Python Project Template
+# NLP4
 
 <p align="center">
 <a href="https://github.com/ag-gipp/PythonProjectTemplate/actions/workflows/release.yml"><img alt="Actions Status" src="https://github.com/ag-gipp/PythonProjectTemplate/actions/workflows/release.yml/badge.svg">  
