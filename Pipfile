@@ -10,6 +10,10 @@ tests = "py.test tests -s --cov=src --cov-report=term-missing --cov-fail-under 9
 
 [packages]
 numpy = "*"
+pytest = "*"
+arxiv = "*"
+pdfplumber = "*"
+gensim = "*"
 
 [dev-packages]
 pyright = "*"

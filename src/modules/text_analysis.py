@@ -1,6 +1,5 @@
 from typing import List, Set
 
-
 def extract_n_grams(tokenized_documents: List[List[str]], n: int) -> Set[str]:
     """
     Extracts n-grams from a list of tokenized documents.
