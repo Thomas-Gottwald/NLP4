@@ -16,6 +16,11 @@ pdfplumber = "*"
 gensim = "*"
 jieba = "*"
 spacy = "*"
+refextract = "*"
+libmagic = "*"
+python-magic-bin = "*"
+jupyter = "*"
+sentence-transformers = "*"
 
 [dev-packages]
 pyright = "*"
