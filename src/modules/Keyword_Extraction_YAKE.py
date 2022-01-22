@@ -1,41 +1,35 @@
 import os
 import  yake
 import pdfplumber
-import language_processing
+import language_processing as lp
 import PDFMiner
 import arxiv
 from rake_nltk import Rake
+from nltk.corpus import stopwords
 
-'''''
-with pdfplumber.open(path_save_pdf) as pdf:
-    first_page = pdf.pages[0]
-    print(first_page.chars[0])
-pdf.
-'''
-
-path_save_pdf = "C:/Users/jan-p/Documents/Uni Wuppertal/Semester 1/NLP/Projekt NLP4/Test_Paper/Paper_5.pdf"
 
 language = "en"
-max_ngram_size = 1
+max_ngram_size = 10
 deduplication_thresold = 0.5
 deduplication_algo = 'seqm'
 windowSize = 3
 numOfKeywords = 10
 
+# Load of the several research Papers, sorted by relevance. The 5 best PDF are loaded
+search = arxiv.Search( query="nlp keyword extraction",
+    max_results=5, sort_by=arxiv.SortCriterion.Relevance)
 
-search = arxiv.Search(
-    query="nlp keyword extraction",
-    max_results=5,
-    sort_by=arxiv.SortCriterion.Relevance
-    )
-
+# Extracting the Abstract of the Papers
 pdf_abstract = list()
 for result in search.results():
     pdf_abstract.append(result.summary)
 
+# -- Reads the hole document, one special task is that it can read also over two columns
 #pdf = PDFMiner.PDFMiner.getPDFText(path_save_pdf + 'Paper_5.pdf')
 
+# -- Preprocessing of the Text
 #processed_text = language_processing.preprocessing(text = pdf_abstract[4])
+processed_text = lp.remove_stopwords(pdf_abstract[4], stopwords.words('english'))
 processed_text = pdf_abstract[4]
 
 print(processed_text)

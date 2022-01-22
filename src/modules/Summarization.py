@@ -4,14 +4,12 @@ import numpy as np
 import networkx as nx
 
 
-def read_article(file_name):
-    file = open(file_name, "r")
-    filedata = file.readlines()
-    article = filedata[0].split(". ")
+def read_article(text):
+
+    article = text.split(". ")
     sentences = []
 
     for sentence in article:
-        print(sentence)
         sentences.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
     sentences.pop()
 
@@ -81,4 +79,6 @@ def generate_summary(file_name, top_n=5):
 
 
     # Step 5 - Offcourse, output the summarize texr
-    print("Summarize Text: \n", ". ".join(summarize_text))
+    print("\n Summarize Text: \n------------------------\n", ". ".join(summarize_text))
+
+    return summarize_text

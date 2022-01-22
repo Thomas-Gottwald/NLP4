@@ -34,3 +34,4 @@ class PDFMiner:
         else:
             print(pdfFilenamePath,"Warning: could not extract text from pdf file.")
             return ''
+

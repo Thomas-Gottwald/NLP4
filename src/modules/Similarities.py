@@ -48,4 +48,3 @@ def sBert_1to1_cosine(first, second):
     second = model.encode(second,convert_to_tensor=True)
     return util.cos_sim(first,second)
 
-

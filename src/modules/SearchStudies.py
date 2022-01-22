@@ -86,6 +86,7 @@ def getSimilarReferences(corpus_set, query_set, min_similarity):
                 new_set[paper]["similarity"] = f"{score['score']}, similar to corpus_set Papers"
     return new_set
 
+
 result = snowballing(["9.pdf","15.pdf"],1)
 print(result)
 print(len(result))
