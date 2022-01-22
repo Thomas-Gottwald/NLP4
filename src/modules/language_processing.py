@@ -1,5 +1,19 @@
 import nltk
 from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+
+def remove_stopwords(text = str(""), stopwords = []):
+    filtered_text = ''
+    tokens = nltk.word_tokenize(text)
+    for w in tokens:
+        if w.lower() in stopwords:
+            continue
+        else:
+            filtered_text = filtered_text + w + ' '
+
+    return filtered_text
+
+
 def preprocessing(text = str("")):
     #Lemmatizer = nltk.stem.WordNetLemmatizer()
 
@@ -19,6 +33,3 @@ def preprocessing(text = str("")):
     #text_neu = nltk.chunk.ne_chunk(text_neu)
     #print(text_neu)
     return text_neu
-
-#text = 'Your houses are burning, be carefully and then we all go into our homes'
-#text_neu = preprocessing(text=text)
