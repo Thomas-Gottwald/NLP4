@@ -8,8 +8,6 @@ import json
 # def getAbstracts():
 #     for file in ["3.pdf","7.pdf","9.pdf","11.pdf","15.pdf"]:
 
-
-
 def snowballing(starterSetPath, iterations):
     starterSetAbstracts = []
     referenceAbstracts = dict()
@@ -85,6 +83,7 @@ def getSimilarReferences(corpus_set, query_set, min_similarity):
                 new_set[paper] = query_set[paper]
                 new_set[paper]["similarity"] = f"{score['score']}, similar to corpus_set Papers"
     return new_set
+
 
 result = snowballing(["9.pdf","15.pdf"],1)
 print(result)

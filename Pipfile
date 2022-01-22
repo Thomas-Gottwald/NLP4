@@ -21,6 +21,7 @@ libmagic = "*"
 python-magic-bin = "*"
 jupyter = "*"
 sentence-transformers = "*"
+fire = "*"
 
 [dev-packages]
 pyright = "*"
