@@ -18,11 +18,11 @@ jieba = "*"
 spacy = "*"
 refextract = "*"
 libmagic = "*"
-python-magic-bin = "*"
 jupyter = "*"
 sentence-transformers = "*"
 fire = "*"
 flake8 = "*"
+python-magic = "*"
 
 [dev-packages]
 pyright = "*"
