@@ -2,7 +2,8 @@ import nltk
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 
-def remove_stopwords(text = str(""), stopwords = []):
+
+def remove_stopwords(text=str(""), stopwords=[]):
     filtered_text = ''
     tokens = nltk.word_tokenize(text)
     for w in tokens:

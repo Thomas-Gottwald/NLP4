@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://github.com/ag-gipp/PythonProjectTemplate/actions/workflows/release.yml"><img alt="Actions Status" src="https://github.com/ag-gipp/PythonProjectTemplate/actions/workflows/release.yml/badge.svg">  
-<a href="https://github.com/ag-gipp/PythonProjectTemplate/actions/workflows/main.yml"><img alt="Actions Status" src="https://github.com/ag-gipp/PythonProjectTemplate/actions/workflows/main.yml/badge.svg?branch=main">
+<a href="https://github.com/fwUniGit/NLP4/actions/workflows/main.yml"><img alt="Actions Status" src="https://github.com/ag-gipp/PythonProjectTemplate/actions/workflows/main.yml/badge.svg?branch=main">
 <a href="https://github.com/ag-gipp/PythonProjectTemplate/blob/main/LICENSE"><img alt="License: MIT" src="https://black.readthedocs.io/en/stable/_static/license.svg"></a>
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 </p>
