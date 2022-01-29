@@ -3,7 +3,7 @@ import pandas as pd
 from plotly.subplots import make_subplots as ms
 
 
-def paper_importance_single_paper(text=[], keywords=[]):
+def paper_importance(text=[], keywords=[]):
 
     model = SentenceTransformer('allenai-specter')
 
