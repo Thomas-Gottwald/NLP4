@@ -1,44 +1,34 @@
 import Similarities
 import ReferenceExtraction
 import os
-import logging
 import re
 import json
 
 # def getAbstracts():
 #     for file in ["3.pdf","7.pdf","9.pdf","11.pdf","15.pdf"]:
 
+
 def snowballing(starterSetPath, iterations):
+    starterSet = [starterSetPath + "\\" + x for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
+    print(starterSet)
     starterSetAbstracts = []
     referenceAbstracts = dict()
-    for file in starterSetPath:
+    for file in starterSet:
         starterSetAbstracts.append(
-            re.sub("<\/jats.*?>|<jats.*?>", "", ReferenceExtraction.getAbstractByPdf(file)['abstract']))
-    for file in starterSetPath:
+            re.sub("</jats.*?>|<jats.*?>", "", ReferenceExtraction.getAbstractByPdf(file)['abstract']))
+    for file in starterSet:
         referenceAbstracts.update(ReferenceExtraction.getReferencedPapers(file))
 
-    for paper in referenceAbstracts:
-        if referenceAbstracts[paper]["references"] != "None":
-            referenceList = []
-            for reference in referenceAbstracts[paper]["references"]:
-                referenceList.append(reference.get("DOI"))
-            referenceList = [x for x in referenceList if x is not None]
-            referenceAbstracts[paper]["references"] = referenceList
-
-    filtered = {k:v
-          for k, v in referenceAbstracts.items()
-          if v["abstract"] != 'None'}
-    referenceAbstracts = filtered
-    for key in referenceAbstracts:
-        referenceAbstracts[key]["abstract"] = re.sub("<\/jats.*?>|<jats.*?>", "", referenceAbstracts[key]["abstract"])
+    referenceAbstracts = clean_reference_abstracts(referenceAbstracts)
     corpus_set = starterSetAbstracts
     query_set = referenceAbstracts
     result_set = {}
-    new_set = getSimilarReferences(corpus_set,query_set,0.8)
+
+    new_set = getSimilarReferences(corpus_set, query_set, 0.8)
     result_set.update(new_set.copy())
     print("First Iteration done")
-    print(result_set)
-    i=0
+    i = 0
+
     while i < iterations:
         referenceAbstracts = dict()
         for paperKey in new_set:
@@ -49,29 +39,32 @@ def snowballing(starterSetPath, iterations):
                 for reference in new_set[paperKey]['references']:
                     referenceAbstracts[reference] = ReferenceExtraction.getAbstractFromDoi(reference)
 
-        for paper in referenceAbstracts:
-            if referenceAbstracts[paper]["references"] != "None":
-                referenceList = []
-                for reference in referenceAbstracts[paper]["references"]:
-                    referenceList.append(reference.get("DOI"))
-                referenceList = [x for x in referenceList if x is not None]
-                referenceAbstracts[paper]["references"] = referenceList
-
-        filtered = {k:v
-              for k, v in referenceAbstracts.items()
-              if v["abstract"] != 'None'}
-        referenceAbstracts = filtered
-        for key in referenceAbstracts:
-            referenceAbstracts[key]["abstract"] = re.sub("<\/jats.*?>|<jats.*?>", "",referenceAbstracts[key]["abstract"])
+        referenceAbstracts = clean_reference_abstracts(referenceAbstracts)
         query_set = referenceAbstracts
         new_set.clear()
-        new_set = getSimilarReferences(corpus_set,query_set,0.8)
+        new_set = getSimilarReferences(corpus_set, query_set, 0.8)
         result_set.update(new_set.copy())
         print("-----------------------------NextIteration done-------------------------------")
         print(new_set)
         print(len(new_set))
         i += 1
     return json.dumps(result_set)
+
+
+def clean_reference_abstracts(referenceAbstracts):
+    for paper in referenceAbstracts:
+        if referenceAbstracts[paper]["references"] != "None":
+            referenceList = []
+            for reference in referenceAbstracts[paper]["references"]:
+                referenceList.append(reference.get("DOI"))
+            referenceList = [x for x in referenceList if x is not None]
+            referenceAbstracts[paper]["references"] = referenceList
+
+    filtered = {k:v for k, v in referenceAbstracts.items() if v["abstract"] != 'None'}
+    referenceAbstracts = filtered
+    for key in referenceAbstracts:
+        referenceAbstracts[key]["abstract"] = re.sub("</jats.*?>|<jats.*?>", "", referenceAbstracts[key]["abstract"])
+    return referenceAbstracts
 
 
 def getSimilarReferences(corpus_set, query_set, min_similarity):
@@ -85,8 +78,8 @@ def getSimilarReferences(corpus_set, query_set, min_similarity):
     return new_set
 
 
-result = snowballing(["9.pdf","15.pdf"],1)
-print(result)
-print(len(result))
-with open("test.json", "w") as f:
-    f.write(json.dumps(json.loads(result), indent=4, sort_keys=True))
+# result = snowballing("C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\starter_set",1)
+# print(result)
+# print(len(result))
+# with open("test.json", "w") as f:
+#     f.write(json.dumps(json.loads(result), indent=4, sort_keys=True))
