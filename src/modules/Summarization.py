@@ -17,8 +17,9 @@ def read_article(text):
 
 
 def sentence_similarity(sent1, sent2, stopwords=None):
-    if stopwords is None:
-        stopwords = []
+    stopword = stopwords
+    if stopword is None:
+        stopword = []
 
     sent1 = [w.lower() for w in sent1]
     sent2 = [w.lower() for w in sent2]
@@ -63,11 +64,11 @@ def generate_summary(file_name, top_n=5):
     # Step 1 - Read text anc split it
     sentences = read_article(file_name)
 
-    # Step 2 - Generate Similary Martix across sentences
-    sentence_similarity_martix = build_similarity_matrix(sentences, stop_words)
+    # Step 2 - Generate Similarity Matrix across sentences
+    sentence_similarity_matrix = build_similarity_matrix(sentences, stop_words)
 
-    # Step 3 - Rank sentences in similarity martix
-    sentence_similarity_graph = nx.from_numpy_array(sentence_similarity_martix)
+    # Step 3 - Rank sentences in similarity matrix
+    sentence_similarity_graph = nx.from_numpy_array(sentence_similarity_matrix)
     scores = nx.pagerank(sentence_similarity_graph)
 
     # Step 4 - Sort the rank and pick top sentences
@@ -77,8 +78,7 @@ def generate_summary(file_name, top_n=5):
     for i in range(top_n):
         summarize_text.append(" ".join(ranked_sentence[i][1]))
 
-
-    # Step 5 - Offcourse, output the summarize texr
+    # Step 5 - Ofcourse, output the summarization text
     print("\n Summarize Text: \n------------------------\n", ". ".join(summarize_text))
 
     return summarize_text

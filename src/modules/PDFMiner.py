@@ -7,10 +7,8 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from io import StringIO
 
+
 class PDFMiner:
-    '''
-    PDFMiner wrapper to get PDF Text
-    '''
 
     @classmethod
     def getPDFText(cls,pdfFilenamePath,throwError:bool=True):
