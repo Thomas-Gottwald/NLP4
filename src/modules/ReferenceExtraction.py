@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def getReferencedPapers(pdf):
+def get_referenced_papers(pdf):
     console = logging.StreamHandler()
     console.setLevel(logging.INFO)
     # add the handler to the root logger
@@ -16,7 +16,6 @@ def getReferencedPapers(pdf):
         logging.info(f"Starting scholarcy request with url: {pdf}")
         response = requests.get('https://ref.scholarcy.com/api/references/extract', params={"url": pdf})
     else:
-        print("test")
         logging.info(f"Starting scholarcy request with file: {pdf}")
         with open(pdf, 'rb') as f:
             response = requests.post('https://ref.scholarcy.com/api/references/extract', files={'file': f})
@@ -25,29 +24,32 @@ def getReferencedPapers(pdf):
     referenceLinks = jsonResponse["reference_links"]
     logging.info(f"Found {len(referenceLinks)} refrences in given paper")
 
-    return getAbstracts(referenceLinks)
+    return get_abstracts_of_reference_links(referenceLinks)
 
 
-def getAbstracts(referenceLinks):
+def get_abstracts_of_reference_links(reference_links):
     abstracts = {}
-    for reflink in referenceLinks:
+    for reflink in reference_links:
         if reflink.get("crossref") is not None:
             link = reflink.get("crossref")
             doi = link.replace("https://dx.doi.org/", "")
             abstracts[link.replace("https://dx.doi.org/", "http://api.crossref.org/works/")] = getAbstractFromDoi(doi)
         elif reflink.get("arxiv_url") is not None:
             link = reflink.get("arxiv_url")
-            arxivId = link.replace("https://arxiv.org/pdf/", "")
-            abstracts[link] = getAbstractFromArxiv(arxivId)
+            arxiv_id = link.replace("https://arxiv.org/pdf/", "")
+            abstracts[link] = getAbstractFromArxiv(arxiv_id)
         else:
             link = reflink.get("oa_query")
             if link is None:
                 continue
             else:
-                response = requests.get(link)
-                if response.headers.get('content-type') == "application/pdf":
-                    abstracts[response.url] = getAbstractByPdf(response.url)
-    logging.info(f"Extracted {len(abstracts)} abstract of {len(referenceLinks)} papers")
+                try:
+                    response = requests.get(link)
+                    if response.headers.get('content-type') == "application/pdf":
+                        abstracts[response.url] = getAbstractByPdf(response.url)
+                except requests.exceptions.RequestException:
+                    continue
+    logging.info(f"Extracted {len(abstracts)} abstract of {len(reference_links)} papers")
     return abstracts
 
 
@@ -73,9 +75,9 @@ def getAbstractByPdf(pdf):
         return {'abstract': "None", 'references': "None"}
 
 
-def getAbstractFromArxiv(arxivId):
-    arxivSearch = arxiv.Search(id_list=[arxivId])
-    abstract = next(arxivSearch.results()).summary
+def getAbstractFromArxiv(arxiv_id):
+    arxiv_search = arxiv.Search(id_list=[arxiv_id])
+    abstract = next(arxiv_search.results()).summary
     return {'abstract': abstract, 'references': "None"}
 
 

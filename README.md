@@ -7,6 +7,13 @@
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 </p>
 
+## Project Description
+NLP4 is a 
+## Getting Started
+
+
+
+# Appendix
 A simple starter for building well-maintainted python projects.
 By Jan Philip Wahle.
 

@@ -23,6 +23,8 @@ sentence-transformers = "*"
 fire = "*"
 flake8 = "*"
 python-magic = "*"
+yake = "*"
+rake-nltk = "*"
 
 [dev-packages]
 pyright = "*"

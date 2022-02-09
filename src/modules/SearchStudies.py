@@ -4,9 +4,6 @@ import os
 import re
 import json
 
-# def getAbstracts():
-#     for file in ["3.pdf","7.pdf","9.pdf","11.pdf","15.pdf"]:
-
 
 def snowballing(starterSetPath, iterations):
     starterSet = [starterSetPath + "\\" + x for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
@@ -17,7 +14,7 @@ def snowballing(starterSetPath, iterations):
         starterSetAbstracts.append(
             re.sub("</jats.*?>|<jats.*?>", "", ReferenceExtraction.getAbstractByPdf(file)['abstract']))
     for file in starterSet:
-        referenceAbstracts.update(ReferenceExtraction.getReferencedPapers(file))
+        referenceAbstracts.update(ReferenceExtraction.get_referenced_papers(file))
 
     referenceAbstracts = clean_reference_abstracts(referenceAbstracts)
     corpus_set = starterSetAbstracts
@@ -34,7 +31,7 @@ def snowballing(starterSetPath, iterations):
         for paperKey in new_set:
             corpus_set.append(new_set[paperKey]['abstract'])
             if new_set[paperKey]['references'] == 'None' and "crossref" not in paperKey:
-                referenceAbstracts.update(ReferenceExtraction.getReferencedPapers(paperKey))
+                referenceAbstracts.update(ReferenceExtraction.get_referenced_papers(paperKey))
             elif new_set[paperKey]['references'] != 'None':
                 for reference in new_set[paperKey]['references']:
                     referenceAbstracts[reference] = ReferenceExtraction.getAbstractFromDoi(reference)
