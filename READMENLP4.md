@@ -74,6 +74,16 @@ with the pdf extraction.
 
 
 ### Reference Extraction
+The Reference Extraction uses an the scholarcy REST API which extracts all references from an uploaded PDF.
+The scholarcy reference extraction API returns a JSON string with all references in textual description
+as well as different links to the references. These links can be of 3 diffrent types:
+* crossref => Is a https://dx.doi.org/ link with the respective doi.
+* scholar_url => Is a link leading to the google scholar result of the specific paper
+* oa_querry => Leads either directly to a PDF version of the reference or to the paper page of the publishing journal
+
+Not for all references all 3 of the types are available.
+
+
 
 ### Automatic Snowballing
 The automatic snowballing feature performs a full automized forward snowballing, by extracting all references
