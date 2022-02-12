@@ -79,7 +79,30 @@ It would be beneficial to analyze ways to remove these parts from the extracted 
 This would boost the performance of the NLP techniques like the similarity or keyword extraction when they are used in combination
 with the pdf extraction.
 
+### Abstract Extraction
+The Abstract Extraction Module implements the following 3 functions to extract abstracts from difrent sources.
+```python
+get_abstract_from_doi(doi)
+```
+Returns the abstract of a paper by its given DOI by querrying the crossref API for the doi.
+The crossref API offers abstracts of many free available papers. Nevertheless it is not possible to
+retrieve abstracst of all papers by this api.
 
+
+```python
+get_abstract_from_arxiv_id(arxiv_id)
+```
+Returns the abstract of any paper hosted by arXiv.org given by the respective arxiv_id.
+To retrieve the abstract the arxiv api is used.
+
+
+```python
+get_abstract_by_pdf(pdf)
+```
+This method trys to get the abstracts of a given pdf. Here The pdf parameter can eiter be the path to
+a local pdf file or an online link like (https://arxiv.org/pdf/xxxxxx.pdf).
+The function makes a request to the scolarcy api, which then returns either the doi or the arxiv id, whichever is
+available. And the uses the respective get_abstract function specified above to return the abstract of the given pdf.
 ### Reference Extraction
 The Reference Extraction uses the scholarcy REST API which extracts all references from an uploaded PDF.
 The scholarcy reference extraction API returns a JSON string with all references in textual description
@@ -89,7 +112,6 @@ as well as different links to the references. These links can be of 3 different 
 * oa_query => Leads either directly to a PDF version of the reference or to the paper page of the publishing journal
 
 Not for all references all 3 of the types are available.
-
 
 
 ### Automatic Snowballing

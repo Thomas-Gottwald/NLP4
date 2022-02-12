@@ -3,6 +3,26 @@ import arxiv
 import logging
 
 
+def get_abstract_from_arxiv_id(arxiv_id):
+    arxiv_search = arxiv.Search(id_list=[arxiv_id])
+    abstract = next(arxiv_search.results()).summary
+    return abstract
+
+
+def get_abstract_from_doi(doi):
+    print(doi)
+    try:
+        requestAbs = requests.get('http://api.crossref.org/works/' + doi).json()
+        abstract = requestAbs["message"].get("abstract", "None")
+        if requestAbs["message"].get("reference") is not None:
+            references = requestAbs["message"].get("reference")
+        else:
+            references = "None"
+        return {'abstract': abstract, 'references': references}
+    except:
+        return {'abstract': "None", 'references': "None"}
+
+
 def get_abstract_by_pdf(pdf):
     try:
         if "http" in pdf:
@@ -25,26 +45,6 @@ def get_abstract_by_pdf(pdf):
         return {'abstract': "None", 'references': "None"}
 
 
-def get_abstract_from_arxiv_id(arxiv_id):
-    arxiv_search = arxiv.Search(id_list=[arxiv_id])
-    abstract = next(arxiv_search.results()).summary
-    return {'abstract': abstract, 'references': "None"}
-
-
-def get_abstract_from_doi(doi):
-    print(doi)
-    try:
-        requestAbs = requests.get('http://api.crossref.org/works/' + doi).json()
-        abstract = requestAbs["message"].get("abstract", "None")
-        if requestAbs["message"].get("reference") is not None:
-            references = requestAbs["message"].get("reference")
-        else:
-            references = "None"
-        return {'abstract': abstract, 'references': references}
-    except:
-        return {'abstract': "None", 'references': "None"}
-
-
 def get_abstracts_of_reference_links(reference_links):
     abstracts = {}
     for reflink in reference_links:
@@ -56,7 +56,8 @@ def get_abstracts_of_reference_links(reference_links):
         elif reflink.get("arxiv_url") is not None:
             link = reflink.get("arxiv_url")
             arxiv_id = link.replace("https://arxiv.org/pdf/", "")
-            abstracts[link] = get_abstract_from_arxiv_id(arxiv_id)
+            abs_ref = {'abstract': get_abstract_from_arxiv_id(arxiv_id), 'references': "None"}
+            abstracts[link] = abs_ref
         else:
             link = reflink.get("oa_query")
             if link is None:
@@ -71,4 +72,5 @@ def get_abstracts_of_reference_links(reference_links):
     logging.info(f"Extracted {len(abstracts)} abstract of {len(reference_links)} papers")
     return abstracts
 
-print(get_abstract_by_pdf("C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\modules\\rsos.201199.pdf"))
+#print(get_abstract_by_pdf("C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\modules\\rsos.201199.pdf"))
+
