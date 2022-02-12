@@ -33,5 +33,5 @@ def plot_paper_selection(df=pd.DataFrame()):
         fig.add_scatter(x=df.columns, y=df.iloc[i, :], mode="markers", marker=dict(size=10),
                         row=1, col=1, name=name)
     fig.show()
-
+    return fig
 
