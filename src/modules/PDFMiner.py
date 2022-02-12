@@ -8,7 +8,7 @@ from pdfminer.layout import LAParams
 from io import StringIO
 
 
-def getPDFText(pdfFilenamePath,throwError:bool=True):
+def getPDFText(pdfFilenamePath):
     output_string = StringIO()
     with open(pdfFilenamePath,'rb') as in_file:
         parser = PDFParser(in_file)

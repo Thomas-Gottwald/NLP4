@@ -30,33 +30,36 @@ section of relevant studies.
 Therefore we implement the following features:
 * Feature list
     * PDF Extraction
-    * Keyword Extractor
-    * Keyphrase Extractor
-    * Reference Extraction
-    * Summarization
-    * Similarity
-    * Preprocessing
+    * Reference Extraction 
     * Automatic Snowballing
     * Paper selection
     * Plot Results
+    * Keyword/Keyphrase Extractor
+    * Summarization
+    * Similarity
+    * Preprocessing
+    
 Most of these features are build upon diverse open source projects.
-In the following section we will describe the features and their basis in detail and propose optimazition possbillities
+In the following section we will describe the features and their basis in detail and propose optimization possibilities
 for future work.
 
 *All features can be used via the CLI without programming as well as in code by using the respective functions* 
 All CLI commands expect the user to be called from the project root path "NLP4/"
 
 ### PDF extraction
-The PDF extraction is implemented with the PDFMiner from:
-https://stackoverflow.com/questions/5725278/how-do-i-use-pdfminer-as-a-library/26351413#26351413
-
-https://github.com/pdfminer/pdfminer.six.
-
-It enables the user to extract all text of a PDF in python. An outstanding feature of the PDFMiner is that it recognizes
+The PDF extraction is implemented with the PDFMiner from https://github.com/pdfminer/pdfminer.six.
+ It enables the user to extract all text of a PDF in python. An outstanding feature of the PDFMiner is that it recognizes
 the layout of the given PDF file and therefore is able to extract text from diverse PDFs. This is especially relevant
 because many scientific papers have a two column layout which other PDF extraction frameworks we tried failed on.
 
 #####Usage:
+
+######Input:
+pdfFilenamePath: This Input from type "String" describes the Path of the PDF, from whom you want to extract the Text
+
+throwError: With that bool 
+######Output:
+As output, you get the hole Text from the PDF, including the Titles, Pages and so on as a string. 
 
 ######In code:
 ```python
@@ -71,19 +74,19 @@ pipenv run python main.py functions extractPdfToText <pdfPath> <txtPath>
 
 ##### Possible optimization / future work
 One problem that occurs with the PDF extraction is that disadvantageous parts of the PDF, which contain no usable information
-for our usecase, are also extracted. This means for example the title page with the paper contibutors etc. or food- / head- notes.
+for our use case, are also extracted. This means for example the title page with the paper contributors etc. or food- / head- notes.
 It would be beneficial to analyze ways to remove these parts from the extracted text or recognize them before extracting the text.
 This would boost the performance of the NLP techniques like the similarity or keyword extraction when they are used in combination
 with the pdf extraction.
 
 
 ### Reference Extraction
-The Reference Extraction uses an the scholarcy REST API which extracts all references from an uploaded PDF.
+The Reference Extraction uses the scholarcy REST API which extracts all references from an uploaded PDF.
 The scholarcy reference extraction API returns a JSON string with all references in textual description
-as well as different links to the references. These links can be of 3 diffrent types:
+as well as different links to the references. These links can be of 3 different types:
 * crossref => Is a https://dx.doi.org/ link with the respective doi.
-* scholar_url => Is a link leading to the google scholar result of the specific paper
-* oa_querry => Leads either directly to a PDF version of the reference or to the paper page of the publishing journal
+* scholar_url => Is a link leading to the Google Scholar result of the specific paper
+* oa_query => Leads either directly to a PDF version of the reference or to the paper page of the publishing journal
 
 Not for all references all 3 of the types are available.
 
@@ -94,36 +97,247 @@ The automatic snowballing feature performs a full automized forward snowballing,
 of all PDFs inside a specified folder. The folder defines the seed set for the snowballing. The default path for
 the seed set is NLP/seed_set. With the ReferenceExtraction feature the abstracts of the 
 
+
+
 ### Paper Selection
+This file contains two functions "paper_importance" and "plot_paper_selection" which can be used to select papers on the
+basis of the similarity between the query and the papers you are interested in, and it can show the result in a plot. 
+####paper_importance
+```python
+PaperSelection.paper_importance(text=[], keywords=[])
+```
+This function makes it possible to compare Keywords or a research topic with one or more texts. Therefor it uses the
+keywords and the text and calculates the cosines similarity of those. As result, you get a value for of each keyword 
+relating to all the papers you hand over the function.
+######Inputs: 
+text: The attribute takes a list of texts (strings). So it is possible to calculate the similarity between more than just 
+one text. -> much more efficient. You can use a hole text, phrases or just the abstract. Feel free to try!
 
-### Keyword Extractor
+keywords: Also the attribute "keywords" is a list of strings. Those can represent a list of single keywords, phrases or sentences.
+Which get compared with the list of texts you hand over.
+######Output:
+The function returns a dataframe from pandas. In this you have in  one axis the texts and on the other the several keywords.
+It is a matrix where you can find the evaluation of all the papers and keywords.
+####plot_paper_selection
+```python
+PaperSelection.plot_paper_selection(df=pd.DataFrame())
+```
+This function makes it possible to plot the results from the function "paper_importance". This function creates an 
+interactive plot, where in the x-axe are shown the several keywords and on the y-axe the score regarding the paper.
+The different papers are shown in single traces on this plot. Since it is an interactive plot, it is possible to
+inactivate or activate the single traces 
+######Inputs: 
+The input is a dataframe, which contains the results of the "paper_importance". 
+Just hand over the return of this function. 
+######Output:
+The function returns the object file of the plot. So it is possible to handle this or to save it afterwards. 
+##### Possible optimization / future work
+1. Probably it would be nice to implement a plot methode to all other functions, so it would be easy to evaluate 
+them and have a good overview. 
+2. Right now we assume that it doesn´t matter if we use keywords or a hole sentence to compare it with the text. 
+It might be good the implement several functions. One for words ->Bert and the other for sentence -> SBert
 
-### Keyphrase Extractor
+
+
+###Keyword/Keyphrase Extractor
+This file contains two methods, the "yake_extraction" and the "rake_phrase_extraction" both can be used to extract 
+keyphrases but for single keyword extraction you can only use the "yake_extraction".
+
+
+####yake_extraction
+The yake extraction provides more than on possibility to extract keywords from the text. The function has a lot of input 
+parameter. With them, it is possible to define a lot of properties. 
+```python 
+yake_extraction(text, number_of_keyphrases=10, language='en', words_in_keyphrase=10, deduplication_threshold=0.5)
+```
+######Inputs: 
+text:This Parameter is the String where you want to extract the keywords/phrases.
+
+number_of_keyphrases: With that integer you can define how many keywords/phrases you want to extract.
+
+language: This string defines the language of the text, where you want to extract the data.
+
+words_in_keyphrase: This Parameter is an integer which defines the number of words in a keyphrase. If you actually want 
+to extract single keywords you might use the value "1" otherwise you get longer phrases.
+
+deduplication_threshold: With that threshold it is possible to finetune the extraction. So that the several Keyphrases 
+consists out of duplication. 
+E.g.1 threshold -> low [Keyword, Keyword Extraction, Keywords out of text]
+E.g.2 threshold -> high [Keyword, Extraction, Words out of text]
+
+######Output:
+As output this function returns a dictionary of all the phrases which you defined with "number_of_keyphrases" and the 
+score of it. 
+####rake_phrase_extraction
+This function is a simple implementation to extract keyphrases out of an text. There are no more variables to define. 
+```python 
+rake_phrase_extraction(text, number_of_keywords=10)
+```
+######Inputs: 
+The input of this function is first the text(string) where you want to extract the keyphrases from. The other input 
+"number_of_keywords" is the number how many phrases you want to return.  
+######Output:
+As output this function returns a list of all the phrases which you defined with "number_of_keywords" and the 
+score of it. 
+
+##### Possible optimization / future work
+1. One important task might be to evaluate the functionality of the extractors. 
+2. Also it would be great to find out, which form of text works best. -> Just the abstract, the hole text and so on. 
+
+### Summarization
+The summarization function is implemented with the function from
+https://gist.github.com/edubey/cc41dbdec508a051675daf8e8bba62c5 it creates a summarization out of a text. Therefor it 
+builds up a similarity matrix between all sentences and the text and takes the most valued sentences as sentences for
+the summarization. This file contain four functions for that: read_article, sentence_similarity, build_similarity_matrix
+and generate_summary.
+
+####read_article
+This function reads the text and parse it into the single sentences and also it removes special characters out of the 
+string.
+```python 
+read_article(text)
+```
+######Input
+The input of this function is a text(string) that you want to summarize.
+######Output
+As an output it returns a list of all sentences without the special symbols in it.
+
+####sentence_similarity
+This function compares two sentences with each other and returns a value of the similarity of those both. Also it removes 
+stopwords out of the sentences. This function is used to build up the similarity matrix. 
+```python 
+sentence_similarity(sent1, sent2, stopwords=None)
+```
+######Input
+sent1: Is a string of sentence one.
+
+sent2: Is a string of sentence two.
+
+stopwords: This parameter can be a list where you can hand over the stopwords you want to remove.
+######Output
+The return of this function is a value, which represent the similarity of the two sentences above.
+
+####build_similarity_matrix
+The function gets the list of all sentences and calculates for all of them the similarity to build the matrix.
+```python 
+build_similarity_matrix(sentences, stop_words)
+```
+######Input
+sentences: This is a List of all sentences and should be the return of the function "read_article"
+
+stopwords: Here you can hand over a list of stopwords which get removed before calculating the similarity.
+If the value is "none" no stopwords got removed.
+######Output
+The function returns a matrix in the size of (len(sentences) x len(sentences)) 
+
+####generate_summary
+This function concate all the other functions above. So you just need to call a single function to create a summary. 
+```python 
+generate_summary(file_name, top_n=5)
+```
+######Input
+file_name: This is the input to give the function the Text you want to summarize
+
+top_n: This parameter defines how long your summarize gonna be. E.g. top_n = 5, creates a summary out of the 5 highest
+valued. 
+######Output
+The function returns the summary as a string.
+
+###Similarity
+
+
+###Text Preprocessing
+This file is a implementation of some nltk functions to preprocess the text which you want to work with. This is not
+always necessary, because some of those steps are already implemented in the other functions. 
+Preprocessing steps: tokenize, remove_stopwords, lemmatizing, port_stemmer and position_tag. 
+
+###tokenize
+This function tokenize the text from the input.
+```python 
+tokenize(text)
+```
+######Input
+text: String of the text which should be tokenized.
+######Output
+Returns a list with all tokens.
+###remove_stopwords
+```python 
+remove_stopwords(text=str(""), stops=[])
+```
+######Input
+text: This input parameter is a string from where the stopwords going to be removed. 
+
+stops: Is a list with all the words you want to remove.
+######Output
+
+###lemmatizing
+This function creates lemmas out of single words. 
+```python 
+lemmatizing(text=str(''))
+```
+######Input
+text: This parameter is a string, which is going to be split up by the tokenize function
+######Output
+The output is a text with lemmas, no words.
+
+###port_stemmer 
+This function stems all words out of an text.
+```python 
+port_stemmer(text=str(''))
+```
+######Input
+text: String that contains the text where the words are going to be stemmed. 
+######Output
+This function returns a text with stemmed words. 
+
+###position_tag
+This methode tags all the words in a text. E.g. Verb, adjective ...
+```python 
+position_tag(text)
+```
+######Input
+text: String that contains the text where the words are going to be tagged.
+######Output
+Returns a text with all words and the relating tags. 
 
 
 ## Installation
+
 Provide step-by-step examples and descriptions of how to set up a development environment.
 
 ## API reference
-For small projects with a simple enough API, include the reference docs in this README. For medium-sized and larger projects, provide a link to the API reference docs.
+For small projects with a simple enough API, include the reference docs in this README. For medium-sized and larger
+projects, provide a link to the API reference docs.
 
 ## Tests (optional: only if you have tests)
 Describe and show how to run the tests with code examples.
 
 ## How to use and extend the project? (maybe)
-Include a step-by-step guide that enables others to use and extend your code for their projects. Whether this section is required and whether it should be part of the `README.md` or a separate file depends on your project. If the **very short** `Code Examples` from above comprehensively cover (despite being concise!) all the major functionality of your project already, this section can be omitted. **If you think that users/developers will need more information than the brief code examples above to fully understand your code, this section is mandatory.** If your project requires significant information on code reuse, place the information into a new `.md` file.
+Include a step-by-step guide that enables others to use and extend your code for their projects. Whether this section
+is required and whether it should be part of the `README.md` or a separate file depends on your project. 
+If the **very short** `Code Examples` from above comprehensively cover (despite being concise!) all the major 
+functionality of your project already, this section can be omitted. **If you think that users/developers will need more 
+information than the brief code examples above to fully understand your code, this section is mandatory.** If your 
+project requires significant information on code reuse, place the information into a new `.md` file.
 
 ## Results
-If you performed evaluations as part of your project, include your preliminary results that you also show in your final project presentation, e.g., precision, recall, F1 measure and/or figures highlighting what your project does. If applicable, briefly describe the dataset your created or used first before presenting the evaluated use cases and the results.
+If you performed evaluations as part of your project, include your preliminary results that you also show in your final
+project presentation, e.g., precision, recall, F1 measure and/or figures highlighting what your project does. 
+If applicable, briefly describe the dataset your created or used first before presenting the evaluated use cases 
+and the results.
 
-If you are about to complete your thesis, include the most important findings (precision/recall/F1 measure) and refer to the corresponding pages in your thesis document.
+If you are about to complete your thesis, include the most important findings (precision/recall/F1 measure) and refer 
+to the corresponding pages in your thesis document.
 
 ## License
 Include the project's license. Usually, we suggest MIT or Apache. Ask your supervisor. For example:
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use news-please except in compliance with the License. A copy of the License is included in the project, see the file [LICENSE](LICENSE).
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use news-please except in compliance with 
+the License. A copy of the License is included in the project, see the file [LICENSE](LICENSE).
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+language governing permissions and limitations under the License
 
 ## License of this readme-template (remove this once you replaced this readme-template with your own content)
 This file itself is partially based on [this file](https://gist.github.com/sujinleeme/ec1f50bb0b6081a0adcf9dd84f4e6271). 
