@@ -1,6 +1,6 @@
 import logging
 import requests
-import arxiv
+from AbstractExtraction import get_abstracts_of_reference_links
 logger = logging.getLogger(__name__)
 
 
@@ -24,10 +24,5 @@ def get_referenced_papers(pdf):
 
     return referenceLinks
 
-
-def get_pdfs_of_scholarcy_link(referenceLinks):
-    refLinks = []
-    for reflink in referenceLinks:
-        link = reflink.get("oa_query")
-        if link is not None:
-            refLinks.append(link)
+def get_reference_abstracts(pdf):
+    return get_abstracts_of_reference_links(get_referenced_papers())

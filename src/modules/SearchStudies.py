@@ -15,8 +15,7 @@ def snowballing(starterSetPath, iterations):
         starterSetAbstracts.append(
             re.sub("</jats.*?>|<jats.*?>", "", AbstractExtraction.get_abstract_by_pdf(file)['abstract']))
     for file in starterSet:
-        reference_links = ReferenceExtraction.get_referenced_papers(file)
-        temp_ref_abstracts = AbstractExtraction.get_abstracts_of_reference_links(reference_links)
+        temp_ref_abstracts = ReferenceExtraction.get_reference_abstracts(file)
         reference_abstracts.update(temp_ref_abstracts)
 
     reference_abstracts = cleanup_reference_abstracts(reference_abstracts)

@@ -97,7 +97,7 @@ To retrieve the abstract the arxiv api is used.
 get_abstract_by_pdf(pdf)
 ```
 This method trys to get the abstracts of a given pdf. Here The pdf parameter can eiter be the path to
-a local pdf file or an online link like (https://arxiv.org/pdf/xxxxxx.pdf).
+a local pdf file or an online link, like (https://arxiv.org/pdf/xxxxxx.pdf).
 The function makes a request to the scolarcy api, which then returns either the doi or the arxiv id, whichever is
 available. And the uses the respective get_abstract function specified above to return the abstract of the given pdf.
 ### Reference Extraction
@@ -110,11 +110,46 @@ as well as different links to the references. These links can be of 3 diffrent t
 
 Not for all references all 3 of the types are available.
 
+##### *Input*
+<str> Link to pdf or Path to local pdf file.
+
+##### *Output*
+Returns a dictionary with following format (If not all link types are available the respective key will be missing):
+````json
+{
+  'id': 'Id of refrence in the referencing paper',
+  'entry': 'Title of references',
+  'crossref': '',
+  'scholar_url': 'https://scholar.google.co.uk/...', 
+  'oa_query': 'https://ref.scholarcy.com/....',
+}
+````
+
 
 ### Automatic Snowballing
-The automatic snowballing feature performs a full automized forward snowballing, by extracting all references
-of all PDFs inside a specified folder. The folder defines the seed set for the snowballing. The default path for
-the seed set is NLP/seed_set. With the ReferenceExtraction feature the abstracts of the 
+The automatic snowballing feature performs a full automized forward snowballing, by measuring the similarity of abstracts
+of the references of papers in a given snowballing seed set, with the abstracts of all the papers in the seed set.
+If the similarity of a refrence with any of the seed set abstracts is higher than threshold *t*, the reference will
+be added to the seed set as well. This is done for user specified number of iterations.
+
+The starting seed set must consist of PDF files located in a specified folder. The papers in the seed set should be preselected papers of high relevance
+for your research topic.
+````python
+snowballing(seed_set_path, iterations, similarity_threshold)
+````
+##### *Input*
+
+##### *Output*
+
+
+The snowballing function starts by extracting the abstracts of the seed set papers by using the *get_abstract_by_pdf()* function of the
+*AbstractExtraction* module and adding them to the *corpus_set* variable. After extracting the seed set abstracts, the refrences of the seed set 
+and their respective abstracts are extracted by using the *get_reference_abstracts* function of the *ReferenceExtraction* module.
+The reference abstracts are added to the *querry_set* variable. Then the *corpus_set* and the *querry_set* are passed as parameters to the
+ *get_similar_references* method of the Similarities module to retrieve the similiraty of every retrieved abstract with every seed set abstract.
+Those references that exceed the specified similiraty threshold are than added to two dictioniarys. The *result_set* and the *new_set*.
+The snowballing prcoess is then continued in a while loop for the given number of iterations where in every iteration the *new_set* is appenden to the
+*corpus_set.
 
 ### Paper Selection
 
