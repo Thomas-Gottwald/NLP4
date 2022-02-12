@@ -47,7 +47,11 @@ for future work.
 All CLI commands expect the user to be called from the project root path "NLP4/"
 
 ### PDF extraction
-The PDF extraction is implemented with the PDFMiner from https://github.com/pdfminer/pdfminer.six.
+The PDF extraction is implemented with the PDFMiner from:
+https://stackoverflow.com/questions/5725278/how-do-i-use-pdfminer-as-a-library/26351413#26351413
+
+https://github.com/pdfminer/pdfminer.six.
+
 It enables the user to extract all text of a PDF in python. An outstanding feature of the PDFMiner is that it recognizes
 the layout of the given PDF file and therefore is able to extract text from diverse PDFs. This is especially relevant
 because many scientific papers have a two column layout which other PDF extraction frameworks we tried failed on.
@@ -69,7 +73,7 @@ pipenv run python main.py functions extractPdfToText <pdfPath> <txtPath>
 One problem that occurs with the PDF extraction is that disadvantageous parts of the PDF, which contain no usable information
 for our usecase, are also extracted. This means for example the title page with the paper contibutors etc. or food- / head- notes.
 It would be beneficial to analyze ways to remove these parts from the extracted text or recognize them before extracting the text.
-This would boost the performance of the NLP techniques like the similarity or key word extraction when they are used in combination
+This would boost the performance of the NLP techniques like the similarity or keyword extraction when they are used in combination
 with the pdf extraction.
 
 

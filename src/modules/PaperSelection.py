@@ -28,9 +28,9 @@ def paper_importance(text=[], keywords=[]):
 
 def plot_paper_selection(df=pd.DataFrame()):
 
-    fig = ms(rows=1, cols=1)
+    fig = ms(rows=1, cols=1, x_title='Keywords', y_title='Similarity')
     for i, name in enumerate(df.index):
-        fig.add_scatter(x=df.columns, y=df.iloc[i, :], mode="lines+markers", marker=dict(size=10),
+        fig.add_scatter(x=df.columns, y=df.iloc[i, :], mode="markers", marker=dict(size=10),
                         row=1, col=1, name=name)
     fig.show()
 
