@@ -1,7 +1,6 @@
 import logging
 import requests
 import arxiv
-from AbstractExtraction import get_abstracts_of_reference_links
 logger = logging.getLogger(__name__)
 
 

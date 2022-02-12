@@ -1,45 +1,48 @@
-import Similarities
-import ReferenceExtraction
+import json
 import os
 import re
-import json
+import AbstractExtraction
+import ReferenceExtraction
+import Similarities
 
 
 def snowballing(starterSetPath, iterations):
     starterSet = [starterSetPath + "\\" + x for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
     print(starterSet)
     starterSetAbstracts = []
-    referenceAbstracts = dict()
+    reference_abstracts = dict()
     for file in starterSet:
         starterSetAbstracts.append(
-            re.sub("</jats.*?>|<jats.*?>", "", ReferenceExtraction.getAbstractByPdf(file)['abstract']))
+            re.sub("</jats.*?>|<jats.*?>", "", AbstractExtraction.get_abstract_by_pdf(file)['abstract']))
     for file in starterSet:
-        referenceAbstracts.update(ReferenceExtraction.get_referenced_papers(file))
+        reference_links = ReferenceExtraction.get_referenced_papers(file)
+        temp_ref_abstracts = AbstractExtraction.get_abstracts_of_reference_links(reference_links)
+        reference_abstracts.update(temp_ref_abstracts)
 
-    referenceAbstracts = clean_reference_abstracts(referenceAbstracts)
+    reference_abstracts = cleanup_reference_abstracts(reference_abstracts)
     corpus_set = starterSetAbstracts
-    query_set = referenceAbstracts
+    query_set = reference_abstracts
     result_set = {}
 
-    new_set = getSimilarReferences(corpus_set, query_set, 0.8)
+    new_set = get_similar_references(corpus_set, query_set, 0.8)
     result_set.update(new_set.copy())
     print("First Iteration done")
     i = 0
 
     while i < iterations:
-        referenceAbstracts = dict()
+        reference_abstracts = dict()
         for paperKey in new_set:
             corpus_set.append(new_set[paperKey]['abstract'])
             if new_set[paperKey]['references'] == 'None' and "crossref" not in paperKey:
-                referenceAbstracts.update(ReferenceExtraction.get_referenced_papers(paperKey))
+                reference_abstracts.update(ReferenceExtraction.get_referenced_papers(paperKey))
             elif new_set[paperKey]['references'] != 'None':
                 for reference in new_set[paperKey]['references']:
-                    referenceAbstracts[reference] = ReferenceExtraction.getAbstractFromDoi(reference)
+                    reference_abstracts[reference] = AbstractExtraction.get_abstract_from_doi(reference)
 
-        referenceAbstracts = clean_reference_abstracts(referenceAbstracts)
-        query_set = referenceAbstracts
+        reference_abstracts = cleanup_reference_abstracts(reference_abstracts)
+        query_set = reference_abstracts
         new_set.clear()
-        new_set = getSimilarReferences(corpus_set, query_set, 0.8)
+        new_set = get_similar_references(corpus_set, query_set, 0.8)
         result_set.update(new_set.copy())
         print("-----------------------------NextIteration done-------------------------------")
         print(new_set)
@@ -48,7 +51,7 @@ def snowballing(starterSetPath, iterations):
     return json.dumps(result_set)
 
 
-def clean_reference_abstracts(referenceAbstracts):
+def cleanup_reference_abstracts(referenceAbstracts):
     for paper in referenceAbstracts:
         if referenceAbstracts[paper]["references"] != "None":
             referenceList = []
@@ -64,7 +67,7 @@ def clean_reference_abstracts(referenceAbstracts):
     return referenceAbstracts
 
 
-def getSimilarReferences(corpus_set, query_set, min_similarity):
+def get_similar_references(corpus_set, query_set, min_similarity):
     similarities = Similarities.sBERT_querys(corpus_set, query_set)
     new_set = {}
     for paper in similarities:
