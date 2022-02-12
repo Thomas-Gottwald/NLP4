@@ -7,20 +7,20 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from io import StringIO
 
-output_string = StringIO()
-with open('C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\starter_set\\15.pdf', 'rb') as in_file:
-    parser = PDFParser(in_file)
-    doc = PDFDocument(parser)
-    rsrcmgr = PDFResourceManager()
-    device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-    for page in PDFPage.create_pages(doc):
-        interpreter.process_page(page)
-
-print(output_string.getvalue())
-
 
 def getPDFText(pdfFilenamePath,throwError:bool=True):
+    output_string = StringIO()
+    with open(pdfFilenamePath,'rb') as in_file:
+        parser = PDFParser(in_file)
+        doc = PDFDocument(parser)
+        rsrcmgr = PDFResourceManager()
+        device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
+        interpreter = PDFPageInterpreter(rsrcmgr, device)
+        for page in PDFPage.create_pages(doc):
+            interpreter.process_page(page)
+
+    print(output_string.getvalue())
+
     retstr = StringIO()
     parser = PDFParser(open(pdfFilenamePath,'rb'))
     try:
