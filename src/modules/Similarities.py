@@ -1,6 +1,6 @@
 from sentence_transformers import SentenceTransformer, util
 from AbstractExtraction import get_abstract_by_pdf
-from PDFMiner import getPDFText
+from PDFMiner import get_pdf_text
 
 
 def specter_query_similarity(corpus_set, query_set):
@@ -30,4 +30,4 @@ def pdf_similarity(first, second, only_abstract=False):
             print("Sorry couldn't retrieve the abstracts for both PDFs, try with whole PDF")
         return specter_1to1_cosine(first_abs, second_abs)
     else:
-        return specter_1to1_cosine(getPDFText(first), getPDFText(second))
+        return specter_1to1_cosine(get_pdf_text(first), get_pdf_text(second))

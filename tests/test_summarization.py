@@ -1,6 +1,4 @@
 import arxiv
-import pytest
-from src.modules.PDFMiner import get_pdf_text
 from src.modules.Summarization import generate_summary
 
 
@@ -10,5 +8,3 @@ def test_summarization():
         pdf = result.summary
     summary = generate_summary(pdf, top_n=3)
     assert isinstance(summary, list)
-
-

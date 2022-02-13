@@ -63,7 +63,7 @@ def pdf_similarity(paper1 = "rsos.201199.pdf", paper2="C:\\Users\\fabia\\Pycharm
     print(f"Papers have similarity score of: {similarity}")
 
 
-def extract_pdf_references( pdf="rsos.201199.pdf", save_to_file= ""):
+def extract_pdf_references(pdf="rsos.201199.pdf", save_to_file= ""):
     references = get_referenced_papers(pdf)
     print(references)
     if save_to_file != "":
@@ -71,12 +71,12 @@ def extract_pdf_references( pdf="rsos.201199.pdf", save_to_file= ""):
             f.write(json.dumps(references, indent=4, sort_keys=True))
 
 
-def extract_keyphrases_string( pdf="Tropical Med Int Health - 2020 - Velavan - The COVID%u201019 epidemic.pdf"):
+def extract_keyphrases_string(pdf="Tropical Med Int Health - 2020 - Velavan - The COVID%u201019 epidemic.pdf"):
     """
     Prints extracted KeyPhrases to the given PDF
     :param paper1: path or url to the PDF
     """
-    KeywordKeyphraseExtractor.rake_phrase_extraction(PDFMiner.getPDFText(pdf).rsplit('References',1)[0])
+    KeywordKeyphraseExtractor.rake_phrase_extraction(get_pdf_text(pdf).rsplit('References',1)[0])
 
 
 if __name__ == "__main__":
