@@ -19,12 +19,10 @@ def get_referenced_papers(pdf):
             response = requests.post('https://ref.scholarcy.com/api/references/extract', files={'file': f})
 
     jsonResponse = response.json()
-    referenceLinks = jsonResponse["reference_links"]
-   # logging.info(f"Found {len(referenceLinks)} refrences in given paper")
+    referenceLinks = jsonResponse.get("reference_links","None")
 
     return referenceLinks
 
 
 def get_reference_abstracts(pdf):
     return get_abstracts_of_reference_links(get_referenced_papers(pdf))
-

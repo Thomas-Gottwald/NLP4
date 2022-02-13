@@ -52,14 +52,14 @@ def snowballing(starterSetPath="C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\st
     sb(starterSetPath, iterations)
 
 
-def pdf_similarity(paper1 = "rsos.201199.pdf", paper2="C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\starter_set\\2111.10594v1.Misrepresenting_Scientific_Consensus_on_COVID_19_The_Amplification_of_Dissenting_Scientists_on_Twitter.pdf", only_abstract = False):
+def pdf_similarity(paper1="rsos.201199.pdf", paper2="C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\starter_set\\2111.10594v1.Misrepresenting_Scientific_Consensus_on_COVID_19_The_Amplification_of_Dissenting_Scientists_on_Twitter.pdf", only_abstract=False):
     """
     Returns the cosine similarity of sBert embeddings between of paper1 and paper2
     :param paper1: Path to first paper to be compared
     :param paper2: Path to second paper to be compared
     :param only_abstract If set to true the function will try to extract the abstracts of the pdfs and will only compare those
     """
-    similarity = Similarities.pdf_similarity(paper1,paper2, only_abstract=only_abstract)
+    similarity = Similarities.pdf_similarity(paper1, paper2, only_abstract=only_abstract)
     print(f"Papers have similarity score of: {similarity}")
 
 
