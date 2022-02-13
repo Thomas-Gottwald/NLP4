@@ -34,4 +34,3 @@ def plot_paper_selection(df=pd.DataFrame()):
                         row=1, col=1, name=name)
     fig.show()
     return fig
-

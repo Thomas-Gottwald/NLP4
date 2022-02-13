@@ -63,7 +63,7 @@ throwError: With that bool
 As output, you get the hole Text from the PDF, including the Titles, Pages and so on as a string. 
 
 ######In code:
-```python
+```
 PDFminer.getPDFtext(pdfFilenamePath="", ignore_references = "True")
 ```
 ###### Via CLI
@@ -82,7 +82,7 @@ with the pdf extraction.
 
 ### Abstract Extraction
 The Abstract Extraction Module implements the following 3 functions to extract abstracts from difrent sources.
-```python
+```
 get_abstract_from_doi(doi)
 ```
 Returns the abstract of a paper by its given DOI by querrying the crossref API for the doi.
@@ -90,14 +90,14 @@ The crossref API offers abstracts of many free available papers. Nevertheless it
 retrieve abstracst of all papers by this api.
 
 
-```python
+```
 get_abstract_from_arxiv_id(arxiv_id)
 ```
 Returns the abstract of any paper hosted by arXiv.org given by the respective arxiv_id.
 To retrieve the abstract the arxiv api is used.
 
 
-```python
+```
 get_abstract_by_pdf(pdf)
 ```
 This method trys to get the abstracts of a given pdf. Here The pdf parameter can eiter be the path to
@@ -114,12 +114,11 @@ as well as different links to the references. These links can be of 3 different 
 
 Not for all references all 3 of the types are available.
 
-##### *Input*
+##### Input
 <str> Link to pdf or Path to local pdf file.
-
-##### *Output*
+##### Output
 Returns a dictionary with following format (If not all link types are available the respective key will be missing):
-````json
+```
 {
   'id': 'Id of refrence in the referencing paper',
   'entry': 'Title of references',
@@ -127,8 +126,7 @@ Returns a dictionary with following format (If not all link types are available 
   'scholar_url': 'https://scholar.google.co.uk/...', 
   'oa_query': 'https://ref.scholarcy.com/....',
 }
-````
-
+```
 
 ### Automatic Snowballing
 The automatic snowballing feature performs a full automized forward snowballing, by measuring the similarity of abstracts
@@ -138,7 +136,7 @@ be added to the seed set as well. This is done for user specified number of iter
 
 The starting seed set must consist of PDF files located in a specified folder. The papers in the seed set should be preselected papers of high relevance
 for your research topic.
-````python
+````
 snowballing(seed_set_path, iterations, similarity_threshold)
 ````
 ##### *Input*
@@ -161,7 +159,7 @@ The snowballing prcoess is then continued in a while loop for the given number o
 This file contains two functions "paper_importance" and "plot_paper_selection" which can be used to select papers on the
 basis of the similarity between the query and the papers you are interested in, and it can show the result in a plot. 
 ####paper_importance
-```python
+```
 PaperSelection.paper_importance(text=[], keywords=[])
 ```
 This function makes it possible to compare Keywords or a research topic with one or more texts. Therefore, it uses the
@@ -177,7 +175,7 @@ Which get compared with the list of texts you hand over.
 The function returns a dataframe from pandas. In this you have in  one axis the texts and on the other the several keywords.
 It is a matrix where you can find the evaluation of all the papers and keywords.
 ####plot_paper_selection
-```python
+```
 PaperSelection.plot_paper_selection(df=pd.DataFrame())
 ```
 This function makes it possible to plot the results from the function "paper_importance". This function creates an 
@@ -205,7 +203,7 @@ keyphrases but for single keyword extraction you can only use the "yake_extracti
 ####yake_extraction
 The yake extraction provides more than on possibility to extract keywords from the text. The function has a lot of input 
 parameter. With them, it is possible to define a lot of properties. 
-```python 
+```
 yake_extraction(text, number_of_keyphrases=10, language='en', words_in_keyphrase=10, deduplication_threshold=0.5)
 ```
 ######Inputs: 

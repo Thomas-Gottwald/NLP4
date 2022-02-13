@@ -1,3 +1,5 @@
+# This Code is a Project from https://github.com/pdfminer/pdfminer.six
+
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
 from pdfminer.pdfpage import PDFPage
@@ -8,9 +10,9 @@ from pdfminer.layout import LAParams
 from io import StringIO
 
 
-def getPDFText(pdfFilenamePath):
+def get_pdf_text(pdffilenamepath):
     output_string = StringIO()
-    with open(pdfFilenamePath, 'rb') as in_file:
+    with open(pdffilenamepath, 'rb') as in_file:
         parser = PDFParser(in_file)
         doc = PDFDocument(parser)
         rsrcmgr = PDFResourceManager()
