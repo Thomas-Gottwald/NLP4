@@ -7,21 +7,24 @@ import Similarities
 
 
 def snowballing(starterSetPath, iterations):
-    starterSet = [starterSetPath + "\\" + x for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
-    starterSet = starterSet[0:2]
+    starterSet = [os.path.join(starterSetPath, x) for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
+    starterSet = starterSet[3:4]
     print(starterSet)
-    starterSetAbstracts = []
+    starter_set_abstracts = []
     reference_abstracts = dict()
     for file in starterSet:
-        starterSetAbstracts.append(
-            re.sub("</jats.*?>|<jats.*?>", "", AbstractExtraction.get_abstract_by_pdf(file)))
+        title_abstract = AbstractExtraction.get_abstract_by_pdf(file)
+        print(title_abstract)
+        if title_abstract['abstract'] != "None":
+            title_abstract["abstract"] = re.sub('</jats.*?>|<jats.*?>', "", title_abstract["abstract"])
+            starter_set_abstracts.append(title_abstract)
     for file in starterSet:
         temp_ref_abstracts = ReferenceExtraction.get_reference_abstracts(file)
         reference_abstracts.update(temp_ref_abstracts)
 
     print(reference_abstracts)
     reference_abstracts = cleanup_reference_abstracts(reference_abstracts)
-    corpus_set = starterSetAbstracts
+    corpus_set = starter_set_abstracts
     query_set = reference_abstracts
     result_set = {}
 
@@ -33,12 +36,12 @@ def snowballing(starterSetPath, iterations):
     while i < iterations:
         reference_abstracts = dict()
         for paperKey in new_set:
-            corpus_set.append(new_set[paperKey]['abstract'])
+            corpus_set.append(new_set[paperKey])
             if new_set[paperKey]['references'] == 'None' and "crossref" not in paperKey:
                 reference_abstracts.update(ReferenceExtraction.get_reference_abstracts(paperKey))
             elif new_set[paperKey]['references'] != 'None':
                 for reference in new_set[paperKey]['references']:
-                    reference_abstracts[reference] = AbstractExtraction.get_abstract_from_doi(reference,with_references=True)
+                    reference_abstracts[reference] = AbstractExtraction.get_abstract_from_doi(reference)
 
         reference_abstracts = cleanup_reference_abstracts(reference_abstracts)
         query_set = reference_abstracts
@@ -64,12 +67,12 @@ def cleanup_reference_abstracts(referenceAbstracts):
     filtered = {k:v for k, v in referenceAbstracts.items() if v["abstract"] != 'None'}
     referenceAbstracts = filtered
     for key in referenceAbstracts:
-        referenceAbstracts[key]["abstract"] = re.sub("</jats.*?>|<jats.*?>", "", referenceAbstracts[key]["abstract"])
+        referenceAbstracts[key]["abstract"] = re.sub('</jats.*?>|<jats.*?>', "", referenceAbstracts[key]["abstract"])
     return referenceAbstracts
 
 
 def get_similar_references(corpus_set, query_set, min_similarity):
-    similarities = Similarities.specter_query_similarity(corpus_set, query_set)
+    similarities = Similarities.specter_query_reference_similarity(corpus_set, query_set)
     new_set = {}
     for paper in similarities:
         for score in similarities[paper][0]:
@@ -79,8 +82,8 @@ def get_similar_references(corpus_set, query_set, min_similarity):
     return new_set
 
 
-# result = snowballing("C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\starter_set",1)
-# print(result)
-# print(len(result))
-# with open("test.json", "w") as f:
-#      f.write(json.dumps(json.loads(result), indent=4, sort_keys=True))
+result = snowballing("C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\starter_set",1)
+print(result)
+print(len(result))
+with open("test.json", "w") as f:
+     f.write(json.dumps(json.loads(result), indent=4))

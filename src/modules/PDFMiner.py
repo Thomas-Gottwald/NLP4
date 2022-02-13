@@ -10,7 +10,7 @@ from io import StringIO
 
 def getPDFText(pdfFilenamePath):
     output_string = StringIO()
-    with open(pdfFilenamePath,'rb') as in_file:
+    with open(pdfFilenamePath, 'rb') as in_file:
         parser = PDFParser(in_file)
         doc = PDFDocument(parser)
         rsrcmgr = PDFResourceManager()

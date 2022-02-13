@@ -1,10 +1,8 @@
-import pytest
 from src.modules.PDFMiner import getPDFText
-
+import os
+dirname = os.path.dirname(__file__)
 
 def test_pdf_to_text():
-    pdfString = getPDFText("C:\\Users\\fabia\PycharmProjects\\NLP4\\src\\modules\\rsos.201199.pdf")
+    pdf = os.path.join(dirname, 'test_paper/15.pdf')
+    pdfString = getPDFText(pdf)
     assert isinstance(pdfString, str)
-    assert isinstance("",int)
-
-
