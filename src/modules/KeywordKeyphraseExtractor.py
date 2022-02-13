@@ -22,6 +22,3 @@ def rake_phrase_extraction(text, number_of_keywords=10):
     for phrase in phrases:
         print(phrase)
     return phrases
-
-
-

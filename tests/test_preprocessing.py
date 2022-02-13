@@ -19,5 +19,3 @@ def test_preprocessing():
     assert isinstance(lemma, str)
     assert isinstance(stem, str)
     assert isinstance(tags, list)
-
-

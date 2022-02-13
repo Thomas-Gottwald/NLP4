@@ -10,7 +10,7 @@ def paper_importance(text=[], keywords=[]):
     keyword_corpus = model.encode(keywords, convert_to_tensor=True)
     match_set = {}
     text_corpus = model.encode(text, convert_to_tensor=True)
-    match_set = util.semantic_search(text_corpus, keyword_corpus,  top_k=len(keywords))
+    match_set = util.semantic_search(text_corpus, keyword_corpus, top_k=len(keywords))
 
     rank_title = []
     for i in range(0, len(text)):
