@@ -3,7 +3,7 @@ from rake_nltk import Rake
 
 
 def yake_extraction(text, number_of_keyphrases=10, language='en', words_in_keyphrase=10, deduplication_threshold=0.5):
-    keyword_extractor = yake.KeywordExtractor(lan=language, n=words_in_keyphrase, dedupLim=deduplication_threshold,  top=number_of_keyphrases)
+    keyword_extractor = yake.KeywordExtractor(lan=language, n=words_in_keyphrase, dedupLim=deduplication_threshold, top=number_of_keyphrases)
     phrases = keyword_extractor.extract_keywords(text)
     print('-----------Yake Key-phrases---------------------------------------------')
     for phrase in phrases:
@@ -21,6 +21,3 @@ def rake_phrase_extraction(text, number_of_keywords=10):
     for phrase in phrases:
         print(phrase)
     return phrases
-
-
-

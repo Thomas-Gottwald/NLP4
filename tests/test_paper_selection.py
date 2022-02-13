@@ -1,7 +1,8 @@
 import arxiv
-import pytest
 import pandas
-from src.modules.PaperSelection import paper_importance, plot_paper_selection
+import os
+from src.modules.PaperSelection import paper_importance, plot_paper_selection, reference_importance_by_keyword
+dirname = os.path.dirname(__file__)
 
 
 def test_paper_selection():
@@ -14,7 +15,9 @@ def test_paper_selection():
         rank_title.append(result.title)
     df = paper_importance(pdf_abstract, research_keywords)
     fig = plot_paper_selection(df)
-    assert isinstance(df, pandas.DataFrame )
+    assert isinstance(df, pandas.DataFrame)
     assert isinstance(fig, object)
 
 
+def test_select_snowballing_results():
+    reference_importance_by_keyword(os.path.join(dirname, 'test.json'), ['conspiracy', 'missinformation', 'vaccination', 'test', 'whale'])

@@ -1,0 +1,405 @@
+[
+    {
+        "entry": "1. Roser M, Ritchie H, Ortiz-Ospina E, Hasell J. 2020 Coronavirus pandemic (COVID-19). Our World Data. See https://ourworldindata.org/coronavirus (accessed on 18 May 2020).",
+        "id": "1",
+        "url": "https://ourworldindata.org/coronavirus"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1038/s41562-020-0884-z",
+        "entry": "2. Van Bavel JJ et al. 2020 Using social and behavioural science to support COVID-19 pandemic response. Nat. Hum. Behav. 4, 460\u2013471. (doi:10.1038/s41562-020-0884-z)",
+        "id": "2",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1038/s41562-020-0884-z"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1016/S01406736(20)30461-X",
+        "entry": "3. Zarocostas J. 2020 How to fight an infodemic. Lancet 395, 676. (doi:10.1016/S01406736(20)30461-X)",
+        "id": "3",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/S01406736%2820%2930461-X"
+    },
+    {
+        "entry": "4. World Health Organization. 2020 Novel Coronavirus (2019-nCoV) Situation Report, 13. See https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200202-sitrep13-ncov-v3.pdf.",
+        "id": "4",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=Organization%2C%20World%20Health%20Novel%20Coronavirus%202020",
+        "url": "https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200202-sitrep13-ncov-v3.pdf"
+    },
+    {
+        "entry": "5. BBC News. 2020 Ofcom: Covid-19 5G theories are \u2018most common\u2019 misinformation. 21 April. See https://www.bbc.co.uk/news/technology52370616",
+        "id": "5",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=BBC%20News%202020%20Ofcom%20Covid19%205G%20theories%20are%20most%20common%20misinformation%2021%20April%20See%20httpswwwbbccouknewstechnology52370616",
+        "url": "https://www.bbc.co.uk/news/technology52370616"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1111/bjso.12394",
+        "entry": "6. Jolley D, Paterson JL. 2020 Pylons ablaze: examining the role of 5G COVID-19 conspiracy beliefs and support for violence. Br. J. Soc. Psychol. 59, 628\u2013640. (doi:10.1111/bjso.12394)",
+        "id": "6",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1111/bjso.12394"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1126/science.aau2706",
+        "entry": "7. Grinberg N, Joseph K, Friedland L, SwireThompson B, Lazer D. 2019 Fake news on Twitter during the 2016 U.S. presidential election. Science 363, 374\u2013378. (doi:10.1126/ science.aau2706) 8. Allcott H, Gentzkow M. 2017 Social media and fake news in the 2016 election. J. Econ. Perspect. 31, 211\u2013236. (doi:10.1257/jep.31.2.211)",
+        "id": "7",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1126/science.aau2706"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1126/sciadv.aay3539",
+        "entry": "9. Allen J, Howland B, Mobius M, Rothschild D, Watts DJ. 2020 Evaluating the fake news problem at the scale of the information ecosystem. Sci. Adv. 6, aay3539. (doi:10.1126/ sciadv.aay3539) 10. Guess A, Nagler J, Tucker J. 2019 Less than you think: prevalence and predictors of fake news dissemination on Facebook. Sci. Adv. 5, aau4586. (doi:10.1126/sciadv.aau4586)",
+        "id": "9",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1126/sciadv.aay3539"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1038/s41586020-2281-1",
+        "entry": "11. Johnson NF et al. 2020 The online competition between proand anti-vaccination views. Nature 582, 230\u2013233. (doi:10.1038/s41586020-2281-1)",
+        "id": "11",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1038/s41586020-2281-1"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1136/bmjgh-2020002604",
+        "entry": "12. Li HO-Y, Bailey A, Huynh D, Chan J. 2020 YouTube as a source of information on COVID19: a pandemic of misinformation? BMJ Glob. Health 5, e002604. (doi:10.1136/bmjgh-2020002604)",
+        "id": "12",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1136/bmjgh-2020002604"
+    },
+    {
+        "entry": "13. Ofcom. 2020 Half of UK adults exposed to false claims about coronavirus. See https://www.ofcom.org.uk/about-ofcom/latest/features-andnews/half-of-uk-adults-exposed-to-false-claimsabout-coronavirus (accessed 18 May 2020).",
+        "id": "13",
+        "url": "https://www.ofcom.org.uk/about-ofcom/latest/features-andnews/half-of-uk-adults-exposed-to-false-claimsabout-coronavirus"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1037/xge0000465",
+        "entry": "14. Pennycook G, Cannon T, Rand DG. 2018 Prior exposure increases perceived accuracy of fake news. J. Exp. Psychol. 147, 1865\u20131880. (doi:10. 1037/xge0000465) 15. Lewandowsky S, Ecker UKH, Cook J. 2017 Beyond misinformation: understanding and coping with the \u2018post-truth\u2019 era. J. Appl. Res. Mem. Cogn. 6, 353\u2013369. (doi:10.1016/j.jarmac. 2017.07.008) 16.",
+        "id": "14",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1037/xge0000465"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.2307/3791630",
+        "entry": "Goertzel T. 1994 Belief in conspiracy theories. Polit. Psychol. 15, 731\u2013742. (doi:10.2307/3791630)",
+        "id": "Goertzel_1994_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.2307/3791630"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1002/acp.3442",
+        "entry": "17. van Prooijen J-W, Staman J, Krouwel APM. 2018 Increased conspiracy beliefs among ethnic and Muslim minorities. Appl. Cogn. Psychol. 32, 661\u2013667. (doi:10.1002/acp.3442)",
+        "id": "17",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1002/acp.3442"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1371/journal.pone.0075637",
+        "entry": "18. Lewandowsky S, Gignac GE, Oberauer K. 2013 The role of conspiracist ideation and worldviews in predicting rejection of science. PLoS One 8, e0075637. (doi:10.1371/journal. pone.0075637)",
+        "id": "18",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1371/journal.pone.0075637"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1177/0963721416654436",
+        "entry": "19. Lewandowsky S, Oberauer K. 2016 Motivated rejection of science. Curr. Dir. Psychol. Sci. 25, 217\u2013222. (doi:10.1177/0963721416654436)",
+        "id": "19",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1177/0963721416654436"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1073/PNAS.1805868115",
+        "entry": "20. Iyengar S, Massey DS. 2018 Scientific communication in a post-truth society. Proc. Natl Acad. Sci. USA 116, 7656\u20137661. (doi:10. 1073/PNAS.1805868115)",
+        "id": "20",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1073/PNAS.1805868115"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1080/13548506.2020.1772988",
+        "entry": "21. Plohl N, Musil B. 2020 Modeling compliance with COVID-19 prevention guidelines: the critical role of trust in science. Psychol. Health Med. 1\u201312. (doi:10.1080/13548506.2020.1772988)",
+        "id": "21",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1080/13548506.2020.1772988"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1111/pops.12681",
+        "entry": "22. van der Linden S, Panagopoulos C, Azevedo F, Jost JT. 2020 The paranoid style in American politics revisited: evidence of an ideological asymmetry in conspiratorial thinking. Polit. Psychol. (doi:10.1111/pops.12681)",
+        "id": "22"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1017/S003329172",
+        "entry": "23. Freeman D et al. 2020 Coronavirus conspiracy beliefs, mistrust, and compliance with government guidelines in England. Psychol. Med. 1\u201330. (doi:10.1017/S003329172 0001890)",
+        "id": "23",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1017/S003329172"
+    },
+    {
+        "entry": "24. Kim M, Cao X. 2016 The impact of exposure to media messages promoting government conspiracy theories on distrust in the government: evidence from a two-stage randomized experiment. Int. J. Commun. 10, 3808\u20133827.",
+        "id": "24",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=Kim%2C%20M.%20Cao%2C%20X.%20The%20impact%20of%20exposure%20to%20media%20messages%20promoting%20government%20conspiracy%20theories%20on%20distrust%20in%20the%20government%3A%20evidence%20from%20a%20two-stage%20randomized%20experiment%202016",
+        "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20M.%20Cao%2C%20X.%20The%20impact%20of%20exposure%20to%20media%20messages%20promoting%20government%20conspiracy%20theories%20on%20distrust%20in%20the%20government%3A%20evidence%20from%20a%20two-stage%20randomized%20experiment%202016"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1007/s11109-014-9287-z",
+        "entry": "25. Einstein KL, Glick DM. 2015 Do I think BLS data are BS? The consequences of conspiracy theories. Polit. Behav. 37, 679\u2013701. (doi:10. 1007/s11109-014-9287-z)",
+        "id": "25",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1007/s11109-014-9287-z"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1177/0163443720906992",
+        "entry": "26. van der Linden S, Panagopoulos C, Roozenbeek J. 2020 You are fake news: the emergence of political bias in perceptions of fake news. Media Cult. Soc. 42, 460\u2013470. (doi:10.1177/ 0163443720906992)",
+        "id": "26",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1177/0163443720906992"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.31234/osf.io/k23cv",
+        "entry": "27. Rothgerber H, Wilson T, Whaley D, Rosenfeld D, Humphrey M, Moore A, Bihl A. 2020 Politicizing the COVID-19 pandemic: ideological differences in adherence to social distancing. PsyArxiv Prepr. (doi:10.31234/osf.io/k23cv)",
+        "id": "27"
+    },
+    {
+        "entry": "28. de Waal JR. 2018 Brexit and Trump voters are more likely to believe in conspiracy theories. YouGov. See https://yougov.co.uk/topics/international/articles-reports/2018/12/14/brexitand-trump-voters-are-more-likely-believe-co (accessed 25 June 2020).",
+        "id": "28",
+        "url": "https://yougov.co.uk/topics/international/articles-reports/2018/12/14/brexitand-trump-voters-are-more-likely-believe-co"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1057/s41599019-0279-9",
+        "entry": "29. Roozenbeek J, van der Linden S. 2019 Fake news game confers psychological resistance against online misinformation. Humanit. Soc. Sci. Commun. 5, 1\u201310. (doi:10.1057/s41599019-0279-9)",
+        "id": "29",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1057/s41599019-0279-9"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.5334/joc.91",
+        "entry": "30. Basol M, Roozenbeek J, van der Linden S. 2020 Good news about bad news: gamified inoculation boosts confidence and cognitive immunity against fake news. J. Cogn. 3, 1\u20139. (doi:10.5334/joc.91)",
+        "id": "30",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.5334/joc.91"
+    },
+    {
+        "entry": "31. Georgiou N, Delfabbro P, Balzan R. 2020 COVID19-related conspiracy beliefs and their relationship with perceived stress and preexisting conspiracy beliefs. Pers. Individ. Dif. 166, 110201.",
+        "id": "31",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=Georgiou%20N%20Delfabbro%20P%20Balzan%20R%202020%20COVID19related%20conspiracy%20beliefs%20and%20their%20relationship%20with%20perceived%20stress%20and%20preexisting%20conspiracy%20beliefs%20Pers%20Individ%20Dif%20166%20110201",
+        "scholar_url": "https://scholar.google.co.uk/scholar?q=Georgiou%20N%20Delfabbro%20P%20Balzan%20R%202020%20COVID19related%20conspiracy%20beliefs%20and%20their%20relationship%20with%20perceived%20stress%20and%20preexisting%20conspiracy%20beliefs%20Pers%20Individ%20Dif%20166%20110201"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1002/acp.3301",
+        "entry": "32. van Prooijen J-W. 2017 Why education predicts decreased belief in conspiracy theories. Appl. Cogn. Psychol. 31, 50\u201358. (doi:10.1002/ acp.3301)",
+        "id": "32",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1002/acp.3301"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1037/14",
+        "entry": "33. Bago B, Rand DG, Pennycook G. 2020 Fake news, fast and slow: deliberation reduces belief in false (but not true) news headlines. J. Exp. Psychol. Gen. 149, 1608\u20131613. (doi:10.1037/ 14",
+        "id": "33",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1037/14"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1016/j.jarmac.2018.09.005",
+        "entry": "Bronstein MM, Pennycook G, Bear A, Rand DG, Cannon T. 2019 Belief in fake news is associated with delusionality, dogmatism, religious fundamentalism, and reduced analytic thinking. J. Appl. Res. Mem. Cogn. 8, 108\u2013117. (doi:10. 1016/j.jarmac.2018.09.005) 35. De keersmaecker J, Roets A. 2017 \u2018Fake news\u2019: incorrect, but hard to correct. The role of cognitive ability on the impact of false information on social impressions. Intelligence 65, 107\u2013110. (doi:10.1016/j.intell.2017.10.005)",
+        "id": "Bronstein_et+al_2019_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.jarmac.2018.09.005"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1016/j.cognition.2018.06.011",
+        "entry": "36. Pennycook G, Rand DG. 2019 Lazy, not biased: susceptibility to partisan fake news is better explained by lack of reasoning than by motivated reasoning. Cognition 188, 39\u201350. (doi:10.1016/j.cognition.2018.06.011)",
+        "id": "36",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.cognition.2018.06.011"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1038/nclimate1547",
+        "entry": "37. Kahan DM, Peters E, Wittlin M, Slovic P, Ouellette LL, Braman D, Mandel G. 2012 The polarizing impact of science literacy and numeracy on perceived climate change risks. Nat. Clim. Chang. 2, 732\u2013735. (doi:10.1038/ nclimate1547) 38. Peters E, V\u00e4stfj\u00e4ll D, Slovic P, Mertz CK, Mazzocco K, Dickert S. 2006 Numeracy and decision making. Psychol. Sci. 17, 407\u2013413.",
+        "id": "37",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1038/nclimate1547"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.31234/osf.io/m3vth",
+        "entry": "39. Stanley M, Barr N, Peters K, Seli P. 2020 Analytic-thinking predicts hoax beliefs and helping behaviors in response to the COVID-19 pandemic. PsyArxiv Prepr. (doi:10.31234/osf.io/ m3vth) 40. Bertin P, Nera K, Delouv\u00e9e S. 2020 Conspiracy beliefs, chloroquine, and the rejection of vaccination: a conceptual replication-extension in the COVID-19 pandemic context. PsyArxiv Prepr. (doi:10.31234/osf.io/rz78k)",
+        "id": "39",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.31234/osf.io/m3vth"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.37016/mr-2020-015",
+        "entry": "41. Uscinski JE, Enders AM, KLofstad C, Seelig M, Funchion J, Everett C, Wuchty S, Premaratne K, Murthi M. 2020 Why do people believe COVID19 conspiracy theories? Harvard Kennedy Sch. Misinformation Rev. 1, 1\u201312. (doi:10. 37016/mr-2020-015) 42. Imhoff R, Lamberty P. 2020 A bioweapon or a hoax? The link between distinct conspiracy beliefs about the Coronavirus disease (COVID-19) outbreak and pandemic behavior. Soc. Psychol. Personal. Sci. Advance online. (doi:10.1177/ 1948550620934692) 43.",
+        "id": "41",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.37016/mr-2020-015"
+    },
+    {
+        "entry": "Duffy B, Allington D. 2020 Covid conspiracies and confusions: the impact on compliance with the UK\u2019s lockdown rules and the link with social media use. London, UK: The Policy Institute, King\u2019s College. See https://www.kcl.ac.uk/policy-institute/assets/covid-conspiracies-andconfusions.pdf.",
+        "id": "Duffy_2020_a",
+        "url": "https://www.kcl.ac.uk/policy-institute/assets/covid-conspiracies-andconfusions.pdf"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1111/j.2044-8295.2010.02004.x",
+        "entry": "44. Miller JM. 2020 Do COVID-19 conspiracy theory beliefs form a monological belief system? Can. J. Polit. Sci. 53, 319\u2013326. (doi:10.1017/ S0008423920000517) 45. Swami V, Coles R, Stieger S, Pietschnig J, Furnham A, Rehim S, Voracek M. 2011 Conspiracist ideation in Britain and Austria: evidence of a monological belief system and associations between individual psychological differences and real-world and fictitious conspiracy theories. Br. J. Psychol. 102, 443\u2013463. (doi:10.1111/j.2044-8295.2010. 02004.x)",
+        "id": "44",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1111/j.2044-8295.2010.02004.x"
+    },
+    {
+        "entry": "royalsocietypublishing.org/journal/rsos R. Soc. Open Sci. 7: 201199",
+        "id": "Royalsocietypublishing_2011_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=royalsocietypublishingorgjournalrsos%20R%20Soc%20Open%20Sci%207%20201199",
+        "scholar_url": "https://scholar.google.co.uk/scholar?q=royalsocietypublishingorgjournalrsos%20R%20Soc%20Open%20Sci%207%20201199"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1017/S0033291720002184",
+        "entry": "46. McManus S, D\u2019Ardenne J, Wessely S. 2020 Covid conspiracies: misleading evidence can be more damaging than no evidence at all. Psychol. Med. 1\u20132. (doi:10.1017/S0033291720002184)",
+        "id": "46",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1017/S0033291720002184"
+    },
+    {
+        "entry": "47. Allington D, Duffy B, Wessely S, Dhavan N, Rubin J. 2020 Health-protective behaviour, social media usage and conspiracy belief during the COVID-19 public health emergency. Psychol. Med. 47, 459\u2013469. (doi:10.1017/ S003329172000224X)",
+        "id": "47",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=Allington%20D%20Duffy%20B%20Wessely%20S%20Dhavan%20N%20Rubin%20J%202020%20Healthprotective%20behaviour%20social%20media%20usage%20and%20conspiracy%20belief%20during%20the%20COVID19%20public%20health%20emergency%20Psychol%20Med%2047%20459469%20doi101017%20S003329172000224X",
+        "scholar_url": "https://scholar.google.co.uk/scholar?q=Allington%20D%20Duffy%20B%20Wessely%20S%20Dhavan%20N%20Rubin%20J%202020%20Healthprotective%20behaviour%20social%20media%20usage%20and%20conspiracy%20belief%20during%20the%20COVID19%20public%20health%20emergency%20Psychol%20Med%2047%20459469%20doi101017%20S003329172000224X"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1177/1948550614567356",
+        "entry": "48. van Prooijen J-W, Krouwel APM, Pollet TV. 2015 Political extremism predicts belief in conspiracy theories. Soc. Psychol. Personal. Sci. 6, 570\u2013578. (doi:10.1177/1948550614567356)",
+        "id": "48",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1177/1948550614567356"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.7326/0003-4819-127-11199712010-00003",
+        "entry": "49. Schwartz LML, Woloshin SS, Black WCW, Welch HGH. 1997 The role of numeracy in understanding the benefit of screening mammography. Ann. Intern. Med. 127, 966\u2013972. (doi:10.7326/0003-4819-127-11199712010-00003)",
+        "id": "49",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.7326/0003-4819-127-11199712010-00003"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1037/t45862-000",
+        "entry": "50. Cokely ET, Galesic M, Schulz E, Ghazal S, GarciaRetamero R. 2012 Measuring risk literacy: the Berlin Numeracy Test. Judgm. Decis. Mak. 7, 25\u201347. (doi:10.1037/t45862-000)",
+        "id": "50",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1037/t45862-000"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1348/135910708X304432",
+        "entry": "51. Wright AJ, Whitwell SCL, Takeichi C, Hankins M, Marteau TM. 2009 The impact of numeracy on reactions to different graphic risk presentation formats: an experimental analogue study. Br. J. Health Psychol. 14, 107\u2013125. (doi:10. 1348/135910708X304432)",
+        "id": "51",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1348/135910708X304432"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1080/13669877.2020.1758193",
+        "entry": "52. Dryhurst S, Schneider CR, Kerr J, Freeman ALJ, Recchia G, van der Bles AM, Spiegelhalter D, van der Linden S. 2020 Risk perceptions of COVID-19 around the world. J. Risk Res. 1466\u20134461. (doi:10. 1080/13669877.2020.1758193)",
+        "id": "52"
+    },
+    {
+        "entry": "53. BBC News. 2020 Coronavirus and ibuprofen: separating fact from fiction. 17 March. See https://www.bbc.com/news/51929628.",
+        "id": "53",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=BBC%20News%202020%20Coronavirus%20and%20ibuprofen%20separating%20fact%20from%20fiction%2017%20March%20See%20httpswwwbbccomnews51929628",
+        "url": "https://www.bbc.com/news/51929628"
+    },
+    {
+        "entry": "54. NHS. 2020 Ibuprofen for adults (including Nurofen). See https://www.nhs.uk/medicines/ibuprofen-for-adults/ (accessed 3 May 2020).",
+        "id": "54",
+        "url": "https://www.nhs.uk/medicines/ibuprofen-for-adults/"
+    },
+    {
+        "entry": "55. World Health Organization. 2020 Coronavirus disease (COVID-19) advice for the public: mythbusters. See https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters (accessed 5 May 2020).",
+        "id": "55",
+        "url": "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters"
+    },
+    {
+        "entry": "56. Roozenbeek J, Basol M, van der Linden S. 2019 WhatsApp wants researchers to tackle its fake news problem\u2014here\u2019s our idea. Conversation. See https://theconversation.com/whatsappwants-researchers-to-tackle-its-fake-newsproblem-heres-our-idea-107415].",
+        "id": "56",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=Roozenbeek%2C%20J.%20Basol%2C%20M.%20van%20der%20Linden%2C%20S.%20WhatsApp%20wants%20researchers%20to%20tackle%20its%20fake%20news%20problem%E2%80%94here%E2%80%99s%20our%20idea.%20Conversation%202019",
+        "url": "https://theconversation.com/whatsappwants-researchers-to-tackle-its-fake-newsproblem-heres-our-idea-107415]"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1207/S15328007SEM0902_5",
+        "entry": "57. Cheung GW, Rensvold RB. 2002 Evaluating goodness-of-fit indexes for testing measurement invariance. Struct. Equ. Model. 9, 233\u2013255. (doi:10.1207/S15328007SEM0902_5)",
+        "id": "57",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1207/S15328007SEM0902_5"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.21500/20112084.857",
+        "entry": "58. Milfont TL, Fischer R. 2010 Testing measurement invariance across groups: applications in cross-cultural research. Int. J. Psychol. Res. 3, 111\u2013121. (doi:10.21500/ 20112084.857)",
+        "id": "58",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.21500/20112084.857"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1016/j.dr.2016.06.004",
+        "entry": "59. Putnick DL, Bornstein MH. 2016 Measurement invariance conventions and reporting: the state of the art and future directions for psychological research. Dev. Rev. 41, 71\u201390. (doi:10.1016/j.dr. 2016.06.004)",
+        "id": "59",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.dr.2016.06.004"
+    },
+    {
+        "entry": "60. Allington D, Dhavan N. 2020 The relationship between conspiracy beliefs and compliance with public health guidance with regard to COVID-19. London, UK: Centre for Countering Digital Hate. See https://kclpure.kcl.ac.uk/portal/files/127048253/Allington_and_Dhavan_2020.pdf.",
+        "id": "60",
+        "url": "https://kclpure.kcl.ac.uk/portal/files/127048253/Allington_and_Dhavan_2020.pdf"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1080/13669877.2020.1756385",
+        "entry": "61. Krause NM, Freiling I, Beets B, Brossard D. 2020 Fact-checking as risk communication: the multilayered risk of misinformation in times of COVID-19. J. Risk Res. 1\u20138. (doi:10.1080/ 13669877.2020.1756385)",
+        "id": "61"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1126/science.aao2998",
+        "entry": "62. Lazer DMJ et al. 2018 The science of fake news. Science 359, 1094\u20131096. (doi:10.1126/science. aao2998)",
+        "id": "62",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1126/science.aao2998"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1016/j.copsyc.2018.01.003",
+        "entry": "63. Jost JT, van der Linden S, Panagopoulos C, Hardin CD. 2018 Ideological asymmetries in conformity, desire for shared reality, and the spread of misinformation. Curr. Opin. Psychol. 23, 77\u201383. (doi:10.1016/j.copsyc.2018.01.003)",
+        "id": "63",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.copsyc.2018.01.003"
+    },
+    {
+        "entry": "64. Motta M, Stecula D, Farhart C. 2020 How rightleaning media coverage of COVID-19 facilitated the spread of misinformation in the early stages of the pandemic in the US. Can. J. Polit. Sci. 53, 335\u2013342.",
+        "id": "64",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=Motta%2C%20M.%20Stecula%2C%20D.%20Farhart%2C%20C.%20How%20rightleaning%20media%20coverage%20of%20COVID-19%20facilitated%20the%20spread%20of%20misinformation%20in%20the%20early%20stages%20of%20the%20pandemic%20in%20the%20US%202020",
+        "scholar_url": "https://scholar.google.co.uk/scholar?q=Motta%2C%20M.%20Stecula%2C%20D.%20Farhart%2C%20C.%20How%20rightleaning%20media%20coverage%20of%20COVID-19%20facilitated%20the%20spread%20of%20misinformation%20in%20the%20early%20stages%20of%20the%20pandemic%20in%20the%20US%202020"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1080/10584609.2019.1661888",
+        "entry": "65. Keller FB, Schoch D, Stier S, Yang J. 2020 Political astroturfing on Twitter: how to coordinate a disinformation campaign. Polit. Commun. 37, 256\u2013280. (doi:10.1080/10584609. 2019.1661888)",
+        "id": "65",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1080/10584609.2019.1661888"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1098/rsos.181870",
+        "entry": "66. van der Bles AM, van der Linden S, Freeman ALJ, Mitchell J, Galvao AB, Zaval L, Spiegelhalter D. 2019 Communicating uncertainty about facts, numbers and science. R. Soc. Open Sci. 6, 181870. (doi:10.1098/rsos.181870)",
+        "id": "66",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1098/rsos.181870"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1038/oby.2007.255",
+        "entry": "67. Bleich S, Blendon R, Adams A. 2007 Trust in scientific experts on obesity: implications for awareness and behavior change. Obesity 15, 2145\u20132156. (doi:10.1038/oby.2007.255)",
+        "id": "67",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1038/oby.2007.255"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1080/21670811.2014.895507",
+        "entry": "68. Bro P, Wallberg F. 2014 Digital gatekeeping. 15 Digit. J. 2, 446\u2013454. (doi:10.1080/21670811. 2014.895507) 69.",
+        "id": "68",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1080/21670811.2014.895507"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1016/j.cognition.2014.08.006",
+        "entry": "Swami V, Voracek M, Stieger S, Tran US, Furnham A. 2014 Analytic thinking reduces belief in conspiracy theories. Cognition 133, 572\u2013585. (doi:10.1016/j.cognition.2014.08.006)",
+        "id": "Swami_et+al_2014_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.cognition.2014.08.006"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.37016//mr-2020-008",
+        "entry": "70. Roozenbeek J, van der Linden S, Nygren T. 2020 Prebunking interventions based on \u2018inoculation\u2019 theory can reduce susceptibility to misinformation across cultures. Harvard Kennedy Sch. Misinformation Rev. 1, 1\u201314. (doi:10. 37016//mr-2020-008) 71. Lutzke L, Drummond C, Slovic P, \u00c1rvai J. 2019 Priming critical thinking: simple interventions limit the influence of fake news about climate change on Facebook. Glob. Environ. Chang. 58, 101964. (doi:10.1016/j.gloenvcha. 2019.101964) 72.",
+        "id": "70",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.37016//mr-2020-008"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1177/0013164420940378)[",
+        "entry": "Roozenbeek J, Maertens R, McClanahan W, van der Linden S. 2020 Differentiating item and testing effects in inoculation research on online misinformation. Educ. Psychol. Meas. 1\u201323. (doi:10.1177/ 0013164420940378)[ 73.",
+        "id": "Roozenbeek_et+al_2020_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1177/0013164420940378%29%5B"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1177/1529100612451018",
+        "entry": "Lewandowsky S, Ecker UKH, Seifert CM, Schwarz N, Cook J. 2012 Misinformation and its correction: continued influence and successful debiasing. Psychol. Sci. Public Interes. 13, 106\u2013131. (doi:10.1177/ 1529100612451018) 74.",
+        "id": "Lewandowsky_et+al_2012_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1177/1529100612451018"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1016/j.vaccine.2010.02.052",
+        "entry": "Poland GA, Spier R. 2010 Fear, misinformation, and innumerates: how the Wakefield paper, the press, and advocacy groups damaged the public health. Vaccine 28, 2361. (doi:10.1016/j.vaccine. 2010.02.052) 75.",
+        "id": "Poland_2010_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.vaccine.2010.02.052"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1371/journal.pone.0089177",
+        "entry": "Jolley D, Douglas KM. 2014 The effects of antivaccine conspiracy theories on vaccination intentions. PLoS One 9, e0089177. (doi:10.1371/ journal.pone.0089177) 76.",
+        "id": "Jolley_2014_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1371/journal.pone.0089177"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1542/peds.2013-2365",
+        "entry": "Nyhan B, Reifler J, Richey S, Freed GL. 2014 Effective messages in vaccine promotion: a randomized trial. Pediatrics 133, e835\u2013e842. (doi:10.1542/peds.2013-2365)",
+        "id": "Nyhan_et+al_2014_a",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1542/peds.2013-2365"
+    },
+    {
+        "crossref": "https://dx.doi.org/10.1111/hcre.12000",
+        "entry": "77. Banas JA, Miller G. 2013 Inducing resistance to conspiracy theory propaganda: testing inoculation and metainoculation strategies. Hum. Commun. Res. 39, 184\u2013207. (doi:10.1111/ hcre.12000) 78. Jolley D, Douglas KM. 2017 Prevention is better than cure: addressing anti-vaccine conspiracy theories. J. Appl. Soc. Psychol. (doi:10.1111/ jasp.12453)",
+        "id": "77",
+        "oa_query": "https://ref.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1111/hcre.12000"
+    }
+]

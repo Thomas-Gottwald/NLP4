@@ -1,7 +1,4 @@
 import arxiv
-import pytest
-import pandas
-import nltk
 from src.modules.text_preprocessing import tokenize, remove_stopwords, lemmatizing, port_stemmer, position_tag
 
 
@@ -11,7 +8,7 @@ def test_preprocessing():
         pdf = result.summary
 
     tokens = tokenize(pdf)
-    filtered_text = remove_stopwords(pdf)
+    filtered_text = remove_stopwords(pdf, ["the", "and"])
     lemma = lemmatizing(pdf)
     stem = port_stemmer(pdf)
     tags = position_tag(pdf)
@@ -21,5 +18,3 @@ def test_preprocessing():
     assert isinstance(lemma, str)
     assert isinstance(stem, str)
     assert isinstance(tags, list)
-
-

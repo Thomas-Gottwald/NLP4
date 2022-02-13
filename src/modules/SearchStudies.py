@@ -8,7 +8,6 @@ import Similarities
 
 def snowballing(starterSetPath, iterations):
     starterSet = [os.path.join(starterSetPath, x) for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
-    starterSet = starterSet[3:4]
     print(starterSet)
     starter_set_abstracts = []
     reference_abstracts = dict()
@@ -82,8 +81,8 @@ def get_similar_references(corpus_set, query_set, min_similarity):
     return new_set
 
 
-result = snowballing("C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\starter_set",1)
-print(result)
-print(len(result))
-with open("test.json", "w") as f:
-     f.write(json.dumps(json.loads(result), indent=4))
+# result = snowballing("C:\\Users\\fabia\\PycharmProjects\\NLP4\\tests\\snowballing_test_seed_set", 1)
+# print(result)
+# print(len(result))
+# with open("test.json", "w") as f:
+#      f.write(json.dumps(json.loads(result), indent=4))

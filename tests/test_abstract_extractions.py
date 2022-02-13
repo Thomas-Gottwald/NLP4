@@ -1,5 +1,4 @@
 import src.modules.AbstractExtraction as ae
-import requests
 import os
 dirname = os.path.dirname(__file__)
 
@@ -22,17 +21,18 @@ def test_get_abstract_of_reference_extraction():
 
 
 def test_get_abstract_of_pdf():
-    pdf = os.path.join(dirname, 'test_paper/15.pdf') # Test non_arxiv Paper
+    pdf = os.path.join(dirname, 'test_paper/15.pdf')  # Test non_arxiv Paper
     abstract = ae.get_abstract_by_pdf(pdf)
     assert isinstance(abstract,dict)
 
-    pdf = os.path.join(dirname, 'test_paper/2202.03513.pdf') # Test paper of arxiv
+    pdf = os.path.join(dirname, 'test_paper/2202.03513.pdf')  # Test paper of arxiv
     abstract = ae.get_abstract_by_pdf(pdf)
     assert isinstance(abstract,dict)
 
-    pdf = os.path.join(dirname, 'test_paper/123.1231.pdf') # Test error with non existing paper
+    pdf = os.path.join(dirname, 'test_paper/123.1231.pdf')  # Test error with non existing paper
     abstract = ae.get_abstract_by_pdf(pdf)
     assert isinstance(abstract,dict)
+
 
 def test_get_abstract_of_pdf_with_references():
     pdf = os.path.join(dirname, 'test_paper/rsos.201199.pdf')
@@ -45,26 +45,16 @@ def test_get_abstract_of_pdf_with_references():
     print(abstract)
     assert isinstance(abstract, dict)
 
-def test_asdas():
-    requestAbs = requests.get("http://api.crossref.org/works/10.1126/science.aba9757").json()
-    abstract = requestAbs["message"].get("abstract", "None")
-    title = requestAbs["message"].get("title", ["None"])
-    references = requestAbs["message"].get("reference", "None")
-    print(references)
-
 
 def test_get_abstract_of_doi():
     doi = "wrong_doi"
-    abstract = ae.get_abstract_from_doi(doi) # Test behavior for wrong DOI
+    abstract = ae.get_abstract_from_doi(doi)  # Test behavior for wrong DOI
     assert isinstance(abstract,dict)
 
-    doi = "10.1007/BF02946780" # Test for doi with no references
+    doi = "10.1007/BF02946780"  # Test for doi with no references
     abstract = ae.get_abstract_from_doi(doi)
     assert isinstance(abstract, dict)
 
     doi = "10.1126/science.aba975"
     abstract = ae.get_abstract_from_doi(doi)
     assert isinstance(abstract,dict)
-
-
-

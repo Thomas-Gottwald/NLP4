@@ -19,9 +19,6 @@ def read_article(text):
 
 
 def sentence_similarity(sent1, sent2, stopwords=None):
-    stopword = stopwords
-    if stopword is None:
-        stopword = []
 
     sent1 = [w.lower() for w in sent1]
     sent2 = [w.lower() for w in sent2]

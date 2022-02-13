@@ -3,7 +3,6 @@ from src.modules.Similarities import specter_1to1_cosine
 from src.modules.Similarities import specter_query_reference_similarity
 from src.modules.Similarities import pdf_similarity
 from src.modules.PDFMiner import get_pdf_text
-
 import os
 dirname = os.path.dirname(__file__)
 

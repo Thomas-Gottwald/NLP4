@@ -3,6 +3,7 @@ from src.modules.ReferenceExtraction import get_reference_abstracts
 import os
 dirname = os.path.dirname(__file__)
 
+
 def test_returns_reference_links():
     pdf = os.path.join(dirname, 'test_paper/15.pdf')
     references = get_referenced_papers(pdf)
@@ -19,4 +20,3 @@ def test_get_reference_abstract():
     pdf = os.path.join(dirname, 'test_paper/15.pdf')
     abstracts = get_reference_abstracts(pdf)
     assert isinstance(abstracts, dict)
-

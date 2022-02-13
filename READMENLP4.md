@@ -70,7 +70,7 @@ PDFminer.getPDFtext(pdfFilenamePath="", ignore_references = "True")
 Via CLI the user is able to extract the text from the given PDF file to a given .txt file
 
 ```sh
-pipenv run python main.py functions extractPdfToText <pdfPath> <txtPath>
+pipenv run python cli.py functions extractPdfToText <pdfPath> <txtPath>
 ```
 
 ##### Possible optimization / future work

@@ -1,6 +1,4 @@
 import arxiv
-import pytest
-import pandas
 from src.modules.KeywordKeyphraseExtractor import yake_extraction, rake_phrase_extraction
 
 
@@ -12,5 +10,3 @@ def test_paper_selection():
     yake = yake_extraction(pdf)
     assert isinstance(rake, list)
     assert isinstance(yake, list)
-
-

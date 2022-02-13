@@ -1,4 +1,3 @@
-import pytest
 from src.modules.PDFMiner import get_pdf_text
 import os
 dirname = os.path.dirname(__file__)

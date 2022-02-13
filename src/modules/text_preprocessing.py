@@ -1,5 +1,6 @@
 import nltk
 from nltk.stem import PorterStemmer
+nltk.download('averaged_perceptron_tagger')
 
 
 def tokenize(text):

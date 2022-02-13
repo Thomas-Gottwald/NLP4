@@ -28,6 +28,7 @@ rake-nltk = "*"
 "pdfminer.six" = "*"
 pandas = "*"
 plotly = "*"
+nltk = "*"
 
 [dev-packages]
 pyright = "*"

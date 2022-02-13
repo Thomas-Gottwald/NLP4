@@ -9,7 +9,7 @@ import json
 import PaperSelection
 
 
-def summarization(pdf='', top_n=5):
+def summarization(text='', top_n=5):
     """
     Creates a summary out of a text. Therefor the algorithm takes a Text and parse it into the single sentences.
     Those sentences get compared with each other --> Cosine similarity. Out of this it is possible to choose the most
@@ -18,7 +18,7 @@ def summarization(pdf='', top_n=5):
     :param pdf: Text for summarization.
     :return: Returns the summary of the given text.
     """
-    return Summarization.generate_summary(pdf, top_n)
+    return Summarization.generate_summary(text, top_n)
 
 
 def paper_selection(text=[], keywords=[]):
@@ -71,7 +71,7 @@ def extract_pdf_references(pdf="rsos.201199.pdf", save_to_file=""):
             f.write(json.dumps(references, indent=4, sort_keys=True))
 
 
-def extract_keyphrases_string(pdf="Tropical Med Int Health - 2020 - Velavan - The COVID%u201019 epidemic.pdf"):
+def extract_keyphrases_pdf(pdf="Tropical Med Int Health - 2020 - Velavan - The COVID%u201019 epidemic.pdf"):
     """
     Prints extracted KeyPhrases to the given PDF
     :param paper1: path or url to the PDF

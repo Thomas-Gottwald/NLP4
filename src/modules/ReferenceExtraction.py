@@ -10,13 +10,16 @@ def get_referenced_papers(pdf):
     # add the handler to the root logger
     logging.getLogger().addHandler(console)
 
-    if "http" in pdf:
-        logging.info(f"Starting scholarcy request with url: {pdf}")
-        response = requests.get('https://ref.scholarcy.com/api/references/extract', params={"url": pdf})
-    else:
-        logging.info(f"Starting scholarcy request with file: {pdf}")
-        with open(pdf, 'rb') as f:
-            response = requests.post('https://ref.scholarcy.com/api/references/extract', files={'file': f})
+    try:
+        if "http" in pdf:
+            logging.info(f"Starting scholarcy request with url: {pdf}")
+            response = requests.get('https://ref.scholarcy.com/api/references/extract', params={"url": pdf})
+        else:
+            logging.info(f"Starting scholarcy request with file: {pdf}")
+            with open(pdf, 'rb') as f:
+                response = requests.post('https://ref.scholarcy.com/api/references/extract', files={'file': f})
+    except requests.exceptions.ConnectionError:
+        return "None"
 
     jsonResponse = response.json()
     referenceLinks = jsonResponse.get("reference_links","None")

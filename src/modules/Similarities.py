@@ -3,7 +3,6 @@ from AbstractExtraction import get_abstract_by_pdf
 from PDFMiner import get_pdf_text
 
 
-
 def specter_query_reference_similarity(corpus_set, query_set):
     model = SentenceTransformer('allenai-specter')
     corpus = [paper['title'] + '[SEP]' + paper['abstract'] for paper in corpus_set]
