@@ -21,6 +21,7 @@ def remove_stopwords(text=str(""), stops=[]):
 
 
 def lemmatizing(text=str('')):
+    nltk.download('omw-1.4')
     text_neu = ""
     text = nltk.word_tokenize(text)
     lemmatizer = nltk.stem.WordNetLemmatizer()
