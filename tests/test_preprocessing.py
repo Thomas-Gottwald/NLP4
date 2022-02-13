@@ -3,6 +3,7 @@ from src.modules.text_preprocessing import tokenize, remove_stopwords, lemmatizi
 
 
 def test_preprocessing():
+    pdf = ""
     search = arxiv.Search(query="nlp keyword extraction", max_results=1, sort_by=arxiv.SortCriterion.Relevance)
     for result in search.results():
         pdf = result.summary
