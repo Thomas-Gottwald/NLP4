@@ -1,5 +1,4 @@
 # This Code is a Project from https://github.com/pdfminer/pdfminer.six
-
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
 from pdfminer.pdfpage import PDFPage

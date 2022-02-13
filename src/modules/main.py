@@ -76,7 +76,7 @@ def extract_keyphrases_string(pdf="Tropical Med Int Health - 2020 - Velavan - Th
     Prints extracted KeyPhrases to the given PDF
     :param paper1: path or url to the PDF
     """
-    KeywordKeyphraseExtractor.rake_phrase_extraction(getPDFText(pdf).rsplit('References', 1)[0])
+    KeywordKeyphraseExtractor.rake_phrase_extraction(get_pdf_text(pdf).rsplit('References', 1)[0])
 
 
 if __name__ == "__main__":

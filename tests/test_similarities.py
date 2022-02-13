@@ -2,7 +2,7 @@ import math
 from src.modules.Similarities import specter_1to1_cosine
 from src.modules.Similarities import specter_query_reference_similarity
 from src.modules.Similarities import pdf_similarity
-from src.modules.PDFMiner import getPDFText
+from src.modules.PDFMiner import get_pdf_text
 
 import os
 dirname = os.path.dirname(__file__)
@@ -11,7 +11,7 @@ dirname = os.path.dirname(__file__)
 def test_1to1_similarity():
     pdf = os.path.join(dirname, 'test_paper/15.pdf')
     paper1 = pdf
-    sim = specter_1to1_cosine(getPDFText(paper1).rsplit('References', 1)[0], getPDFText(paper1).rsplit('References', 1)[0])
+    sim = specter_1to1_cosine(get_pdf_text(paper1).rsplit('References', 1)[0], get_pdf_text(paper1).rsplit('References', 1)[0])
     assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-4)
 
 
