@@ -30,11 +30,12 @@ section of relevant studies.
 Therefore we implement the following features:
 * Feature list
     * PDF Extraction
+    * Abstract Extraction
     * Reference Extraction 
     * Automatic Snowballing
     * Paper selection
     * Plot Results
-    * Keyword/Keyphrase Extractor
+    * Keyword/Keyphrase Extraction
     * Summarization
     * Similarity
     * Preprocessing
@@ -163,12 +164,12 @@ basis of the similarity between the query and the papers you are interested in, 
 ```python
 PaperSelection.paper_importance(text=[], keywords=[])
 ```
-This function makes it possible to compare Keywords or a research topic with one or more texts. Therefor it uses the
+This function makes it possible to compare Keywords or a research topic with one or more texts. Therefore, it uses the
 keywords and the text and calculates the cosines similarity of those. As result, you get a value for of each keyword 
 relating to all the papers you hand over the function.
 ######Inputs: 
 text: The attribute takes a list of texts (strings). So it is possible to calculate the similarity between more than just 
-one text. -> much more efficient. You can use a hole text, phrases or just the abstract. Feel free to try!
+one text. -> much more efficient. You can use a whole text, phrases or just the abstract. Feel free to try!
 
 keywords: Also the attribute "keywords" is a list of strings. Those can represent a list of single keywords, phrases or sentences.
 Which get compared with the list of texts you hand over.
@@ -182,7 +183,7 @@ PaperSelection.plot_paper_selection(df=pd.DataFrame())
 This function makes it possible to plot the results from the function "paper_importance". This function creates an 
 interactive plot, where in the x-axe are shown the several keywords and on the y-axe the score regarding the paper.
 The different papers are shown in single traces on this plot. Since it is an interactive plot, it is possible to
-inactivate or activate the single traces 
+inactivate or activate the single traces. 
 ######Inputs: 
 The input is a dataframe, which contains the results of the "paper_importance". 
 Just hand over the return of this function. 
@@ -191,7 +192,7 @@ The function returns the object file of the plot. So it is possible to handle th
 ##### Possible optimization / future work
 1. Probably it would be nice to implement a plot methode to all other functions, so it would be easy to evaluate 
 them and have a good overview. 
-2. Right now we assume that it doesn´t matter if we use keywords or a hole sentence to compare it with the text. 
+2. Right now we assume that it doesn´t matter if we use keywords or a whole sentence to compare it with the text. 
 It might be good the implement several functions. One for words ->Bert and the other for sentence -> SBert
 
 

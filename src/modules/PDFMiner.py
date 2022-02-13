@@ -18,5 +18,4 @@ def getPDFText(pdfFilenamePath):
         interpreter = PDFPageInterpreter(rsrcmgr, device)
         for page in PDFPage.create_pages(doc):
             interpreter.process_page(page)
-
-    print(output_string.getvalue())
+    return output_string.getvalue()

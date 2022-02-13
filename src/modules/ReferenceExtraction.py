@@ -20,9 +20,11 @@ def get_referenced_papers(pdf):
 
     jsonResponse = response.json()
     referenceLinks = jsonResponse["reference_links"]
-    logging.info(f"Found {len(referenceLinks)} refrences in given paper")
+   # logging.info(f"Found {len(referenceLinks)} refrences in given paper")
 
     return referenceLinks
 
+
 def get_reference_abstracts(pdf):
-    return get_abstracts_of_reference_links(get_referenced_papers())
+    return get_abstracts_of_reference_links(get_referenced_papers(pdf))
+

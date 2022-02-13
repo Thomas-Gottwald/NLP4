@@ -1,12 +1,45 @@
 import json
 import os
 import re
-import src.modules.AbstractExtraction as AbstractExtraction
-import src.modules.ReferenceExtraction
-import src.modules.Similarities
+import src.modules.AbstractExtraction as ae
+import src.modules.SearchStudies
+
 
 def test_get_abstract_of_reference_extraction():
-    reference_list = [{"id":"50","entry":"50. Kimball, A. et al. Asymptomatic and presymptomatic SARS-CoV-2 infections in residents of a long-term care skilled nursing facility. King County, Washington, March 2020. Morb. Mortal Wkly Rep. 69, 377–381 (2020).","scholar_url":"https://scholar.google.co.uk/scholar?q=Kimball%2C%20A.%20Asymptomatic%20and%20presymptomatic%20SARS-CoV-2%20infections%20in%20residents%20of%20a%20long-term%20care%20skilled%20nursing%20facility%202020-03","oa_query":"https://ref.scholarcy.com/oa_version?query=Kimball%2C%20A.%20Asymptomatic%20and%20presymptomatic%20SARS-CoV-2%20infections%20in%20residents%20of%20a%20long-term%20care%20skilled%20nursing%20facility%202020-03"},{"id":"51","entry":"51. Nishiura, H., Linton, N. M. & Akhmetzhanov, A. R. Serial interval of novel coronavirus (COVID-19) infections. Int. J. Infect. Dis. 93, 284–286 (2020).","scholar_url":"https://scholar.google.co.uk/scholar?q=Nishiura%2C%20H.%20Linton%2C%20N.M.%20Akhmetzhanov%2C%20A.R.%20Serial%20interval%20of%20novel%20coronavirus%20%28COVID-19%29%20infections%202020","oa_query":"https://ref.scholarcy.com/oa_version?query=Nishiura%2C%20H.%20Linton%2C%20N.M.%20Akhmetzhanov%2C%20A.R.%20Serial%20interval%20of%20novel%20coronavirus%20%28COVID-19%29%20infections%202020"},{"id":"52","entry":"52. Du, Z. et al. Serial interval of COVID-19 among publicly reported confirmed cases. Emerg. Infect. Dis. 26, 6 (2020).","scholar_url":"https://scholar.google.co.uk/scholar?q=Du%2C%20Z.%20Serial%20interval%20of%20COVID-19%20among%20publicly%20reported%20confirmed%20cases%202020","oa_query":"https://ref.scholarcy.com/oa_version?query=Du%2C%20Z.%20Serial%20interval%20of%20COVID-19%20among%20publicly%20reported%20confirmed%20cases%202020"},{"id":"53","entry":"53. King, A. A. et al. Avoidable errors in the modelling of outbreaks of emerging pathogens, with special reference to Ebola. Proc. Biol. Sci. 282, 20150347 (2015).","scholar_url":"https://scholar.google.co.uk/scholar?q=King%2C%20A.A.%20Avoidable%20errors%20in%20the%20modelling%20of%20outbreaks%20of%20emerging%20pathogens%2C%20with%20special%20reference%20to%20Ebola%202015","oa_query":"https://ref.scholarcy.com/oa_version?query=King%2C%20A.A.%20Avoidable%20errors%20in%20the%20modelling%20of%20outbreaks%20of%20emerging%20pathogens%2C%20with%20special%20reference%20to%20Ebola%202015"},{"id":"54","entry":"54. Dowd, J. B. et al. Demographic science aids in understanding the spread and fatality rates of COVID-19. OSF https://osf.io/fd4rh (2020).","url":"https://osf.io/fd4rh","oa_query":"https://ref.scholarcy.com/oa_version?query=Dowd%2C%20J.B.%20Demographic%20science%20aids%20in%20understanding%20the%20spread%20and%20fatality%20rates%20of%20COVID-19%202020"},{"id":"55","entry":"55. Istituto Superiore di Sanità. Characteristics of COVID-19 patients dying in Italy. https://www.epicentro.iss.it/en/coronavirus/sars-cov-2-analysis-of-deaths (2020). ","url":"https://www.epicentro.iss.it/en/coronavirus/sars-cov-2-analysis-of-deaths"}]
-    anstracts = AbstractExtraction.get_abstracts_of_reference_links(reference_list)
+    reference_list = [{
+      "id": "Rytgaard_et+al_2021_a",
+      "entry": "RYTGAARD, H. C. & VAN DER LAAN, M. J. (2021). One-step tmle for targeting cause-specific absolute risks and survival curves. arXiv preprint arXiv:2107.01537.  [Titel anhand dieser ArXiv-ID in Citavi-Projekt übernehmen] ",
+      "arxiv_url": "https://arxiv.org/pdf/2107.01537"
+    },
+    {
+      "crossref": "https://dx.doi.org/10.1126/science.aba9757",
+      "id": "Schenck_2021_a",
+      "entry": "SCHENCK, E. J., HOFFMAN, K. L., CUSICK, M., KABARITI, J., SHOLLE, E. T. & CAMPION JR, T. R. (2021). Critical care database for advanced research (cedar): An automated method to support intensive care units with electronic health record data. Journal of Biomedical Informatics 118, 103789.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Critical%20care%20database%20for%20advanced%20research%20%28cedar%29%3A%20An%20automated%20method%20to%20support%20intensive%20care%20units%20with%20electronic%20health%20record%20data%202021",
+      "oa_query": "https://ref.scholarcy.com/oa_version?query=Critical%20care%20database%20for%20advanced%20research%20%28cedar%29%3A%20An%20automated%20method%20to%20support%20intensive%20care%20units%20with%20electronic%20health%20record%20data%202021"
+    }]
+    anstracts = ae.get_abstracts_of_reference_links(reference_list)
     print(anstracts)
+    print(src.modules.SearchStudies.cleanup_reference_abstracts(anstracts))
     assert isinstance(anstracts, dict)
+
+
+def test_get_abstract_of_pdf():
+    pdf = "C:\\Users\\fabia\PycharmProjects\\NLP4\\src\\starter_set\\15.pdf"
+    abstract = ae.get_abstract_by_pdf(pdf)
+    print(abstract)
+    assert isinstance(abstract,str)
+
+def test_get_abstract_of_pdf_with_references():
+    pdf = "C:\\Users\\fabia\PycharmProjects\\NLP4\\src\\modules\\rsos.201199.pdf"
+    abstract = ae.get_abstract_by_pdf(pdf, with_references=True)
+    print(abstract)
+    assert isinstance(abstract,dict)
+
+    pdf = "C:\\Users\\fabia\PycharmProjects\\NLP4\\src\\starter_set\\2202.03513.pdf"
+    abstract = ae.get_abstract_by_pdf(pdf, with_references=True)
+    print(abstract)
+    assert isinstance(abstract, dict)
+
+
+
