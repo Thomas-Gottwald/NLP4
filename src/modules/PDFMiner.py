@@ -18,30 +18,4 @@ def getPDFText(pdfFilenamePath):
         interpreter = PDFPageInterpreter(rsrcmgr, device)
         for page in PDFPage.create_pages(doc):
             interpreter.process_page(page)
-
-    print(output_string.getvalue())
-
-    retstr = StringIO()
-    parser = PDFParser(open(pdfFilenamePath,'rb'))
-    try:
-        document = PDFDocument(parser)
-    except Exception as e:
-        errMsg=f"error {pdfFilenamePath}:{str(e)}"
-        print(errMsg)
-        if throwError:
-            raise e
-        return ''
-    if document.is_extractable:
-        rsrcmgr = PDFResourceManager()
-        device = TextConverter(rsrcmgr,retstr,  laparams = LAParams())
-        interpreter = PDFPageInterpreter(rsrcmgr, device)
-        pages = PDFPage.create_pages(document)
-        for pageNumber, page in enumerate(pages):
-            if pageNumber != 0:
-                interpreter.process_page(page)
-
-        return retstr.getvalue()
-    else:
-        print(pdfFilenamePath,"Warning: could not extract text from pdf file.")
-        return ''
-
+    return output_string.getvalue()

@@ -8,17 +8,18 @@ import Similarities
 
 def snowballing(starterSetPath, iterations):
     starterSet = [starterSetPath + "\\" + x for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
+    starterSet = starterSet[0:2]
     print(starterSet)
     starterSetAbstracts = []
     reference_abstracts = dict()
     for file in starterSet:
         starterSetAbstracts.append(
-            re.sub("</jats.*?>|<jats.*?>", "", AbstractExtraction.get_abstract_by_pdf(file)['abstract']))
+            re.sub("</jats.*?>|<jats.*?>", "", AbstractExtraction.get_abstract_by_pdf(file)))
     for file in starterSet:
-        reference_links = ReferenceExtraction.get_referenced_papers(file)
-        temp_ref_abstracts = AbstractExtraction.get_abstracts_of_reference_links(reference_links)
+        temp_ref_abstracts = ReferenceExtraction.get_reference_abstracts(file)
         reference_abstracts.update(temp_ref_abstracts)
 
+    print(reference_abstracts)
     reference_abstracts = cleanup_reference_abstracts(reference_abstracts)
     corpus_set = starterSetAbstracts
     query_set = reference_abstracts
@@ -34,10 +35,10 @@ def snowballing(starterSetPath, iterations):
         for paperKey in new_set:
             corpus_set.append(new_set[paperKey]['abstract'])
             if new_set[paperKey]['references'] == 'None' and "crossref" not in paperKey:
-                reference_abstracts.update(ReferenceExtraction.get_referenced_papers(paperKey))
+                reference_abstracts.update(ReferenceExtraction.get_reference_abstracts(paperKey))
             elif new_set[paperKey]['references'] != 'None':
                 for reference in new_set[paperKey]['references']:
-                    reference_abstracts[reference] = AbstractExtraction.get_abstract_from_doi(reference)
+                    reference_abstracts[reference] = AbstractExtraction.get_abstract_from_doi(reference,with_references=True)
 
         reference_abstracts = cleanup_reference_abstracts(reference_abstracts)
         query_set = reference_abstracts
@@ -68,7 +69,7 @@ def cleanup_reference_abstracts(referenceAbstracts):
 
 
 def get_similar_references(corpus_set, query_set, min_similarity):
-    similarities = Similarities.sBERT_querys(corpus_set, query_set)
+    similarities = Similarities.specter_query_similarity(corpus_set, query_set)
     new_set = {}
     for paper in similarities:
         for score in similarities[paper][0]:
@@ -82,4 +83,4 @@ def get_similar_references(corpus_set, query_set, min_similarity):
 # print(result)
 # print(len(result))
 # with open("test.json", "w") as f:
-#     f.write(json.dumps(json.loads(result), indent=4, sort_keys=True))
+#      f.write(json.dumps(json.loads(result), indent=4, sort_keys=True))

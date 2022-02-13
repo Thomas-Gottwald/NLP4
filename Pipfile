@@ -25,6 +25,9 @@ flake8 = "*"
 python-magic = "*"
 yake = "*"
 rake-nltk = "*"
+"pdfminer.six" = "*"
+pandas = "*"
+plotly = "*"
 
 [dev-packages]
 pyright = "*"
