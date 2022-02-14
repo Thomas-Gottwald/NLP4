@@ -15,6 +15,8 @@ def test_paper_selection():
         rank_title.append(result.title)
     df = paper_importance(pdf_abstract, research_keywords)
     fig = plot_paper_selection(df)
+    df = paper_importance(pdf_abstract, research_keywords, rank_title)
+    fig = plot_paper_selection(df)
     assert isinstance(df, pandas.DataFrame)
     assert isinstance(fig, object)
 

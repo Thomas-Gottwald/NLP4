@@ -3,7 +3,7 @@ from src.modules.Summarization import generate_summary
 
 
 def test_summarization():
-    pdf = ""
+    pdf = ''
     search = arxiv.Search(query="nlp keyword extraction", max_results=1, sort_by=arxiv.SortCriterion.Relevance)
     for result in search.results():
         pdf = result.summary
