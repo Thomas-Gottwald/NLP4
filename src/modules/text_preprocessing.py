@@ -2,6 +2,8 @@ from nltk.stem import PorterStemmer
 import nltk
 nltk.download('averaged_perceptron_tagger')
 nltk.download('stopwords')
+nltk.download('punkt')
+
 
 def tokenize(text):
     tokens = nltk.word_tokenize(text)

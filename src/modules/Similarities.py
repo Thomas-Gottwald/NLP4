@@ -4,6 +4,7 @@ from PDFMiner import get_pdf_text
 import nltk
 nltk.download('averaged_perceptron_tagger')
 nltk.download('stopwords')
+nltk.download('punkt')
 
 
 def specter_query_reference_similarity(corpus_set, query_set):

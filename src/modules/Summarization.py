@@ -6,6 +6,8 @@ import networkx as nx
 import nltk
 nltk.download('averaged_perceptron_tagger')
 nltk.download('stopwords')
+nltk.download('punkt')
+
 
 def read_article(text):
 
