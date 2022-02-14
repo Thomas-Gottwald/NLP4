@@ -1,5 +1,8 @@
 import yake
 from rake_nltk import Rake
+import nltk
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 
 
 def yake_extraction(text, number_of_keyphrases=10, language='en', words_in_keyphrase=10, deduplication_threshold=0.5):

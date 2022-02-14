@@ -1,7 +1,7 @@
-import nltk
 from nltk.stem import PorterStemmer
+import nltk
 nltk.download('averaged_perceptron_tagger')
-
+nltk.download('stopwords')
 
 def tokenize(text):
     tokens = nltk.word_tokenize(text)

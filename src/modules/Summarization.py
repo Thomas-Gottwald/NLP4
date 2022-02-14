@@ -1,10 +1,11 @@
 # This Code is a Project from https://gist.github.com/edubey/cc41dbdec508a051675daf8e8bba62c5.
-
 from nltk.corpus import stopwords
 from nltk.cluster.util import cosine_distance
 import numpy as np
 import networkx as nx
-
+import nltk
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 
 def read_article(text):
 

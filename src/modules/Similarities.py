@@ -1,6 +1,9 @@
 from sentence_transformers import SentenceTransformer, util
 from AbstractExtraction import get_abstract_by_pdf
 from PDFMiner import get_pdf_text
+import nltk
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 
 
 def specter_query_reference_similarity(corpus_set, query_set):
