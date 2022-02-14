@@ -11,7 +11,7 @@ def test_1to1_similarity():
     pdf = os.path.join(dirname, 'test_paper/15.pdf')
     paper1 = pdf
     sim = specter_1to1_cosine(get_pdf_text(paper1).rsplit('References', 1)[0], get_pdf_text(paper1).rsplit('References', 1)[0])
-    assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-4)
+    assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-2)
 
 
 def test_query_similarity():
@@ -41,12 +41,12 @@ def test_query_similarity():
 def test_pdf_similarity():
     pdf = os.path.join(dirname, 'test_paper/rsos.201199.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=True)
-    assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-4)
+    assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-2)
 
     pdf = os.path.join(dirname, 'test_paper/rsos.201199.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=False)
-    assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-4)
+    assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-2)
 
     pdf = os.path.join(dirname, 'test_paper/15.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=True)
-    assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-4)
+    assert math.isclose(sim.numpy()[0][0], 1, abs_tol=1e-2)

@@ -92,7 +92,7 @@ Returns a dictionary with following format (If not all link types are available 
 {
   "id": "Id of refrence in the referencing paper",
   "entry": "Title of references",
-  "crossref": "",
+  "crossref": "https://www.science.org/doi/10.1126/science.aba9757",
   "scholar_url": "https://scholar.google.co.uk/...", 
   "oa_query": "https://ref.scholarcy.com/...."
 }
@@ -129,7 +129,6 @@ Returns the title, abstract and if available the references of a paper by its gi
 To retrieve the abstract a request to the crossref API (see API section) with the given doi is made.
 Since the crossref API offers also the references for some papers they are also returned if available.
 This is done mainly to safe time in the automatic snowballing.
-
 
 The crossref API offers abstracts of many free available papers. Nevertheless it is not possible to
 retrieve abstracst of all papers by this api. 
@@ -188,7 +187,13 @@ The ouput is a python dictionary with the following format:
 ```
 get_abstracts_of_reference_links(pdf)
 ```
-
+The get_abstracts_of_reference_links function is especially made to retireve the abstracts from the reference_links retrieved of the scholarcy API by the ReferenceExtraction.get_referenced_papers() function.
+The function tries to retrieve the abstracts for each retrieved references in the following three diffrent ways:
+1. If for the reference a link of type "crossref" (meaning: https://dx.doi.org/10.1126/example_doi) is available, the doi is extracted from the link.
+The extracted doi is than passed to the AbstractExtraction.get_abstracts_of_doi() function to retrieve the abstract of the reference.
+2. If No croossref link is avaible it is checked if an arxiv link is available. In this case the arXiv_id is extracted is is passed to the AbstractExtract.get_abstract_from_arxiv_id() function to retrieve the title an the abstract of the reference.
+3. If none of these links is available the a get request to the "oa_query" link is made. If the "content-type" of the response is application/pdf the response url is passed to the get_abstract_by_pdf() function to try to extract the abstract from the pdf url. 
+If none of these 3 steps is succesfull no abstract for the reference is extracted.
 
 
 
@@ -218,8 +223,7 @@ The reference abstracts are added to the *querry_set* variable. Then the *corpus
  *get_similar_references* method of the Similarities module to retrieve the similiraty of every retrieved abstract with every seed set abstract.
 Those references that exceed the specified similiraty threshold are than added to two dictioniarys. The *result_set* and the *new_set*.
 The snowballing prcoess is then continued in a while loop for the given number of iterations where in every iteration the *new_set* is appenden to the
-*corpus_set.
-
+*corpus_set*
 
 
 ### Paper Selection

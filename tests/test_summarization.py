@@ -2,6 +2,7 @@ import arxiv
 from src.modules.Summarization import generate_summary
 import nltk
 nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 
 
 def test_summarization():

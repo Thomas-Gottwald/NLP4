@@ -2,6 +2,7 @@ import src.modules.cli as cli
 import os
 import nltk
 nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
 dirname = os.path.dirname(__file__)
 
 
