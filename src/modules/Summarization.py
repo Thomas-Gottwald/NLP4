@@ -4,9 +4,7 @@ from nltk.cluster.util import cosine_distance
 import numpy as np
 import networkx as nx
 import nltk
-nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
-nltk.download('punkt')
+nltk.download('all')
 
 
 def read_article(text):

@@ -194,8 +194,18 @@ The extracted doi is than passed to the AbstractExtraction.get_abstracts_of_doi(
 2. If No croossref link is avaible it is checked if an arxiv link is available. In this case the arXiv_id is extracted is is passed to the AbstractExtract.get_abstract_from_arxiv_id() function to retrieve the title an the abstract of the reference.
 3. If none of these links is available the a get request to the "oa_query" link is made. If the "content-type" of the response is application/pdf the response url is passed to the get_abstract_by_pdf() function to try to extract the abstract from the pdf url. 
 If none of these 3 steps is succesfull no abstract for the reference is extracted.
+In case one of the steps is succesfull the retrieved abstract will be added to a dictionary with the respective link as key and the respective abstract dictionary as value.
 
 
+######Inputs: 
+reference_links: Input should be the output of the ReferenceExtraction.get_referenced_papers() function
+######Output:
+Ouput is a dictionary with the following format:
+```json
+ {"http://api.crossref.org/works/10.1126/science.aba9757": {"title": "paper title", "abstract": "paper abstract", "references": {"key":"e_1_3_2_21_2","doi-asserted-by":"publisher","DOI":"10.1016/example_doi"}},
+  "https://arxiv.org/pdf/1706.05924.pdf": {"title": "paper title", "abstract": "paper abstract", "references": "None"}
+ }
+```
 
 
 
@@ -417,15 +427,49 @@ text: String that contains the text where the words are going to be stemmed.
 ######Output
 This function returns a text with stemmed words. 
 
-###position_tag
+### position_tag
 This methode tags all the words in a text. E.g. Verb, adjective ...
 ```python 
 position_tag(text)
 ```
-######Input
+###### Input
 text: String that contains the text where the words are going to be tagged.
-######Output
+###### Output
 Returns a text with all words and the relating tags. 
+
+### Command line interface (cli)
+Instead of using the above described modules and their function in code or as a library you can simply use most of these function with simple cli commands which will be explainend in the following section.
+All cli commpands need to be called from the path NLP4/src/modules.
+For further information about parameters and functionality of each cli command call the respective command with "--help" flag.
+
+##### Explanation of all function
+```cli
+pipenv run cli.py --help
+```
+##### Summarization
+```cli
+pipenv run cli.py summarization --text""
+```
+##### paper_selection
+```cli
+pipenv run cli.py paper_selection --text="["text1", "text2"]" --keywords="["kw1", "kw2"]"
+```
+##### snowballing
+```cli
+pipenv run cli.py snowballing --seed_set_path
+```
+##### paper_selection
+```cli
+pipenv run cli.py paper_selection --text="["text1", "text2"]" --keywords="["kw1", "kw2"]"
+```
+##### snowballing_paper_selection
+```cli snowballing_paper_selection
+pipenv run cli.py snowballing_paper_selection --snowballing_result_path="", --keywords="["test","test2"]"
+```
+##### pdf_similarity
+```cli 
+pipenv run cli.py pdf_similarity --paper1="", paper2=""
+```
 
 
 ## Installation

@@ -1,9 +1,7 @@
 import arxiv
 from src.modules.KeywordKeyphraseExtractor import yake_extraction, rake_phrase_extraction
 import nltk
-nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
-nltk.download('punkt')
+nltk.download('all')
 
 
 def test_paper_selection():

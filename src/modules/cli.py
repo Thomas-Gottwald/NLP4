@@ -29,7 +29,6 @@ def paper_selection(text=[], keywords=[]):
     This function calculates the similarity between keywords or phrases relating a text. So it is possible to compare
     several texts and keywords in once to see which text is the best relating special keywords. Also a plot is
     generated, where it is possible to see the scores of all paper and keywords
-    Use like this: --text="["duda", "hallo"]" --keywords="["abcdef", "tets"]"
 
     :param text: This is a list of texts which you want to compare with the keywords
     :param keywords: The keywords in this list are used to compare the single texts.
@@ -48,13 +47,13 @@ def extract_keywords_pdf(pdf=""):
     KeywordKeyphraseExtractor.rake_phrase_extraction(get_pdf_text(pdf).rsplit('References', 1)[0])
 
 
-def snowballing(starterSetPath=os.path.join(dirname, 'starter_set'), iterations=1):
+def snowballing(seed_set_path=os.path.join(dirname, 'starter_set'), iterations=1):
     """
     Conducts and automated forward snowballing with set of papers given in <starterSetPath> as seed set
-    :param starterSetPath: path to to your existing seed set. Alternatively place your starter set in the default folder src/seed_set
+    :param seed_set_path: path to to your existing seed set. Alternatively place your starter set in the default folder src/seed_set
     :param iterations: specify how many iterations the snowballing should make
     """
-    sb(starterSetPath, iterations)
+    sb(seed_set_path, iterations)
 
 
 # pipenv run cli.py snowballing_paper_selection --snowballing_result_path="C:\Users\fabia\PycharmProjects\NLP4\src\modules\test.json", --keywords="["test","test2"]
