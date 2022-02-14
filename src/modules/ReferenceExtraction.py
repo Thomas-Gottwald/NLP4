@@ -22,7 +22,7 @@ def get_referenced_papers(pdf):
         return "None"
 
     jsonResponse = response.json()
-    referenceLinks = jsonResponse.get("reference_links","None")
+    referenceLinks = jsonResponse.get("reference_links", "None")
 
     return referenceLinks
 

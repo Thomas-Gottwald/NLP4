@@ -8,7 +8,6 @@ def paper_importance(text=[], keywords=[], rank_title=[]):
 
     model = SentenceTransformer('allenai-specter')
     keyword_corpus = model.encode(keywords, convert_to_tensor=True)
-    match_set = {}
     text_corpus = model.encode(text, convert_to_tensor=True)
     match_set = util.semantic_search(text_corpus, keyword_corpus, top_k=len(keywords))
 
