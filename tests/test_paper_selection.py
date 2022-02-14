@@ -1,7 +1,7 @@
 import arxiv
 import pandas
 import os
-from src.modules.PaperSelection import paper_importance, plot_paper_selection, reference_importance_by_keyword
+from src.modules.PaperSelection import paper_importance, plot_paper_selection, snowballing_paper_importance
 dirname = os.path.dirname(__file__)
 
 
@@ -22,4 +22,4 @@ def test_paper_selection():
 
 
 def test_select_snowballing_results():
-    reference_importance_by_keyword(os.path.join(dirname, 'test.json'), ['conspiracy', 'missinformation', 'vaccination', 'test', 'whale'])
+    snowballing_paper_importance(os.path.join(dirname, 'snowballing_result_no_keyword_sims.json'), ['conspiracy', 'missinformation', 'vaccination', 'test', 'whale'])

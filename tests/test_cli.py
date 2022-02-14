@@ -1,5 +1,7 @@
 import src.modules.cli as cli
 import os
+import nltk
+nltk.download('averaged_perceptron_tagger')
 dirname = os.path.dirname(__file__)
 
 
@@ -29,7 +31,13 @@ def test_extract_keywords():
 
 
 def test_paper_selection():
-    print(cli.paper_selection([" Conspiracy theories explain complex world events with reference to secret plots hatched by powerful groups. Belief in such theories is largely determined by a general propensity towards conspirational thinking. Such a conspiracy mentality can be understood as a generalised political attitude, distinct from established generalised political attitudes such as right\u2013wing authoritarianism (RWA) and social dominance orientation (SDO) (Study 1a, N = 497) that is temporally relatively stable (Study 1b and 1c, total N = 196). Three further studies (combined N = 854) show that in contrast to RWA and SDO, conspiracy mentality is related to prejudice against high\u2013power groups that are perceived as less likeable and more threatening than low\u2013power groups, whereas SDO and RWA are associated with an opposite reaction to perceptions of power. Study 5 (N = 1852) investigates the relationship of conspiracy mentality with political behavioural intentions in a specific catastrophic scenario (i.e. the damage to the Fukushima nuclear reactor after the 2011 tsunami in Japan) revealing a hitherto neglected role of conspiracy mentality in motivating social action aimed at changing the status quo. Copyright \u00a9 2013 European Association of Personality Psychology. "],["conspiracy", "conspiracy mentality", "social media", "sausage"]))
+    cli.paper_selection([" Conspiracy theories explain complex world events with reference to secret plots hatched by powerful groups. Belief in such theories is largely determined by a general propensity towards conspirational thinking. Such a conspiracy mentality can be understood as a generalised political attitude, distinct from established generalised political attitudes such as right\u2013wing authoritarianism (RWA) and social dominance orientation (SDO) (Study 1a, N = 497) that is temporally relatively stable (Study 1b and 1c, total N = 196). Three further studies (combined N = 854) show that in contrast to RWA and SDO, conspiracy mentality is related to prejudice against high\u2013power groups that are perceived as less likeable and more threatening than low\u2013power groups, whereas SDO and RWA are associated with an opposite reaction to perceptions of power. Study 5 (N = 1852) investigates the relationship of conspiracy mentality with political behavioural intentions in a specific catastrophic scenario (i.e. the damage to the Fukushima nuclear reactor after the 2011 tsunami in Japan) revealing a hitherto neglected role of conspiracy mentality in motivating social action aimed at changing the status quo. Copyright \u00a9 2013 European Association of Personality Psychology. "],["conspiracy", "conspiracy mentality", "social media", "sausage"])
+
+
+def test_snowballing_paper_selection():
+    cli.snowballing_paper_selection(snowballing_result_path=os.path.join(dirname, 'snowballing_result.json'),keywords=["conspiracy", "conspiracy mentality", "social media", "sausage"])
+    res = cli.snowballing_plot_selection(snowballing_result_path=os.path.join(dirname, 'snowballing_result_no_keyword_sims.json'))
+    assert res is None
 
 
 def test_summary():

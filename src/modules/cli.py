@@ -1,5 +1,5 @@
 import fire
-from SearchStudies import snowballing as sb
+from PaperSearch import snowballing as sb
 import KeywordKeyphraseExtractor
 import Similarities
 import Summarization
@@ -29,6 +29,8 @@ def paper_selection(text=[], keywords=[]):
     This function calculates the similarity between keywords or phrases relating a text. So it is possible to compare
     several texts and keywords in once to see which text is the best relating special keywords. Also a plot is
     generated, where it is possible to see the scores of all paper and keywords
+    Use like this: --text="["duda", "hallo"]" --keywords="["abcdef", "tets"]"
+
     :param text: This is a list of texts which you want to compare with the keywords
     :param keywords: The keywords in this list are used to compare the single texts.
     :return:
@@ -38,7 +40,7 @@ def paper_selection(text=[], keywords=[]):
     return df, fig
 
 
-def extract_keywords_pdf(pdf="Tropical Med Int Health - 2020 - Velavan - The COVID%u201019 epidemic.pdf"):
+def extract_keywords_pdf(pdf=""):
     """
     Prints the extracted keywords of the given PDF
     :param paper1: path or url to the PDF
@@ -55,7 +57,16 @@ def snowballing(starterSetPath=os.path.join(dirname, 'starter_set'), iterations=
     sb(starterSetPath, iterations)
 
 
-def pdf_similarity(paper1="rsos.201199.pdf", paper2="C:\\Users\\fabia\\PycharmProjects\\NLP4\\src\\starter_set\\2111.10594v1.Misrepresenting_Scientific_Consensus_on_COVID_19_The_Amplification_of_Dissenting_Scientists_on_Twitter.pdf", only_abstract=False):
+# pipenv run cli.py snowballing_paper_selection --snowballing_result_path="C:\Users\fabia\PycharmProjects\NLP4\src\modules\test.json", --keywords="["test","test2"]
+def snowballing_paper_selection(snowballing_result_path="", keywords=[]):
+    PaperSelection.snowballing_paper_importance(snowballing_result_path, keywords)
+
+
+def snowballing_plot_selection(snowballing_result_path=""):
+    PaperSelection.plot_snowballing_importance(snowballing_result_path)
+
+
+def pdf_similarity(paper1="", paper2="", only_abstract=False):
     """
     Returns the cosine similarity of sBert embeddings between of paper1 and paper2
     :param paper1: Path to first paper to be compared
@@ -66,7 +77,7 @@ def pdf_similarity(paper1="rsos.201199.pdf", paper2="C:\\Users\\fabia\\PycharmPr
     print(f"Papers have similarity score of: {similarity}")
 
 
-def extract_pdf_references(pdf="rsos.201199.pdf", save_to_file=""):
+def extract_pdf_references(pdf="", save_to_file=""):
     references = get_referenced_papers(pdf)
     print(references)
     if save_to_file != "":
@@ -74,7 +85,7 @@ def extract_pdf_references(pdf="rsos.201199.pdf", save_to_file=""):
             f.write(json.dumps(references, indent=4, sort_keys=True))
 
 
-def extract_keyphrases_pdf(pdf="Tropical Med Int Health - 2020 - Velavan - The COVID%u201019 epidemic.pdf"):
+def extract_keyphrases_pdf(pdf=""):
     """
     Prints extracted KeyPhrases to the given PDF
     :param paper1: path or url to the PDF

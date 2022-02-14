@@ -26,6 +26,7 @@ def get_abstract_by_pdf(pdf):
 
 
 def get_abstract_from_arxiv_id(arxiv_id):
+    print(f"Get abstract from{arxiv_id}")
     arxiv_search = arxiv.Search(id_list=[arxiv_id])
     paper = next(arxiv_search.results())
     abstract = paper.summary
@@ -34,12 +35,14 @@ def get_abstract_from_arxiv_id(arxiv_id):
 
 
 def get_abstract_from_doi(doi):
-    print(doi)
+    print(f"Get abstract from{doi}")
     try:
         requestAbs = requests.get('http://api.crossref.org/works/' + doi).json()
         abstract = requestAbs["message"].get("abstract", "None")
         title = requestAbs["message"].get("title", ["None"])
         if requestAbs["message"].get("reference") is not None:
+            # If crossref has references for the doi,they will also be returned in the dictionary
+            # Main purpose is to safe time in the snowballing
             references = requestAbs["message"].get("reference")
         else:
             references = "None"
@@ -54,8 +57,8 @@ def get_abstracts_of_reference_links(reference_links):
         if reflink.get("crossref") is not None:
             link = reflink.get("crossref")
             doi = link.replace("https://dx.doi.org/", "")
-            abstracts[link.replace("https://dx.doi.org/", "http://api.crossref.org/works/")] = get_abstract_from_doi(
-                doi)
+            abstracts[link.replace("https://dx.doi.org/", "http://api.crossref.org/works/")] = get_abstract_from_doi(doi)
+            # replace doi link by crossref link just for possible later usage of the api
         elif reflink.get("arxiv_url") is not None:
             link = reflink.get("arxiv_url")
             arxiv_id = link.replace("https://arxiv.org/pdf/", "")
@@ -68,8 +71,8 @@ def get_abstracts_of_reference_links(reference_links):
                 try:
                     response = requests.get(link)
                     if response.headers.get('content-type') == "application/pdf":
+                        # If pdf is available we will try to extract the abstract from the pdf
                         abstracts[response.url] = get_abstract_by_pdf(response.url)
                 except requests.exceptions.RequestException:
                     continue
-    logging.info(f"Extracted {len(abstracts)} abstract of {len(reference_links)} papers")
     return abstracts

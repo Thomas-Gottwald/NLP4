@@ -1,5 +1,7 @@
 import arxiv
 from src.modules.text_preprocessing import tokenize, remove_stopwords, lemmatizing, port_stemmer, position_tag
+import nltk
+nltk.download('averaged_perceptron_tagger')
 
 
 def test_preprocessing():

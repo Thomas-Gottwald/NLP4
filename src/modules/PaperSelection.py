@@ -46,7 +46,7 @@ def plot_paper_selection(df=pd.DataFrame()):
     return fig
 
 
-def reference_importance_by_keyword(snowballing_result_path, keywords=[]):
+def snowballing_paper_importance(snowballing_result_path, keywords=[]):
     with open(snowballing_result_path) as json_file:
         snowballing_result = json.load(json_file)
     model = SentenceTransformer('allenai-specter')
@@ -59,14 +59,18 @@ def reference_importance_by_keyword(snowballing_result_path, keywords=[]):
         for score in match_set[0]:
             scores[keywords[score['corpus_id']]] = score['score']
         snowballing_result[paper]["keyword_similarites"] = scores
-    with open("test.json", "w") as f:
+    with open(snowballing_result_path, "w") as f:
         json.dump(snowballing_result, f, indent=4)
-    plot_reference_importance(snowballing_result_path)
+    plot_snowballing_importance(snowballing_result_path)
 
 
-def plot_reference_importance(snowballing_result_path):
+def plot_snowballing_importance(snowballing_result_path):
     with open(snowballing_result_path) as json_file:
         snowballing_result = json.load(json_file)
+    if "keyword_similarites" not in snowballing_result[list(snowballing_result.keys())[0]]:
+        print("Sorry no field 'keyword_similarites', run 'snowballing_paper_selection()' first ")
+        return None
+
     key_words = list(snowballing_result[list(snowballing_result.keys())[0]]["keyword_similarites"].keys())
     columns = key_words.copy()
     columns.append("paper")

@@ -1,9 +1,9 @@
 
 ---
 ## NLP To the Rescue! (NLP4)
-A short description of the project’s purpose and main functionality. **What** does the project do?
-This project is an attempt to create a system which uses NLP techniques to aid authors in performing systematic literature 
-reviews (SLR). This system offers some implementations of NLP techniques like text similarity and key word extraction.
+
+This project is an attempt to create a system which uses natural language processing (NLP) techniques to aid authors in performing systematic literature 
+reviews (SLR). This system offers some implementations of NLP techniques like for exeample text similarity and key word extraction.
 Herby the current state of the project is focused on aiding the author in the search of relevant studies and the
 selection of relevant studies.
 
@@ -24,15 +24,14 @@ in a SLR.
 
 
 ## Features
-*What makes your project stand out? Include screenshots, code snippets, logos, etc.*
-As already mentioned the current state of the proposed system focuses on aiding the author in the search of relevant studies and the
+As already mentioned the current state of the proposed system, focuses on aiding the author in the search of relevant studies and the
 section of relevant studies. 
 Therefore we implement the following features:
 * Feature list
     * PDF Extraction
     * Abstract Extraction
     * Reference Extraction 
-    * Automatic Snowballing
+    * Automatic Snowballing (Paper)
     * Paper selection
     * Plot Results
     * Keyword/Keyphrase Extraction
@@ -44,33 +43,24 @@ Most of these features are build upon diverse open source projects.
 In the following section we will describe the features and their basis in detail and propose optimization possibilities
 for future work.
 
-*All features can be used via the CLI without programming as well as in code by using the respective functions* 
-All CLI commands expect the user to be called from the project root path "NLP4/"
+*All features can be used via the CLI without programming (see CLI section), as well as in code by using the proposed modules as library* 
 
 ### PDF extraction
 The PDF extraction is implemented with the PDFMiner from https://github.com/pdfminer/pdfminer.six.
- It enables the user to extract all text of a PDF in python. An outstanding feature of the PDFMiner is that it recognizes
-the layout of the given PDF file and therefore is able to extract text from diverse PDFs. This is especially relevant
-because many scientific papers have a two column layout which other PDF extraction frameworks we tried failed on.
+It enables the user to extract all text of a PDF in python. An outstanding feature of the PDFMiner is that it recognizes
+the layout of the given PDF file and therefore is able to extract text from multicolumn pdf layouts. This is especially relevant
+because many scientific papers have a two column layout, which other PDF extraction frameworks we tried failed on.
 
-#####Usage:
 
 ######Input:
-pdfFilenamePath: This Input from type "String" describes the Path of the PDF, from whom you want to extract the Text
+pdfFilenamePath: This Input from type "String" describes the Path of the PDF, from which you want to extract the Text
 
-throwError: With that bool 
 ######Output:
-As output, you get the hole Text from the PDF, including the Titles, Pages and so on as a string. 
+As output, you get the whole Text from the PDF as a string. 
 
 ######In code:
 ```
-PDFminer.getPDFtext(pdfFilenamePath="", ignore_references = "True")
-```
-###### Via CLI
-Via CLI the user is able to extract the text from the given PDF file to a given .txt file
-
-```sh
-pipenv run python cli.py functions extractPdfToText <pdfPath> <txtPath>
+PDFminer.getPDFtext(pdfFilenamePath="")
 ```
 
 ##### Possible optimization / future work
@@ -80,55 +70,132 @@ It would be beneficial to analyze ways to remove these parts from the extracted 
 This would boost the performance of the NLP techniques like the similarity or keyword extraction when they are used in combination
 with the pdf extraction.
 
-### Abstract Extraction
-The Abstract Extraction Module implements the following 3 functions to extract abstracts from difrent sources.
-```
-get_abstract_from_doi(doi)
-```
-Returns the abstract of a paper by its given DOI by querrying the crossref API for the doi.
-The crossref API offers abstracts of many free available papers. Nevertheless it is not possible to
-retrieve abstracst of all papers by this api.
-
-
-```
-get_abstract_from_arxiv_id(arxiv_id)
-```
-Returns the abstract of any paper hosted by arXiv.org given by the respective arxiv_id.
-To retrieve the abstract the arxiv api is used.
-
-
-```
-get_abstract_by_pdf(pdf)
-```
-This method trys to get the abstracts of a given pdf. Here The pdf parameter can eiter be the path to
-a local pdf file or an online link, like (https://arxiv.org/pdf/xxxxxx.pdf).
-The function makes a request to the scolarcy api, which then returns either the doi or the arxiv id, whichever is
-available. And the uses the respective get_abstract function specified above to return the abstract of the given pdf.
 ### Reference Extraction
-The Reference Extraction uses the scholarcy REST API which extracts all references from an uploaded PDF.
+This module contains functions to extract references of paper pdfs and their respective abstracts.
+Not for all references all 3 of the types are available.
+
+```get_referenced_papers(pdf)```
+The Reference Extraction uses the scholarcy REST API extract all references from an uploaded PDF.
 The scholarcy reference extraction API returns a JSON string with all references in textual description
 as well as different links to the references. These links can be of 3 different types:
 * crossref => Is a https://dx.doi.org/ link with the respective doi.
 * scholar_url => Is a link leading to the Google Scholar result of the specific paper
 * oa_query => Leads either directly to a PDF version of the reference or to the paper page of the publishing journal
 
-Not for all references all 3 of the types are available.
 
 ##### Input
-<str> Link to pdf or Path to local pdf file.
+Link to pdf or Path to local pdf file.
 ##### Output
 Returns a dictionary with following format (If not all link types are available the respective key will be missing):
-```
+
+```json
 {
-  'id': 'Id of refrence in the referencing paper',
-  'entry': 'Title of references',
-  'crossref': '',
-  'scholar_url': 'https://scholar.google.co.uk/...', 
-  'oa_query': 'https://ref.scholarcy.com/....',
+  "id": "Id of refrence in the referencing paper",
+  "entry": "Title of references",
+  "crossref": "",
+  "scholar_url": "https://scholar.google.co.uk/...", 
+  "oa_query": "https://ref.scholarcy.com/...."
 }
 ```
 
-### Automatic Snowballing
+```get_reference_abstracts(pdf)```
+Calls the get_refrenced_papers() function and passes the result to the AbstractExtraction.get_abstracts_of_reference_links() links 
+to retieve available abstracts from the paper references.
+##### Input
+Link to pdf or Path to local pdf file.
+##### Output
+Returns a dictionary with the references link as key and the title, abstract and if the abstract is retrieved from the doi 
+also the references (see: Abstractextraction.get_abstract_from_doi) of the respective reference.
+```json
+{"http://api.crossref.org/works/10.2196/19659": {"title":"paper title", "abstract": "paper abstract",
+  "references": [
+    {
+        "key": "e_1_3_2_21_2",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1016/example_doi"
+    }]
+}
+```
+If the references for the paper aren't available´, "refernces" will be "None"
+
+```cleanup_reference_abstracts```
+
+### Abstract Extraction
+The Abstract Extraction Module implements the following 3 functions to extract abstracts from difrent sources.
+```
+get_abstract_from_doi(doi)
+```
+Returns the title, abstract and if available the references of a paper by its given DOI.
+To retrieve the abstract a request to the crossref API (see API section) with the given doi is made.
+Since the crossref API offers also the references for some papers they are also returned if available.
+This is done mainly to safe time in the automatic snowballing.
+
+
+The crossref API offers abstracts of many free available papers. Nevertheless it is not possible to
+retrieve abstracst of all papers by this api. 
+
+######Inputs: 
+doi: The digital object identifier (doi) of the paper whichs abstract should be extracted
+######Output:
+The ouput is a python dictionary with the following format:
+```json
+{"title": "paper title", "abstract": "paper abstract", "references": [
+    {
+        "key": "e_1_3_2_21_2",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1016/example_doi"
+    }
+  ]
+} 
+```
+
+If the references for the paper aren't available´, "refernces" will be "None"
+
+
+```
+get_abstract_from_arxiv_id(arxiv_id)  
+```
+Returns the abstract and the title of any paper hosted by arXiv.org given by the respective arxiv_id.
+To retrieve the abstract the arxiv API is used (See API section).
+######Inputs: 
+arxiv_id: The arxiv_id of the paper whichs abstract should be extracted
+######Output:
+The ouput is a python dictionary with the following format:
+```json
+{"title": "paper title", "abstract": "paper abstract", "references": "None"}
+```
+Since arXiv doesn't offer referecnes of papers they are not returned like in *get_abstract_from_doi(doi)*.
+However the key "references" is filled with "None" to have a consistent output format of across the functions.
+
+
+```
+get_abstract_by_pdf(pdf)
+```
+This method trys to get the abstracts of a given pdf. 
+The function makes a request to the scolarcy api, which then returns either the doi or the arxiv id, whichever is
+available. And then uses the respective *get_abstract* function specified above with the received id to return the abstract of the given pdf.
+######Inputs: 
+pdf: Can either be the path to a local PDF file, or a URL to a PDF file. 
+######Output:
+The ouput is a python dictionary with the following format:
+```json
+{"title": "paper title", "abstract": "paper abstract", "references": "None"} if arXiv paper
+{"title": "paper title", "abstract": "paper abstract", "references": {"key":"e_1_3_2_21_2","doi-asserted-by":"publisher","DOI":"10.1016/example_doi"}
+} if paper with doi
+{"title": "None", "abstract": "None", "references": "None"} If neither an arXiv id nor an doi could be extracted from the pdf
+```
+
+```
+get_abstracts_of_reference_links(pdf)
+```
+
+
+
+
+
+
+### Paper Search
+#### Automatic Snowballing 
 The automatic snowballing feature performs a full automized forward snowballing, by measuring the similarity of abstracts
 of the references of papers in a given snowballing seed set, with the abstracts of all the papers in the seed set.
 If the similarity of a refrence with any of the seed set abstracts is higher than threshold *t*, the reference will
