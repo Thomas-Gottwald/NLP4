@@ -1,6 +1,5 @@
 import math
 import numpy
-
 from src.modules.Similarities import specter_1to1_cosine
 from src.modules.Similarities import specter_query_reference_similarity
 from src.modules.Similarities import pdf_similarity
@@ -42,12 +41,12 @@ def test_query_similarity():
 def test_pdf_similarity():
     pdf = os.path.join(dirname, 'test_paper/rsos.201199.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=True)
-    assert isinstance(sim, numpy.float32)
+    assert isinstance(sim, numpy.core.single)
 
     pdf = os.path.join(dirname, 'test_paper/rsos.201199.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=False)
-    assert isinstance(sim, numpy.float32)
+    assert isinstance(sim, numpy.core.single)
 
     pdf = os.path.join(dirname, 'test_paper/15.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=True)
-    assert isinstance(sim, numpy.float32)
+    assert isinstance(sim, numpy.core.single)
