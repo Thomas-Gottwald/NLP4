@@ -1,5 +1,4 @@
 import math
-import numpy
 from src.modules.Similarities import specter_1to1_cosine
 from src.modules.Similarities import specter_query_reference_similarity
 from src.modules.Similarities import pdf_similarity

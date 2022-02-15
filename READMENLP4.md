@@ -4,20 +4,21 @@
 
 This project is an attempt to create a system which uses natural language processing (NLP) techniques to aid authors in performing systematic literature 
 reviews (SLR). This system offers some implementations of NLP techniques like for exeample text similarity and key word extraction.
-Herby the current state of the project is focused on aiding the author in the search of relevant studies and the
+Hereby the current state of the project is focused on aiding the author in the search of relevant studies and the
 selection of relevant studies.
 
 
 ## Motivation
-Performing a systematic literature review is usually a time-consuming task and can take up to 12 Months [1].
+Performing a systematic literature review is usually a time-consuming task and can take up to 12 Months ([Feng et al, 2017](https://ieeexplore.ieee.org/document/8305926)).
 These tasks are for example: 
 * Defining the research question
 * Search relevant studies
 * Select relevant studies
-* ... For a full description see: 
+* Extract data from studies
+For more details about the specific task in an SLR see: [https://flexiblelearning.auckland.ac.nz/philson/47.html](https://flexiblelearning.auckland.ac.nz/philson/47.html)
 
-One reason an SLR is so time-consuming is that it consists of several tasks which each needs time to fulfill.
-Natural language processing has the potential to aid an author in doing these task or even completely automate some of them.
+Natural language processing has the potential to aid an author in doing these task or even completely automate some of them and thereby
+reduce the time to conduct a full SLR.
 
 This project should give a starting point for future development of additional NLP techniques to automate or aid the specified tasks
 in a SLR.
@@ -332,11 +333,11 @@ Returns a dictionary with each paper of the query_set that exceeds the min_simil
 ```
 
 ### Paper Selection
-This file contains two functions "paper_importance" and "plot_paper_selection" which can be used to select papers on the
+This module contains four functions which can be used to select papers on the
 basis of the similarity between the query and the papers you are interested in, and it can show the result in a plot. 
 ####paper_importance
 ```
-PaperSelection.paper_importance(text=[], keywords=[])
+PaperSelection.paper_importance but for the snowballing results and adds the similarity with the keyords to the snowballing_result json.(text=[], keywords=[])
 ```
 This function makes it possible to compare Keywords or a research topic with one or more texts. Therefore, it uses the
 keywords and the text and calculates the cosines similarity of those. As result, you get a value for of each keyword 
@@ -363,6 +364,28 @@ The input is a dataframe, which contains the results of the "paper_importance".
 Just hand over the return of this function. 
 ######Output:
 The function returns the object file of the plot. So it is possible to handle this or to save it afterwards. 
+
+#### snowballing_paper_importance
+```
+snowballing_paper_importance(snowballing_result_path, keywords=[]):
+```
+Calculates the paper importance like in PaperSelection.paper_importance but for the snowballing results and adds the similarity with the keyords to the snowballing_result json.
+######Inputs: 
+*snowballing_result_path*: json file resulting from PaperSearch.snowballing()
+######Output:
+Returns json file with keyword similarity of each paper in the file added.
+
+#### plot_snowballing_importance
+```
+plot_snowballing_importance(snowballing_result_path)
+```
+Plots the result of the PaperSelection.snowballing_paper_importance, by tranforming the json to a pandas data frame and passing it to the PaperSelecton.plot_paper_selection function
+######Inputs: 
+*snowballing_result_path*: json file resulting from PaperSelection.snowballing_paper_importance
+######Output:
+The function returns the object file of the plot. So it is possible to handle this or to save it afterwards. 
+
+plot
 ##### Possible optimization / future work
 1. Probably it would be nice to implement a plot methode to all other functions, so it would be easy to evaluate 
 them and have a good overview. 
