@@ -41,12 +41,12 @@ def test_query_similarity():
 def test_pdf_similarity():
     pdf = os.path.join(dirname, 'test_paper/rsos.201199.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=True)
-    assert isinstance(sim, numpy.core.single)
+    assert isinstance(sim, float)
 
     pdf = os.path.join(dirname, 'test_paper/rsos.201199.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=False)
-    assert isinstance(sim, numpy.core.single)
+    assert isinstance(sim, float)
 
     pdf = os.path.join(dirname, 'test_paper/15.pdf')
     sim = pdf_similarity(pdf, pdf, only_abstract=True)
-    assert isinstance(sim, numpy.core.single)
+    assert isinstance(sim, float)

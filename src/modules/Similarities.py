@@ -24,7 +24,7 @@ def specter_1to1_cosine(first, second):
     model = SentenceTransformer('allenai-specter')
     first = model.encode(first, convert_to_tensor=True)
     second = model.encode(second, convert_to_tensor=True)
-    return util.cos_sim(first, second).numpy()[0][0]
+    return util.cos_sim(first, second).numpy()[0][0].item()
 
 
 def pdf_similarity(first, second, only_abstract=False):
