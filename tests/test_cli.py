@@ -37,8 +37,6 @@ def test_paper_selection():
 
 def test_snowballing_paper_selection():
     cli.snowballing_paper_selection(snowballing_result_path=os.path.join(dirname, 'snowballing_result.json'),keywords=["conspiracy", "conspiracy mentality", "social media", "sausage"])
-    res = cli.snowballing_plot_selection(snowballing_result_path=os.path.join(dirname, 'snowballing_result_no_keyword_sims.json'))
-    assert res is None
 
 
 def test_summary():
