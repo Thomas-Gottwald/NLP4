@@ -7,7 +7,7 @@ nltk.download('all')
 
 def specter_query_reference_similarity(corpus_set, query_set):
     model = SentenceTransformer('allenai-specter')
-    corpus = [paper['title'] + '[SEP]' + paper['abstract'] for paper in corpus_set]
+    corpus = [paper['title'] + '[SEP]' + paper['abstract'] for paper in corpus_set]  # [SEP] token is recommendend by sentence_transformers documentation to seperate the title and the abstract
 
     corpus_embeddings = model.encode(corpus, convert_to_tensor=True)
     match_set = {}
@@ -24,7 +24,7 @@ def specter_1to1_cosine(first, second):
     model = SentenceTransformer('allenai-specter')
     first = model.encode(first, convert_to_tensor=True)
     second = model.encode(second, convert_to_tensor=True)
-    return util.cos_sim(first, second)
+    return util.cos_sim(first, second).numpy()[0][0]
 
 
 def pdf_similarity(first, second, only_abstract=False):

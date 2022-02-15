@@ -121,7 +121,8 @@ If the references for the paper aren't available´, "refernces" will be "None"
 ```cleanup_reference_abstracts```
 
 ### Abstract Extraction
-The Abstract Extraction Module implements the following 3 functions to extract abstracts from difrent sources.
+The Abstract Extraction Module implements the following 4 functions to extract abstracts from different sources.
+#### get_abstract_from_doi
 ```
 get_abstract_from_doi(doi)
 ```
@@ -150,7 +151,7 @@ The ouput is a python dictionary with the following format:
 
 If the references for the paper aren't available´, "refernces" will be "None"
 
-
+#### get_abstract_from_arxiv_id
 ```
 get_abstract_from_arxiv_id(arxiv_id)  
 ```
@@ -166,7 +167,7 @@ The ouput is a python dictionary with the following format:
 Since arXiv doesn't offer referecnes of papers they are not returned like in *get_abstract_from_doi(doi)*.
 However the key "references" is filled with "None" to have a consistent output format of across the functions.
 
-
+#### get_abstract_by_pdf
 ```
 get_abstract_by_pdf(pdf)
 ```
@@ -184,17 +185,18 @@ The ouput is a python dictionary with the following format:
 {"title": "None", "abstract": "None", "references": "None"} If neither an arXiv id nor an doi could be extracted from the pdf
 ```
 
+#### get_abstracts_of_reference_links
 ```
 get_abstracts_of_reference_links(pdf)
 ```
-The get_abstracts_of_reference_links function is especially made to retireve the abstracts from the reference_links retrieved of the scholarcy API by the ReferenceExtraction.get_referenced_papers() function.
-The function tries to retrieve the abstracts for each retrieved references in the following three diffrent ways:
+The get_abstracts_of_reference_links function is especially made to retrieve the abstracts from the reference_links retrieved of the scholarcy API by the ReferenceExtraction.get_referenced_papers() function.
+The function tries to retrieve the abstracts for each retrieved references in the following three different ways:
 1. If for the reference a link of type "crossref" (meaning: https://dx.doi.org/10.1126/example_doi) is available, the doi is extracted from the link.
 The extracted doi is than passed to the AbstractExtraction.get_abstracts_of_doi() function to retrieve the abstract of the reference.
-2. If No croossref link is avaible it is checked if an arxiv link is available. In this case the arXiv_id is extracted is is passed to the AbstractExtract.get_abstract_from_arxiv_id() function to retrieve the title an the abstract of the reference.
+2. If No crossref link is available it is checked if an arxiv link is available. In this case the arXiv_id is extracted is passed to the AbstractExtract.get_abstract_from_arxiv_id() function to retrieve the title an the abstract of the reference.
 3. If none of these links is available the a get request to the "oa_query" link is made. If the "content-type" of the response is application/pdf the response url is passed to the get_abstract_by_pdf() function to try to extract the abstract from the pdf url. 
-If none of these 3 steps is succesfull no abstract for the reference is extracted.
-In case one of the steps is succesfull the retrieved abstract will be added to a dictionary with the respective link as key and the respective abstract dictionary as value.
+If none of these 3 steps is successful no abstract for the reference is extracted.
+In case one of the steps is successful the retrieved abstract will be added to a dictionary with the respective link as key and the respective abstract dictionary as value.
 
 
 ######Inputs: 
@@ -207,6 +209,68 @@ Ouput is a dictionary with the following format:
  }
 ```
 
+
+### Similarities
+The similarities module implements the [sentence-transformers/allenai-specter](https://huggingface.co/sentence-transformers/allenai-specter) model, which is an implementation of the [SPECTER-Model](https://arxiv.org/abs/2004.07180).
+The SPECTER-Model is a transformer to generate document-level embeddings of scientific documents based on [Sci-BERT](https://arxiv.org/abs/1903.10676).
+It is trained with consideration of the relatedness of scientific documents citing each other. This means that the embedding representations of papers are closer
+to each other when one cites the other.
+
+The  [sentence-transformers/allenai-specter](https://huggingface.co/sentence-transformers/allenai-specter) implementation
+of the SPECTER-Model enables to create SPECTER embeddings of titles and abstracts of papers.
+
+
+####specter_query_reference_similarity
+````
+specter_query_reference_similarity
+````
+This function generates the SPECTER embeddings and calucaltes the cosine similarity of each reference in query_set
+with each reference in the corpus set and return the similarities. It uses the sentence_transformers.util.semantic_search
+from the [sentence-transformers/allenai-specter](https://huggingface.co/sentence-transformers/allenai-specter) model for this. 
+######Inputs: 
+*corpus_set:* List of dictionarys containing title and abstract of papers
+```json
+[{"title": "paper title", "abstract": "paper abstract", "references": {"key":"e_1_3_2_21_2","doi-asserted-by":"publisher","DOI":"10.1016/example_doi"}},
+{"title": "paper title", "abstract": "paper abstract", "references": "None"}]
+```
+*query_set: Dictionary containing paper id's as key and title and abstract as value* 
+```json
+{"10.1177/0093650214565914": {
+            "title": "Paper title",
+            "abstract": "Paper abstract"},
+  "10.117/9090": "..."
+}
+```
+
+######Output:
+Ouput is a dictionary containting the similarity score of each quer_set paper with each corpus_set paper with the following format:
+```json
+{"10.1177/0093650214565914": [[{"corpus_id": 0, "score": 0.8752286434173584}, {"corpus_id": 1, "score": 0.6487678289413452}]]}
+```
+
+#### specter_1to1_cosine
+````
+specter_1to1_cosine(first, second)
+````
+Creates the SPECTER embeddings of two passed strings and returns their cosine similarity
+###### Inputs:
+*first*: First string for comparison
+*second*: Second string for comparison
+###### Output:
+Returns similarity of both strings as float number.
+
+#### pdf_similarity
+````
+pdf_similarity(first, second, only_abstract=False)
+````
+Creates the SPECTER embeddings of two passed PDFs and returns their cosine similarity.
+###### Inputs:
+*first*: First string for comparison
+*second*: Second string for comparison
+*only_abstract*: If true it will first try to extract the abstracts of the specified pdf and only calculate the
+similarity of the abstracts.
+###### Output:
+Returns similarity of both pdfs/abstracts as float number.
 
 
 ### Paper Search
@@ -221,11 +285,6 @@ for your research topic.
 ````
 snowballing(seed_set_path, iterations, similarity_threshold)
 ````
-##### *Input*
-
-##### *Output*
-
-
 The snowballing function starts by extracting the abstracts of the seed set papers by using the *get_abstract_by_pdf()* function of the
 *AbstractExtraction* module and adding them to the *corpus_set* variable. After extracting the seed set abstracts, the refrences of the seed set 
 and their respective abstracts are extracted by using the *get_reference_abstracts* function of the *ReferenceExtraction* module.
@@ -234,7 +293,43 @@ The reference abstracts are added to the *querry_set* variable. Then the *corpus
 Those references that exceed the specified similiraty threshold are than added to two dictioniarys. The *result_set* and the *new_set*.
 The snowballing prcoess is then continued in a while loop for the given number of iterations where in every iteration the *new_set* is appenden to the
 *corpus_set*
+##### *Input*
 
+##### *Output*
+
+#### get_similar_references
+````
+get_similar_references(corpus_set, query_set, min_similarity):
+````
+Calcualtes the similaritys of each query_set(new references) paper with each corpus_set(seed_set/current result_set) paper
+and only returns those papers of the query_set (with their achieved similarity) that have a higher similarity than min_similarity with one of the corpus_set
+papers.
+##### *Input*
+*corpus_set:* List of dictionarys containing title and abstract of papers
+```json
+[{"title": "paper title", "abstract": "paper abstract", "references": {"key":"e_1_3_2_21_2","doi-asserted-by":"publisher","DOI":"10.1016/example_doi"}},
+{"title": "paper title", "abstract": "paper abstract", "references": "None"}]
+```
+*query_set: Dictionary containing paper id's as key and title and abstract as value* 
+```json
+{"10.1177/0093650214565914": {
+            "title": "Paper title",
+            "abstract": "Paper abstract"},
+  "10.117/9090": "..."
+}
+```
+*min_similarity*: Minimum similarity to return the reference
+##### *Output*
+Returns a dictionary with each paper of the query_set that exceeds the min_similarity with one of the corpus_set papers:
+```json
+{
+  "10.1177/0093650214565914": {
+    "title": "Test Title",
+    "abstract": " This study joins a growing body of research that demonstrates the behavioral consequences of hostile media perceptions. Using survey data from a nationally representative U.S. sample, this study tests a moderated-mediation model examining the direct and indirect effects of hostile media perceptions on climate change activism. The model includes external political efficacy as a mediator and political ideology and internal political efficacy as moderators. The results show that hostile media perceptions have a direct association with climate activism that is conditioned by political ideology: Among liberals, hostile media perceptions promote activism, whereas among conservatives, they decrease activism. Hostile media perceptions also have a negative, indirect relationship with activism that is mediated through external political efficacy; however, this relationship is conditioned by both ideology and internal political efficacy. Specifically, the indirect effect manifests exclusively among conservatives and moderates who have low internal efficacy. Theoretical, normative, and practical implications are discussed. ",
+    "similarity": "0.8984190225601196, similar to corpus_set Papers"
+  }
+}
+```
 
 ### Paper Selection
 This file contains two functions "paper_importance" and "plot_paper_selection" which can be used to select papers on the
@@ -439,22 +534,26 @@ Returns a text with all words and the relating tags.
 
 ### Command line interface (cli)
 Instead of using the above described modules and their function in code or as a library you can simply use most of these function with simple cli commands which will be explainend in the following section.
-All cli commpands need to be called from the path NLP4/src/modules.
-For further information about parameters and functionality of each cli command call the respective command with "--help" flag.
+All cli commands need to be called from the path NLP4/src/modules.
+
+For a detailed description about parameters and functionality of each cli command call the respective command with "--help" flag.
 
 ##### Explanation of all function
 ```cli
 pipenv run cli.py --help
 ```
 ##### Summarization
+Uses Summarization.generate_summary() to summarize given text
 ```cli
 pipenv run cli.py summarization --text""
 ```
 ##### paper_selection
+Calls PaperSelection.paperimportance and PaperSelection.plot_paper_selection with the passed arguments
 ```cli
 pipenv run cli.py paper_selection --text="["text1", "text2"]" --keywords="["kw1", "kw2"]"
 ```
 ##### snowballing
+Runs the automated snowballing with the papers in the passed_seed set. If none is passed, default path NLP4/src/seed_set will be used.
 ```cli
 pipenv run cli.py snowballing --seed_set_path
 ```
@@ -463,12 +562,14 @@ pipenv run cli.py snowballing --seed_set_path
 pipenv run cli.py paper_selection --text="["text1", "text2"]" --keywords="["kw1", "kw2"]"
 ```
 ##### snowballing_paper_selection
+Calls PaperSelection.snowballing_paper_selection with the given snowballing_result_file and the specified key_words
 ```cli snowballing_paper_selection
 pipenv run cli.py snowballing_paper_selection --snowballing_result_path="", --keywords="["test","test2"]"
 ```
 ##### pdf_similarity
+Compares the similarity of two passed pdf with Similarities.pdf_similarity with the specified files.
 ```cli 
-pipenv run cli.py pdf_similarity --paper1="", paper2=""
+pipenv run cli.py pdf_similarity --paper1="" --paper2="" --only_abstracts=False
 ```
 
 
@@ -491,14 +592,9 @@ functionality of your project already, this section can be omitted. **If you thi
 information than the brief code examples above to fully understand your code, this section is mandatory.** If your 
 project requires significant information on code reuse, place the information into a new `.md` file.
 
-## Results
-If you performed evaluations as part of your project, include your preliminary results that you also show in your final
-project presentation, e.g., precision, recall, F1 measure and/or figures highlighting what your project does. 
-If applicable, briefly describe the dataset your created or used first before presenting the evaluated use cases 
-and the results.
 
-If you are about to complete your thesis, include the most important findings (precision/recall/F1 measure) and refer 
-to the corresponding pages in your thesis document.
+## References
+[1]
 
 ## License
 Include the project's license. Usually, we suggest MIT or Apache. Ask your supervisor. For example:
@@ -510,5 +606,3 @@ Unless required by applicable law or agreed to in writing, software distributed 
 "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
 language governing permissions and limitations under the License
 
-## License of this readme-template (remove this once you replaced this readme-template with your own content)
-This file itself is partially based on [this file](https://gist.github.com/sujinleeme/ec1f50bb0b6081a0adcf9dd84f4e6271). 

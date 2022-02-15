@@ -6,7 +6,7 @@ import ReferenceExtraction
 import Similarities
 
 
-def snowballing(starterSetPath, iterations, min_similarity=0.85):
+def snowballing(starterSetPath, iterations, min_similarity=0.85, result_file="snowballing_result.json"):
     seed_set = [os.path.join(starterSetPath, x) for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
     print(seed_set)
     seed_set_abstracts = []
@@ -54,7 +54,7 @@ def snowballing(starterSetPath, iterations, min_similarity=0.85):
         result_set.update(new_set.copy())
         print("-----------------------------NextIteration done-------------------------------")
         i += 1
-    with open("snowballing_result.json", "w") as f:
+    with open("result_file.json", "w") as f:
         json.dump(result_set, f, indent=4)
     print(json.dumps(result_set))
     return json.dumps(result_set)

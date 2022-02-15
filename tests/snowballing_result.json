@@ -21,7 +21,13 @@
             "10.1001/jama.2018.16865",
             "10.1007/s12559-016-9415-7"
         ],
-        "similarity": "0.8523349761962891, similar to corpus_set Papers"
+        "similarity": "0.8523349761962891, similar to corpus_set Papers",
+        "keyword_similarites": {
+            "social media": 0.7614051103591919,
+            "conspiracy": 0.6369688510894775,
+            "conspiracy mentality": 0.6284813284873962,
+            "sausage": 0.599249005317688
+        }
     },
     "http://api.crossref.org/works/10.2196/19702": {
         "title": "Correlations of Online Search Engine Trends With Coronavirus Disease (COVID-19) Incidence: Infodemiology Study",
@@ -54,7 +60,13 @@
             "10.1002/alr.22580",
             "10.2196/13680"
         ],
-        "similarity": "0.9025652408599854, similar to corpus_set Papers"
+        "similarity": "0.9025652408599854, similar to corpus_set Papers",
+        "keyword_similarites": {
+            "social media": 0.704372763633728,
+            "sausage": 0.6467978358268738,
+            "conspiracy": 0.6199130415916443,
+            "conspiracy mentality": 0.5986101031303406
+        }
     },
     "10.1098/rsif.2014.0950": {
         "title": "Global rise in human infectious disease outbreaks",
@@ -75,7 +87,13 @@
             "10.1016/j.arcmed.2005.06.005",
             "10.3201/eid0602.000201"
         ],
-        "similarity": "0.8217978477478027, similar to corpus_set Papers"
+        "similarity": "0.8217978477478027, similar to corpus_set Papers",
+        "keyword_similarites": {
+            "sausage": 0.6920263767242432,
+            "social media": 0.6673992872238159,
+            "conspiracy": 0.6550647020339966,
+            "conspiracy mentality": 0.6013824939727783
+        }
     },
     "10.3390/data4010006": {
         "title": "Using Twitter for Public Health Surveillance from Monitoring and Prediction to Public Response",
@@ -104,7 +122,13 @@
             "10.1371/journal.pone.0134270",
             "10.1016/j.idh.2017.08.005"
         ],
-        "similarity": "0.8911285996437073, similar to corpus_set Papers"
+        "similarity": "0.8911285996437073, similar to corpus_set Papers",
+        "keyword_similarites": {
+            "social media": 0.7710689306259155,
+            "conspiracy": 0.647445797920227,
+            "sausage": 0.620275616645813,
+            "conspiracy mentality": 0.6134014129638672
+        }
     },
     "10.2196/14007": {
         "title": "Automatically Appraising the Credibility of Vaccine-Related Web Pages Shared on Social Media: A Twitter Surveillance Study",
@@ -158,7 +182,13 @@
             "10.1177/1460458213512220",
             "10.1016/j.vaccine.2015.01.078"
         ],
-        "similarity": "0.8396040201187134, similar to corpus_set Papers"
+        "similarity": "0.8396040201187134, similar to corpus_set Papers",
+        "keyword_similarites": {
+            "social media": 0.6800616979598999,
+            "conspiracy": 0.6540381908416748,
+            "sausage": 0.6221829652786255,
+            "conspiracy mentality": 0.6050226092338562
+        }
     },
     "10.1186/s12889-019-7659-3": {
         "title": "How organisations promoting vaccination respond to misinformation on social media: a qualitative investigation",
@@ -219,7 +249,13 @@
             "10.1136/bmj.j661",
             "10.1111/j.1467-842X.1998.tb01140.x"
         ],
-        "similarity": "0.8300053477287292, similar to corpus_set Papers"
+        "similarity": "0.8300053477287292, similar to corpus_set Papers",
+        "keyword_similarites": {
+            "social media": 0.689948320388794,
+            "conspiracy mentality": 0.6723840236663818,
+            "conspiracy": 0.6630359888076782,
+            "sausage": 0.6291828155517578
+        }
     },
     "10.2807/1560-7917.ES.2020.25.10.2000199": {
         "title": "Retrospective analysis of the possibility of predicting the COVID-19 outbreak from Internet searches and social media data, China, 2020",
@@ -231,7 +267,13 @@
             "10.2196/publichealth.5814",
             "10.1038/srep32920"
         ],
-        "similarity": "0.8952438235282898, similar to corpus_set Papers"
+        "similarity": "0.8952438235282898, similar to corpus_set Papers",
+        "keyword_similarites": {
+            "social media": 0.7905707955360413,
+            "sausage": 0.6309187412261963,
+            "conspiracy": 0.6225141882896423,
+            "conspiracy mentality": 0.5925639867782593
+        }
     },
     "10.2196/13680": {
         "title": "The Application of Internet-Based Sources for Public Health Surveillance (Infoveillance): Systematic Review",
@@ -422,6 +464,12 @@
             "10.1038/494155a",
             "10.1126/science.1248506"
         ],
-        "similarity": "0.9092237949371338, similar to corpus_set Papers"
+        "similarity": "0.9092237949371338, similar to corpus_set Papers",
+        "keyword_similarites": {
+            "social media": 0.7271340489387512,
+            "sausage": 0.6586793661117554,
+            "conspiracy": 0.6350359916687012,
+            "conspiracy mentality": 0.6096625328063965
+        }
     }
 }

@@ -14,7 +14,7 @@ dirname = Path(__file__).parent
 
 def summarization(text='', top_n=5):
     """
-    Creates a summary out of a text. Therefore the algorithm takes a Text and parse it into the single sentences.
+    Creates a summary out of a text. Therefore the algorithm takes a text and parse it into the single sentences.
     Those sentences get compared with each other --> Cosine similarity. Out of this it is possible to choose the most
     relevant sentences relating all others to create the summary.
     :param top_n: Chose the n best sentences to create the summary.
@@ -22,6 +22,28 @@ def summarization(text='', top_n=5):
     :return: Returns the summary of the given text.
     """
     return Summarization.generate_summary(text, top_n)
+
+
+def extract_pdf_references(pdf="", save_to_file=""):
+    """
+    Extracts the references of the given Paper. If save_to_file is set the references will be saved in the specified file.
+    :param pdf: Path or URL to the pdf of which the references should be extracted
+    :param save_to_file Optional path to file in which the extracted references will be saved in json format
+    """
+    references = get_referenced_papers(pdf)
+    print(references)
+    if save_to_file != "":
+        with open(save_to_file, "w") as f:
+            f.write(json.dumps(references, indent=4, sort_keys=True))
+
+
+def snowballing(seed_set_path=os.path.join(dirname, 'starter_set'), iterations=1):
+    """
+    Conducts and automated forward snowballing with set of papers given in seed_set_path as seed set
+    :param seed_set_path: Path to to your existing seed set. Alternatively place your place your papers to start with in the default folder: src/seed_set
+    :param iterations: specify how many iterations the snowballing should make
+    """
+    sb(seed_set_path, iterations)
 
 
 def paper_selection(text=[], keywords=[]):
@@ -39,49 +61,22 @@ def paper_selection(text=[], keywords=[]):
     return df, fig
 
 
-def extract_keywords_pdf(pdf=""):
-    """
-    Prints the extracted keywords of the given PDF
-    :param paper1: path or url to the PDF
-    """
-    KeywordKeyphraseExtractor.rake_phrase_extraction(get_pdf_text(pdf).rsplit('References', 1)[0])
-
-
-def snowballing(seed_set_path=os.path.join(dirname, 'starter_set'), iterations=1):
-    """
-    Conducts and automated forward snowballing with set of papers given in <starterSetPath> as seed set
-    :param seed_set_path: path to to your existing seed set. Alternatively place your starter set in the default folder src/seed_set
-    :param iterations: specify how many iterations the snowballing should make
-    """
-    sb(seed_set_path, iterations)
-
-
-# pipenv run cli.py snowballing_paper_selection --snowballing_result_path="C:\Users\fabia\PycharmProjects\NLP4\src\modules\test.json", --keywords="["test","test2"]
 def snowballing_paper_selection(snowballing_result_path="", keywords=[]):
+    """
+    Takes the result generated from the snowballing and adds keyword similarities (paper importance) of each result from the snowballing,
+    as well as plotting the results in an interactive plot.
+    :param snowballing_result_path: Path to to your existing seed set. Alternatively place your place your papers to start with in the default folder: src/seed_set.
+    :param keywords: The keywords in this list are used to compare the snowballing results.
+    """
     PaperSelection.snowballing_paper_importance(snowballing_result_path, keywords)
 
 
-def snowballing_plot_selection(snowballing_result_path=""):
-    PaperSelection.plot_snowballing_importance(snowballing_result_path)
-
-
-def pdf_similarity(paper1="", paper2="", only_abstract=False):
+def extract_keywords_pdf(pdf=""):
     """
-    Returns the cosine similarity of sBert embeddings between of paper1 and paper2
-    :param paper1: Path to first paper to be compared
-    :param paper2: Path to second paper to be compared
-    :param only_abstract If set to true the function will try to extract the abstracts of the pdfs and will only compare those
+    Prints the extracted keywords of the given PDF
+    :param paper1: Path or URL to the PDF
     """
-    similarity = Similarities.pdf_similarity(paper1, paper2, only_abstract=only_abstract)
-    print(f"Papers have similarity score of: {similarity}")
-
-
-def extract_pdf_references(pdf="", save_to_file=""):
-    references = get_referenced_papers(pdf)
-    print(references)
-    if save_to_file != "":
-        with open(save_to_file, "w") as f:
-            f.write(json.dumps(references, indent=4, sort_keys=True))
+    KeywordKeyphraseExtractor.rake_phrase_extraction(get_pdf_text(pdf).rsplit('References', 1)[0])
 
 
 def extract_keyphrases_pdf(pdf=""):
@@ -90,6 +85,17 @@ def extract_keyphrases_pdf(pdf=""):
     :param paper1: path or url to the PDF
     """
     KeywordKeyphraseExtractor.rake_phrase_extraction(get_pdf_text(pdf).rsplit('References', 1)[0])
+
+
+def pdf_similarity(paper1="", paper2="", only_abstract=False):
+    """
+    Returns the cosine similarity of SPECTER embeddings between  paper1 and paper2
+    :param paper1: Path to first paper to be compared
+    :param paper2: Path to second paper to be compared
+    :param only_abstract If set to true the function will try to extract the abstracts of the pdfs and will only compare those
+    """
+    similarity = Similarities.pdf_similarity(paper1, paper2, only_abstract=only_abstract)
+    print(f"Papers have similarity score of: {similarity}")
 
 
 if __name__ == "__main__":
