@@ -716,6 +716,9 @@ We implemented unit test with a code coverage of 97%. We couldn't cover 99% beca
 like the reference_extraction have some very rare exceptions when for example the scholarcy request
 responses with an 503 error. For these cases we couldn't find test examples.
 
+## Project structure 
+The Python Project structure and the github workflows including the typing, linting and testing are generated from
+[https://github.com/ag-gipp/PythonProjectTemplate](https://github.com/ag-gipp/PythonProjectTemplate)
 
 ## License
 This project is licensed under the terms of MIT license. Please see the LICENSE file for details.
