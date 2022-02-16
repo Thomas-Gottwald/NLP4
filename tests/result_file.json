@@ -1,0 +1,20 @@
+{
+    "https://arxiv.org/pdf/1903.06464": {
+        "title": "A Context-Aware Citation Recommendation Model with BERT and Graph Convolutional Networks",
+        "abstract": "With the tremendous growth in the number of scientific papers being\npublished, searching for references while writing a scientific paper is a\ntime-consuming process. A technique that could add a reference citation at the\nappropriate place in a sentence will be beneficial. In this perspective,\ncontext-aware citation recommendation has been researched upon for around two\ndecades. Many researchers have utilized the text data called the context\nsentence, which surrounds the citation tag, and the metadata of the target\npaper to find the appropriate cited research. However, the lack of\nwell-organized benchmarking datasets and no model that can attain high\nperformance has made the research difficult.\n  In this paper, we propose a deep learning based model and well-organized\ndataset for context-aware paper citation recommendation. Our model comprises a\ndocument encoder and a context encoder, which uses Graph Convolutional Networks\n(GCN) layer and Bidirectional Encoder Representations from Transformers (BERT),\nwhich is a pre-trained model of textual data. By modifying the related PeerRead\ndataset, we propose a new dataset called FullTextPeerRead containing context\nsentences to cited references and paper metadata. To the best of our knowledge,\nThis dataset is the first well-organized dataset for context-aware paper\nrecommendation. The results indicate that the proposed model with the proposed\ndatasets can attain state-of-the-art performance and achieve a more than 28%\nimprovement in mean average precision (MAP) and recall@k.",
+        "references": "None",
+        "similarity": "0.8759956359863281, similar to corpus_set Papers"
+    },
+    "https://arxiv.org/pdf/1609.02907": {
+        "title": "Semi-Supervised Classification with Graph Convolutional Networks",
+        "abstract": "We present a scalable approach for semi-supervised learning on\ngraph-structured data that is based on an efficient variant of convolutional\nneural networks which operate directly on graphs. We motivate the choice of our\nconvolutional architecture via a localized first-order approximation of\nspectral graph convolutions. Our model scales linearly in the number of graph\nedges and learns hidden layer representations that encode both local graph\nstructure and features of nodes. In a number of experiments on citation\nnetworks and on a knowledge graph dataset we demonstrate that our approach\noutperforms related methods by a significant margin.",
+        "references": "None",
+        "similarity": "0.8366063833236694, similar to corpus_set Papers"
+    },
+    "https://arxiv.org/pdf/1405.4053": {
+        "title": "Distributed Representations of Sentences and Documents",
+        "abstract": "Many machine learning algorithms require the input to be represented as a\nfixed-length feature vector. When it comes to texts, one of the most common\nfixed-length features is bag-of-words. Despite their popularity, bag-of-words\nfeatures have two major weaknesses: they lose the ordering of the words and\nthey also ignore semantics of the words. For example, \"powerful,\" \"strong\" and\n\"Paris\" are equally distant. In this paper, we propose Paragraph Vector, an\nunsupervised algorithm that learns fixed-length feature representations from\nvariable-length pieces of texts, such as sentences, paragraphs, and documents.\nOur algorithm represents each document by a dense vector which is trained to\npredict words in the document. Its construction gives our algorithm the\npotential to overcome the weaknesses of bag-of-words models. Empirical results\nshow that Paragraph Vectors outperform bag-of-words models as well as other\ntechniques for text representations. Finally, we achieve new state-of-the-art\nresults on several text classification and sentiment analysis tasks.",
+        "references": "None",
+        "similarity": "0.8057055473327637, similar to corpus_set Papers"
+    }
+}

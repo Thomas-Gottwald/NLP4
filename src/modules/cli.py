@@ -14,11 +14,11 @@ dirname = Path(__file__).parent
 
 def summarization(text='', top_n=5):
     """
-    Creates a summary out of a text. Therefore the algorithm takes a text and parse it into the single sentences.
+    Creates a summary out of a text. Therefore, the algorithm takes a text and parse it into the single sentences.
     Those sentences get compared with each other --> Cosine similarity. Out of this it is possible to choose the most
     relevant sentences relating all others to create the summary.
     :param top_n: Chose the n best sentences to create the summary.
-    :param pdf: Text for summarization.
+    :param text: Text for summarization.
     :return: Returns the summary of the given text.
     """
     return Summarization.generate_summary(text, top_n)
@@ -37,13 +37,15 @@ def extract_pdf_references(pdf="", save_to_file=""):
             f.write(json.dumps(references, indent=4, sort_keys=True))
 
 
-def snowballing(seed_set_path=os.path.join(dirname, 'starter_set'), iterations=1):
+def snowballing(seed_set_path=os.path.join(dirname, 'snowballing_seed_set'), iterations=1, min_similarity=0.85, result_file=os.path.join(dirname, 'starter_set')):
     """
-    Conducts and automated forward snowballing with set of papers given in seed_set_path as seed set
-    :param seed_set_path: Path to to your existing seed set. Alternatively place your place your papers to start with in the default folder: src/seed_set
+    Conducts and automated forward snowballing with set of papers PDFs given in the seed_set_path as seed set
+    :param seed_set_path: Path to your existing seed set. Alternatively place your papers to start with in the default folder: src/seed_set
     :param iterations: specify how many iterations the snowballing should make
+    :param min_similarity:
+    :param result_file:
     """
-    sb(seed_set_path, iterations)
+    sb(seed_set_path, iterations, min_similarity=min_similarity, result_file=result_file)
 
 
 def paper_selection(text=[], keywords=[]):

@@ -26,16 +26,19 @@ def get_abstract_by_pdf(pdf):
 
 
 def get_abstract_from_arxiv_id(arxiv_id):
-    print(f"Get abstract from{arxiv_id}")
-    arxiv_search = arxiv.Search(id_list=[arxiv_id])
-    paper = next(arxiv_search.results())
-    abstract = paper.summary
-    title = paper.title
-    return {'title': title, 'abstract': abstract, 'references': "None"}
+    try:
+        print(f"Get abstract from {arxiv_id}")
+        arxiv_search = arxiv.Search(id_list=[arxiv_id])
+        paper = next(arxiv_search.results())
+        abstract = paper.summary
+        title = paper.title
+        return {'title': title, 'abstract': abstract, 'references': "None"}
+    except ConnectionResetError:
+        print("To many requests for free arXiv API")
 
 
 def get_abstract_from_doi(doi):
-    print(f"Get abstract from{doi}")
+    print(f"Get abstract from {doi}")
     try:
         requestAbs = requests.get('http://api.crossref.org/works/' + doi).json()
         abstract = requestAbs["message"].get("abstract", "None")
@@ -72,6 +75,7 @@ def get_abstracts_of_reference_links(reference_links):
                     response = requests.get(link)
                     if response.headers.get('content-type') == "application/pdf":
                         # If pdf is available we will try to extract the abstract from the pdf
+                        print(f"Try to get abstract from from PDF-URL {response.url}")
                         abstracts[response.url] = get_abstract_by_pdf(response.url)
                 except requests.exceptions.RequestException:
                     continue

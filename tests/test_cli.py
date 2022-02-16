@@ -1,8 +1,7 @@
 import src.modules.cli as cli
 import os
 import nltk
-nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
+nltk.download("all",quiet=True)
 dirname = os.path.dirname(__file__)
 
 
@@ -36,7 +35,8 @@ def test_paper_selection():
 
 
 def test_snowballing_paper_selection():
-    cli.snowballing_paper_selection(snowballing_result_path=os.path.join(dirname, 'snowballing_result.json'),keywords=["conspiracy", "conspiracy mentality", "social media", "sausage"])
+    cli.snowballing_paper_selection(snowballing_result_path=os.path.join(dirname,
+                                                                         '../src/modules/snowballing_result.json'), keywords=["conspiracy", "conspiracy mentality", "social media", "sausage"])
 
 
 def test_summary():

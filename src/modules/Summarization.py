@@ -4,7 +4,7 @@ from nltk.cluster.util import cosine_distance
 import numpy as np
 import networkx as nx
 import nltk
-nltk.download('all')
+nltk.download('all', quiet=True)  # We need to download all because github test workflows didn't work.
 
 
 def read_article(text):

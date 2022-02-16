@@ -6,9 +6,10 @@ import ReferenceExtraction
 import Similarities
 
 
-def snowballing(starterSetPath, iterations, min_similarity=0.85, result_file="snowballing_result.json"):
-    seed_set = [os.path.join(starterSetPath, x) for x in os.listdir(starterSetPath) if x.endswith('.pdf')]
+def snowballing(seed_set_path, iterations, min_similarity=0.85, result_file="snowballing_result.json"):
+    seed_set = [os.path.join(seed_set_path, x) for x in os.listdir(seed_set_path) if x.endswith('.pdf')]
     print(seed_set)
+    print("This may take a while, go get a coffee... or two :)")
     seed_set_abstracts = []
     reference_abstracts = dict()
     for file in seed_set:
@@ -30,7 +31,7 @@ def snowballing(starterSetPath, iterations, min_similarity=0.85, result_file="sn
     print("First Iteration done")
 
     # The while loops continues the snowballing with the initialy retrieved references
-    # For the given number of iterations
+    # for the given number of iterations
     i = 0
     while i < iterations:
         reference_abstracts = dict()
@@ -50,9 +51,10 @@ def snowballing(starterSetPath, iterations, min_similarity=0.85, result_file="sn
         reference_abstracts = ReferenceExtraction.cleanup_reference_abstracts(reference_abstracts)
         query_set = reference_abstracts
         new_set.clear()
-        new_set = get_similar_references(corpus_set, query_set, 0.8)
-        result_set.update(new_set.copy())
-        print("-----------------------------NextIteration done-------------------------------")
+        if len(query_set) != 0:
+            new_set = get_similar_references(corpus_set, query_set, 0.8)
+            result_set.update(new_set.copy())
+        print(f"-----------------------------{i + 2}. Iteration done-------------------------------")
         i += 1
     with open("result_file.json", "w") as f:
         json.dump(result_set, f, indent=4)
@@ -61,6 +63,7 @@ def snowballing(starterSetPath, iterations, min_similarity=0.85, result_file="sn
 
 
 def get_similar_references(corpus_set, query_set, min_similarity):
+    print("Start caluclating abstract similarities")
     similarities = Similarities.specter_query_reference_similarity(corpus_set, query_set)
     new_set = {}
     for paper in similarities:

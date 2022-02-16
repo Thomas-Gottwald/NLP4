@@ -1,6 +1,6 @@
 from nltk.stem import PorterStemmer
 import nltk
-nltk.download('all')
+nltk.download('all', quiet=True)  # We need to download all because github test workflows didn't work.
 
 
 def tokenize(text):

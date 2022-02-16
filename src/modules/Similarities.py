@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer, util
 from AbstractExtraction import get_abstract_by_pdf
 from PDFMiner import get_pdf_text
 import nltk
-nltk.download('all')
+nltk.download('all', quiet=True)  # We need to download all because github test workflows didn't work.
 
 
 def specter_query_reference_similarity(corpus_set, query_set):
