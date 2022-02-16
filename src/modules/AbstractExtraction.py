@@ -35,6 +35,7 @@ def get_abstract_from_arxiv_id(arxiv_id):
         return {'title': title, 'abstract': abstract, 'references': "None"}
     except ConnectionResetError:
         print("To many requests for free arXiv API")
+        return {'title': "None", 'abstract': "None", 'references': "None"}
 
 
 def get_abstract_from_doi(doi):
