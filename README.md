@@ -53,13 +53,13 @@ the layout of the given PDF file and therefore is able to extract text from mult
 because many scientific papers have a two column layout, which other PDF extraction frameworks we tried failed on.
 
 #### get_PDF_text
+```python 
+getPDFtext(pdfFilenamePath="")
 ```
-PDFminer.getPDFtext(pdfFilenamePath="")
-```
-**<span style="font-size:14px;">Input:</span>**  
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>  
 *pdfFilenamePath*: This Input from type "String" describes the Path of the PDF, from which you want to extract the Text
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 As output, you get the whole Text from the PDF as a string. 
 
 
@@ -75,9 +75,9 @@ with the pdf extraction.
 This module contains functions to extract references of paper pdfs and their respective abstracts.
 
 #### get_referenced_papers
-````
+```python 
 get_referenced_papers(pdf)
-````
+```
 
 The Reference Extraction uses the scholarcy API to extract all references from an uploaded PDF.
 The scholarcy reference extraction API returns a JSON string with all references in textual description
@@ -88,10 +88,10 @@ as well as different links to the references. These links can be of 3 different 
 
 * Not for all references all 3 of the types are available.
 
-**<span style="font-size:14px;">Input:</span>**   
-Link to pdf or Path to local pdf file.
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
+*pdf:* Link to pdf or Path to local pdf file.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Returns a dictionary with following format (If not all link types are available the respective key will be missing):
 
 ```json
@@ -104,16 +104,16 @@ Returns a dictionary with following format (If not all link types are available 
 }
 ```
 #### get_reference_abstracts
-```
+```python 
 get_reference_abstracts(pdf)
 ```
 Calls the [get_refrenced_papers()](#get_refrenced_papers) function and passes the result to the [AbstractExtraction.get_abstracts_of_reference_links()](#get_abstracts_of_reference_links) links 
 to retieve available abstracts from the paper references.
 
 **<span style="font-size:15px;">Input:</span>**   
-Link to pdf or Path to local pdf file.
+*pdf*: Link to pdf or Path to local pdf file.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Returns a dictionary with the references link as key and the title, abstract and if the abstract is retrieved from the doi 
 also the references (see: [Abstractextraction.get_abstract_from_doi](#get_abstract_from_doi)) of the respective reference.
 ```json
@@ -131,7 +131,7 @@ If the references for the paper aren't available´, "refernces" will be "None"
 ### Abstract Extraction
 The Abstract Extraction Module implements the following 4 functions to extract abstracts from different sources.
 #### get_abstract_from_doi
-```
+```python 
 get_abstract_from_doi(doi)
 ```
 Returns the title, abstract and if available the references of a paper by its given DOI.
@@ -142,10 +142,10 @@ This is done mainly to safe time in the automatic snowballing.
 The crossref API offers abstracts of many free available papers. Nevertheless it is not possible to
 retrieve abstracst of all papers by this api. 
 
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 *doi*: The digital object identifier (doi) of the paper whichs abstract should be extracted
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The ouput is a python dictionary with the following format:
 ```json
 {"title": "paper title", "abstract": "paper abstract", "references": [
@@ -160,16 +160,16 @@ The ouput is a python dictionary with the following format:
 If the references for the paper aren't available, "refernces" will be "None"
 
 #### get_abstract_from_arxiv_id
-```
+```python 
 get_abstract_from_arxiv_id(arxiv_id)  
 ```
 Returns the abstract and the title of any paper hosted by arXiv.org given by the respective arxiv_id.
 To retrieve the abstract the arxiv API is used (See API section).
 
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 *arxiv_id*: The arxiv_id of the paper whichs abstract should be extracted
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The output is a python dictionary with the following format:
 ```json
 {"title": "paper title", "abstract": "paper abstract", "references": "None"}
@@ -178,17 +178,17 @@ Since arXiv doesn't offer referecnes of papers they are not returned like in [*g
 However, the key "references" is filled with "None" to have a consistent output format of across the functions.
 
 #### get_abstract_by_pdf
-```
+```python 
 get_abstract_by_pdf(pdf)
 ```
 This method trys to get the abstracts of a given pdf. 
 The function makes a request to the scolarcy api, which then returns either the doi or the arxiv id, whichever is
 available. And then uses the respective [*get_abstract*] function specified above with the received id to return the abstract of the given pdf.
 
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 *pdf*: Can either be the path to a local PDF file, or a URL to a PDF file. 
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The ouput is a python dictionary with the following format:
 ```python
 {"title": "paper title", "abstract": "paper abstract", "references": "None"} # if arXiv paper
@@ -198,7 +198,7 @@ The ouput is a python dictionary with the following format:
 ```
 
 #### get_abstracts_of_reference_links
-```
+```python  
 get_abstracts_of_reference_links(pdf)
 ```
 The get_abstracts_of_reference_links function is especially made to retrieve the abstracts from the reference_links retrieved of the scholarcy API by the ReferenceExtraction.get_referenced_papers() function.
@@ -211,10 +211,10 @@ If none of these 3 steps is successful no abstract for the reference is extracte
 In case one of the steps is successful the retrieved abstract will be added to a dictionary with the respective link as key and the respective abstract dictionary as value.
 
 
-**<span style="font-size:14px;">Input:</span>**  
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>  
 *reference_links*: Input should be the output of the ReferenceExtraction.get_referenced_papers() function
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Ouput is a dictionary with the following format:
 ```json
  {"http://api.crossref.org/works/10.1126/science.aba9757": {"title": "paper title", "abstract": "paper abstract", "references": {"key":"e_1_3_2_21_2","doi-asserted-by":"publisher","DOI":"10.1016/example_doi"}},
@@ -237,14 +237,14 @@ of the SPECTER-Model enables to create SPECTER embeddings of titles and abstract
 
 
 #### specter_query_reference_similarity
-````
-specter_query_reference_similarity
-````
+```python 
+specter_query_reference_similarity(corpus_set, query_set)
+```
 This function generates the SPECTER embeddings and calucaltes the cosine similarity of each reference in query_set
 with each reference in the corpus set and return the similarities. It uses the sentence_transformers.util.semantic_search
 from the [sentence-transformers/allenai-specter](https://huggingface.co/sentence-transformers/allenai-specter) model for this. 
 
-**<span style="font-size:14px;">Input:</span>**    
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 *corpus_set:* List of dictionary's containing title and abstract of papers
 ```json
 [{"title": "paper title", "abstract": "paper abstract", "references": {"key":"e_1_3_2_21_2","doi-asserted-by":"publisher","DOI":"10.1016/example_doi"}},
@@ -259,38 +259,38 @@ from the [sentence-transformers/allenai-specter](https://huggingface.co/sentence
 }
 ```
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Output is a dictionary containting the similarity score of each quer_set paper with each corpus_set paper with the following format:
 ```json
 {"10.1177/0093650214565914": [[{"corpus_id": 0, "score": 0.8752286434173584}, {"corpus_id": 1, "score": 0.6487678289413452}]]}
 ```
 
 #### specter_1to1_cosine
-````
+```python 
 specter_1to1_cosine(first, second)
-````
+```
 Creates the SPECTER embeddings of two passed strings and returns their cosine similarity
 
-**<span style="font-size:14px;">Input:</span>**     
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>     
 *first*: First string for comparison  
 *second*: Second string for comparison
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Returns similarity of both strings as float number.
 
 #### pdf_similarity
-````
+```python 
 pdf_similarity(first, second, only_abstract=False)
-````
+```
 Creates the SPECTER embeddings of two passed PDFs and returns their cosine similarity.
 
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 *first*: First string for comparison  
 *second*: Second string for comparison  
 *only_abstract*: If true it will first try to extract the abstracts of the specified pdf and only calculate the
 similarity of the abstracts.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Returns similarity of both pdfs/abstracts as float number.
 
 
@@ -305,9 +305,9 @@ the numbers of references the papers have).
 
 The starting seed set must consist of PDF files located in a specified folder. The papers in the seed set should be preselected papers of high relevance
 for your research topic.
-````
+```python 
 snowballing(seed_set_path, iterations, min_similarity=0.85, result_file="snowballing_result.json")
-````
+```
 The snowballing function starts by extracting the abstracts of the seed set papers by using the [*get_abstract_by_pdf()*](#get_abstract_by_pdf) function of the
 *AbstractExtraction* module and adding them to the *corpus_set* variable. After extracting the seed set abstracts, the references of the seed set 
 and their respective abstracts are extracted by using the [*get_reference_abstracts*](#get_reference_abstracts) function of the *ReferenceExtraction* module.
@@ -323,13 +323,13 @@ The snowballing process is then continued in a while loop for the given number o
 *min_similarity*: Minimum similarity a reference needs to have with the seed set to be taken up in the *result_set*  
 *result_file*: A path to a json file in with the result should be saved  
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Save the json result of the snowballing in the *result_file* 
 
 #### get_similar_references
-````
+```python 
 get_similar_references(corpus_set, query_set, min_similarity):
-````
+```
 Calcualtes the similaritys of each *query_set*(the new_references) paper with each *corpus_set*(seed_set/current result_set) paper
 and only returns those papers of the *query_set* (with their achieved similarity) that have a higher similarity than min_similarity with one of the *corpus_set*
 papers.
@@ -350,7 +350,7 @@ papers.
 ```
 *min_similarity*: Minimum similarity to return the reference
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Returns a dictionary with each paper of the query_set that exceeds the min_similarity with one of the corpus_set papers:
 ```json
 {
@@ -369,61 +369,61 @@ different APIs. Here another approach for retrieving these would be nice.
 This module contains four functions which can be used to select papers on the
 basis of the similarity between the query and the papers you are interested in, and it can show the result in a plot. 
 #### paper_importance
-```
-PaperSelection.paper_importance but for the snowballing results and adds the similarity with the keyords to the snowballing_result json.(text=[], keywords=[])
+```python 
+paper_importance(text=[], keywords=[])
 ```
 This function makes it possible to compare Keywords or a research topic with one or more texts. Therefore, it uses the
 keywords and the text and calculates the cosines similarity of those. As result, you get a value for of each keyword 
 relating to all the papers you hand over the function.
 
-**<span style="font-size:14px;">Input:</span>**    
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 *text*: The parameter takes a list of texts (strings). So it is possible to calculate the similarity between more than just 
 one text. -> much more efficient. You can use a whole text, phrases or just the abstract. Feel free to try!
 
 *keywords*: Also the attribute "keywords" is a list of strings. Those can represent a list of single keywords, phrases or sentences.
 Which get compared with the list of texts you hand over.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The function returns a dataframe from pandas. In this you have in  one axis the texts and on the other the several keywords.
 It is a matrix where you can find the evaluation of all the papers and keywords.
 #### plot_paper_selection
 ```
-PaperSelection.plot_paper_selection(df=pd.DataFrame())
+plot_paper_selection(df=pd.DataFrame())
 ```
 This function makes it possible to plot the results from the function "paper_importance". This function creates an 
 interactive plot, where in the x-axe are shown the several keywords and on the y-axe the score regarding the paper.
 The different papers are shown in single traces on this plot. Since it is an interactive plot, it is possible to
 inactivate or activate the single traces. 
 
-**<span style="font-size:14px;">Input:</span>**    
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 *df*: The input is a dataframe, which contains the results of the "paper_importance". 
 Just hand over the return of this function. 
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins><ins>**<span style="font-size:13px;">Output:</span>**</ins></ins>  
 The function returns the object file of the plot. So it is possible to handle this or to save it afterwards. 
 
 #### snowballing_paper_importance
-```
+```python 
 snowballing_paper_importance(snowballing_result_path, keywords=[]):
 ```
 Calculates the paper importance like in PaperSelection.paper_importance but for the snowballing results and adds the similarity with the keyords to the snowballing_result json.
 
-**<span style="font-size:14px;">Input:</span>**    
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 *snowballing_result_path*: json file resulting from PaperSearch.snowballing()
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins><ins>**<span style="font-size:13px;">Output:</span>**</ins></ins>  
 Returns json file with keyword similarity of each paper in the file added.
 
 #### plot_snowballing_importance
-```
+```python 
 plot_snowballing_importance(snowballing_result_path)
 ```
 Plots the result of the [PaperSelection.snowballing_paper_importance](#snowballing_paper_importance), by tranforming the json to a pandas data frame and passing it to the PaperSelecton.plot_paper_selection function
 
-**<span style="font-size:14px;">Input:</span>**    
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 *snowballing_result_path*: json file resulting from [PaperSelection.snowballing_paper_importance](#snowballing_paper_importance)
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins><ins>**<span style="font-size:13px;">Output:</span>**</ins></ins>  
 The function returns the object file of the plot. So it is possible to handle this or to save it afterwards. 
 
 plot
@@ -442,10 +442,10 @@ keyphrases but for single keyword extraction you can only use the "yake_extracti
 #### yake_extraction
 The yake extraction provides more than on possibility to extract keywords from the text. The function has a lot of input 
 parameter. With them, it is possible to define a lot of properties. 
-```
+```python 
 yake_extraction(text, number_of_keyphrases=10, language='en', words_in_keyphrase=10, deduplication_threshold=0.5)
 ```
-**<span style="font-size:14px;">Input:</span>**    
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 text:This Parameter is the String where you want to extract the keywords/phrases.  
 number_of_keyphrases: With that integer you can define how many keywords/phrases you want to extract.  
 language: This string defines the language of the text, where you want to extract the data.  
@@ -456,7 +456,7 @@ consists out of duplication.
 E.g.1 threshold -> low [Keyword, Keyword Extraction, Keywords out of text]  
 E.g.2 threshold -> high [Keyword, Extraction, Words out of text]
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 As output this function returns a dictionary of all the phrases which you defined with "number_of_keyphrases" and the 
 score of it. 
 #### rake_phrase_extraction
@@ -464,11 +464,11 @@ This function is a simple implementation to extract keyphrases out of an text. T
 ```python 
 rake_phrase_extraction(text, number_of_keywords=10)
 ```
-**<span style="font-size:14px;">Input:</span>**    
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 The input of this function is first the text(string) where you want to extract the keyphrases from. The other input 
 "number_of_keywords" is the number how many phrases you want to return.  
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 As output this function returns a list of all the phrases which you defined with "number_of_keywords" and the 
 score of it. 
 
@@ -489,10 +489,10 @@ string.
 ```python 
 read_article(text)
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 The input of this function is a text(string) that you want to summarize.
 
-**<span style="font-size:14px;">Output:</span>**  >
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  >
 As an output it returns a list of all sentences without the special symbols in it.
 
 #### sentence_similarity
@@ -501,12 +501,12 @@ stopwords out of the sentences. This function is used to build up the similarity
 ```python 
 sentence_similarity(sent1, sent2, stopwords=None)
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 sent1: Is a string of sentence one.  
 sent2: Is a string of sentence two.  
 stopwords: This parameter can be a list where you can hand over the stopwords you want to remove.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The return of this function is a value, which represent the similarity of the two sentences above.
 
 #### build_similarity_matrix
@@ -514,12 +514,12 @@ The function gets the list of all sentences and calculates for all of them the s
 ```python 
 build_similarity_matrix(sentences, stop_words)
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 sentences: This is a List of all sentences and should be the return of the function "read_article"  
 stopwords: Here you can hand over a list of stopwords which get removed before calculating the similarity.
 If the value is "none" no stopwords got removed.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The function returns a matrix in the size of (len(sentences) x len(sentences)) 
 
 #### generate_summary
@@ -527,12 +527,12 @@ This function concate all the other functions above. So you just need to call a 
 ```python 
 generate_summary(file_name, top_n=5)
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 file_name: This is the input to give the function the Text you want to summarize  
 top_n: This parameter defines how long your summarize gonna be. E.g. top_n = 5, creates a summary out of the 5 highest
 valued. 
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The function returns the summary as a string.
 
 
@@ -546,30 +546,30 @@ This function tokenize the text from the input.
 ```python 
 tokenize(text)
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 text: String of the text which should be tokenized.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Returns a list with all tokens.
 ### remove_stopwords
 ```python 
 remove_stopwords(text=str(""), stops=[])
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 text: This input parameter is a string from where the stopwords going to be removed.  
 stops: Is a list with all the words you want to remove.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 
 ### lemmatizing
 This function creates lemmas out of single words. 
 ```python 
 lemmatizing(text=str(''))
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 text: This parameter is a string, which is going to be split up by the tokenize function
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The output is a text with lemmas, no words.
 
 ### port_stemmer 
@@ -577,10 +577,10 @@ This function stems all words out of an text.
 ```python 
 port_stemmer(text=str(''))
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 text: String that contains the text where the words are going to be stemmed. 
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 This function returns a text with stemmed words. 
 
 ### position_tag
@@ -588,10 +588,10 @@ This methode tags all the words in a text. E.g. Verb, adjective ...
 ```python 
 position_tag(text)
 ```
-**<span style="font-size:14px;">Input:</span>**   
+<ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 text: String that contains the text where the words are going to be tagged.
 
-**<span style="font-size:14px;">Output:</span>**  
+<ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Returns a text with all words and the relating tags. 
 
 ### Command line interface (cli)
