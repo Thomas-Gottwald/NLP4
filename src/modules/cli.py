@@ -37,7 +37,7 @@ def extract_pdf_references(pdf="", save_to_file=""):
             f.write(json.dumps(references, indent=4, sort_keys=True))
 
 
-def snowballing(seed_set_path=os.path.join(dirname, 'snowballing_seed_set'), iterations=1, min_similarity=0.85, result_file=os.path.join(dirname, 'starter_set')):
+def snowballing(seed_set_path=os.path.join(dirname, 'snowballing_seed_set'), iterations=1, min_similarity=0.85, result_file=os.path.join(dirname, 'snowballing_result.json')):
     """
     Conducts and automated forward snowballing with set of papers PDFs given in the seed_set_path as seed set
     :param seed_set_path: Path to your existing seed set. Alternatively place your papers to start with in the default folder: src/seed_set
@@ -63,7 +63,7 @@ def paper_selection(text=[], keywords=[]):
     return df, fig
 
 
-def snowballing_paper_selection(snowballing_result_path="", keywords=[]):
+def snowballing_paper_selection(snowballing_result_path=os.path.join(dirname, 'snowballing_result.json'), keywords=[]):
     """
     Takes the result generated from the snowballing and adds keyword similarities (paper importance) of each result from the snowballing,
     as well as plotting the results in an interactive plot.

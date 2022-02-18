@@ -447,10 +447,10 @@ parameter. With them, it is possible to define a lot of properties.
 yake_extraction(text, number_of_keyphrases=10, language='en', words_in_keyphrase=10, deduplication_threshold=0.5)
 ```
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>    
-text:This Parameter is the String where you want to extract the keywords/phrases.  
-number_of_keyphrases: With that integer you can define how many keywords/phrases you want to extract.  
-language: This string defines the language of the text, where you want to extract the data.  
-words_in_keyphrase: This Parameter is an integer which defines the number of words in a keyphrase. If you actually want 
+*text*:This Parameter is the String where you want to extract the keywords/phrases.
+*number_of_keyphrases*: With that integer you can define how many keywords/phrases you want to extract.  
+*language*: This string defines the language of the text, where you want to extract the data.  
+*words_in_keyphrase*: This Parameter is an integer which defines the number of words in a keyphrase. If you actually want 
 to extract single keywords you might use the value "1" otherwise you get longer phrases.  
 deduplication_threshold: With that threshold it is possible to finetune the extraction. So that the several Keyphrases 
 consists out of duplication.  
@@ -503,9 +503,9 @@ stopwords out of the sentences. This function is used to build up the similarity
 sentence_similarity(sent1, sent2, stopwords=None)
 ```
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
-sent1: Is a string of sentence one.  
-sent2: Is a string of sentence two.  
-stopwords: This parameter can be a list where you can hand over the stopwords you want to remove.
+*sent1*: Is a string of sentence one.  
+*sent2*: Is a string of sentence two.  
+*stopwords*: This parameter can be a list where you can hand over the stopwords you want to remove.
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The return of this function is a value, which represent the similarity of the two sentences above.
@@ -516,15 +516,15 @@ The function gets the list of all sentences and calculates for all of them the s
 build_similarity_matrix(sentences, stop_words)
 ```
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
-sentences: This is a List of all sentences and should be the return of the function "read_article"  
-stopwords: Here you can hand over a list of stopwords which get removed before calculating the similarity.
+*sentences*: This is a List of all sentences and should be the return of the function "read_article"  
+*stopwords*: Here you can hand over a list of stopwords which get removed before calculating the similarity.
 If the value is "none" no stopwords got removed.
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The function returns a matrix in the size of (len(sentences) x len(sentences)) 
 
 #### generate_summary
-This function concate all the other functions above. So you just need to call a single function to create a summary. 
+This function concatenates all the other functions above. So you just need to call a single function to create a summary. 
 ```python 
 generate_summary(file_name, top_n=5)
 ```
@@ -568,7 +568,7 @@ This function creates lemmas out of single words.
 lemmatizing(text=str(''))
 ```
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
-text: This parameter is a string, which is going to be split up by the tokenize function
+*text*: This parameter is a string, which is going to be split up by the tokenize function
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The output is a text with lemmas, no words.
@@ -590,7 +590,7 @@ This methode tags all the words in a text. E.g. Verb, adjective ...
 position_tag(text)
 ```
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
-text: String that contains the text where the words are going to be tagged.
+*text*: String that contains the text where the words are going to be tagged.
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 Returns a text with all words and the relating tags. 
@@ -613,7 +613,7 @@ pipenv run cli.py summarization --text"your text"
 ##### paper_selection
 Calls [PaperSelection.paper_importance](#paper_importance) and PaperSelection.plot_paper_selection with the passed arguments
 ```cli
-pipenv run cli.py paper_importance --text="["text1", "text2"]" --keywords="["kw1", "kw2"]"
+pipenv run cli.py paper_selection  --text="["text1", "text2"]" --keywords="["kw1", "kw2"]"
 ```
 ##### snowballing
 Runs the [automated snowballing](#snowballing) with the papers with the passed_seed set. If none is passed, default path NLP4/src/seed_set will be used.
@@ -624,12 +624,25 @@ pipenv run cli.py snowballing --seed_set_path
 ##### snowballing_paper_selection
 Calls [PaperSelection.snowballing_paper_importance](#snowballing_paper_importance ) with the given snowballing_result_file and the specified key_words
 ```cli snowballing_paper_selection
-pipenv run cli.py snowballing_paper_selection --snowballing_result_path="", --keywords="["test","test2"]"
+pipenv run cli.py snowballing_paper_selection --snowballing_result_path="path to snowballing result" --keywords="["test","test2"]"
 ```
 ##### pdf_similarity
 Compares the similarity of two passed pdf with [Similarities.pdf_similarity](#pdf_similarity) with the specified files.
 ```cli 
-pipenv run cli.py pdf_similarity --paper1="" --paper2="" --only_abstracts=False
+pipenv run cli.py pdf_similarity --paper1="Path To paper" --paper2="Path To paper" --only_abstract=False
+```
+
+##### extract_keywords_pdf
+Extracts key_phrases of given PDF with [KeywordKeyphraseExtractor.yake_extraction](#yake_extraction).
+```cli 
+pipenv run cli.py extract_keywords_pdf --pdf="path to pdf"
+
+```
+
+##### extract_keyphrases_pdf
+Extracts key_phrases of given PDF with [KeywordKeyphraseExtractor.rake_phrase_extraction](#rake_phrase_extraction).
+```cli 
+pipenv run cli.py extract_keyphrases_pdf --pdf="path to pdf" 
 ```
 
 

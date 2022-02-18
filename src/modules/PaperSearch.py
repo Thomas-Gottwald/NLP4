@@ -56,7 +56,7 @@ def snowballing(seed_set_path, iterations, min_similarity=0.85, result_file="sno
             result_set.update(new_set.copy())
         print(f"-----------------------------{i + 2}. Iteration done-------------------------------")
         i += 1
-    with open("result_file.json", "w") as f:
+    with open(result_file, "w") as f:
         json.dump(result_set, f, indent=4)
     print(json.dumps(result_set))
     return json.dumps(result_set)
