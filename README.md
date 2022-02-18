@@ -618,7 +618,7 @@ pipenv run cli.py paper_selection  --text="["text1", "text2"]" --keywords="["kw1
 ##### snowballing
 Runs the [automated snowballing](#snowballing) with the papers with the passed_seed set. If none is passed, default path NLP4/src/seed_set will be used.
 ```cli
-pipenv run cli.py snowballing --seed_set_path
+pipenv run cli.py snowballing --seed_set_path"path to seed_set" --iterations=1  --min_similarity=0.85
 ```
 
 ##### snowballing_paper_selection
