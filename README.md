@@ -3,7 +3,7 @@
 ## NLP To the Rescue! (NLP4)
 
 This project is an attempt to create a system which uses natural language processing (NLP) techniques to aid authors in performing systematic literature 
-reviews (SLR). This system offers some implementations of NLP techniques like for exeample text similarity and key word extraction.
+reviews (SLR). This system offers some implementations of NLP techniques like for exeample text similarity and key word extraction tailored for the use in an SLR.
 Hereby the current state of the project is focused on aiding the author in the search of relevant studies and the
 selection of relevant studies.
 
@@ -79,7 +79,7 @@ This module contains functions to extract references of paper pdfs and their res
 get_referenced_papers(pdf)
 ```
 
-The Reference Extraction uses the scholarcy API to extract all references from an uploaded PDF.
+The Reference Extraction uses the [scholarcy](#API-reference) API to extract all references from an uploaded PDF.
 The scholarcy reference extraction API returns a JSON string with all references in textual description
 as well as different links to the references. These links can be of 3 different types:
 * crossref => Is a https://dx.doi.org/ link with the respective doi.
@@ -164,7 +164,7 @@ If the references for the paper aren't available, "refernces" will be "None"
 get_abstract_from_arxiv_id(arxiv_id)  
 ```
 Returns the abstract and the title of any paper hosted by arXiv.org given by the respective arxiv_id.
-To retrieve the abstract the arxiv API is used (See API section).
+To retrieve the abstract the arxiv API is used [(see API section)](#api-reference).
 
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 *arxiv_id*: The arxiv_id of the paper whichs abstract should be extracted
@@ -183,7 +183,7 @@ get_abstract_by_pdf(pdf)
 ```
 This method trys to get the abstracts of a given pdf. 
 The function makes a request to the scolarcy api, which then returns either the doi or the arxiv id, whichever is
-available. And then uses the respective [*get_abstract*] function specified above with the received id to return the abstract of the given pdf.
+available. And then uses the respective *get_abstract* function specified above with the received id to return the abstract of the given pdf.
 
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 *pdf*: Can either be the path to a local PDF file, or a URL to a PDF file. 
@@ -201,12 +201,12 @@ The ouput is a python dictionary with the following format:
 ```python  
 get_abstracts_of_reference_links(pdf)
 ```
-The get_abstracts_of_reference_links function is especially made to retrieve the abstracts from the reference_links retrieved of the scholarcy API by the ReferenceExtraction.get_referenced_papers() function.
+The get_abstracts_of_reference_links function is especially made to retrieve the abstracts from the reference_links retrieved of the scholarcy API by the [ReferenceExtraction.get_referenced_papers()](*get_referenced_papers*) function.
 The function tries to retrieve the abstracts for each retrieved references in the following three different ways:
 1. If for the reference a link of type "crossref" (meaning: https://dx.doi.org/10.1126/example_doi) is available, the doi is extracted from the link.
-The extracted doi is than passed to the AbstractExtraction.get_abstracts_of_doi() function to retrieve the abstract of the reference.
-2. If No crossref link is available it is checked if an arxiv link is available. In this case the arXiv_id is extracted is passed to the AbstractExtract.get_abstract_from_arxiv_id() function to retrieve the title an the abstract of the reference.
-3. If none of these links is available the a get request to the "oa_query" link is made. If the "content-type" of the response is application/pdf the response url is passed to the get_abstract_by_pdf() function to try to extract the abstract from the pdf url. 
+The extracted doi is than passed to the [AbstractExtraction.get_abstracts_of_doi()](#get_abstract_from_doi) function to retrieve the abstract of the reference.
+2. If No crossref link is available it is checked if an arxiv link is available. In this case the arXiv_id is extracted is passed to the [AbstractExtract.get_abstract_from_arxiv_id()](#get_abstract_from_arxiv_id) function to retrieve the title an the abstract of the reference.
+3. If none of these links is available a get request to the "oa_query" link is made. If the "content-type" of the response is application/pdf the response url is passed to the [AbstractExtraction.get_abstract_by_pdf()](#get_abstract_by_pdf) function to try to extract the abstract from the pdf url. 
 If none of these 3 steps is successful no abstract for the reference is extracted.
 In case one of the steps is successful the retrieved abstract will be added to a dictionary with the respective link as key and the respective abstract dictionary as value.
 
@@ -330,7 +330,7 @@ Save the json result of the snowballing in the *result_file*
 ```python 
 get_similar_references(corpus_set, query_set, min_similarity):
 ```
-Calcualtes the similaritys of each *query_set*(the new_references) paper with each *corpus_set*(seed_set/current result_set) paper
+Calcualtes the similaritys of each *query_set* (the new_references) paper with each *corpus_set* (seed_set/current result_set) paper
 and only returns those papers of the *query_set* (with their achieved similarity) that have a higher similarity than min_similarity with one of the *corpus_set*
 papers.
 
@@ -406,10 +406,11 @@ The function returns the object file of the plot. So it is possible to handle th
 ```python 
 snowballing_paper_importance(snowballing_result_path, keywords=[]):
 ```
-Calculates the paper importance like in PaperSelection.paper_importance but for the snowballing results and adds the similarity with the keyords to the snowballing_result json.
+Calculates the paper importance like in [PaperSelection.paper_importance](#paper_importance)
+but for the snowballing results and adds the similarity with the keyords to the snowballing_result json.
 
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>    
-*snowballing_result_path*: json file resulting from PaperSearch.snowballing()
+*snowballing_result_path*: json file resulting from [PaperSearch.snowballing()](#Automatic-Snowballing)
 
 <ins><ins>**<span style="font-size:13px;">Output:</span>**</ins></ins>  
 Returns json file with keyword similarity of each paper in the file added.
