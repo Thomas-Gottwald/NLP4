@@ -3,7 +3,7 @@
 ## NLP To the Rescue! (NLP4)
 
 This project is an attempt to create a system which uses natural language processing (NLP) techniques to aid authors in performing systematic literature 
-reviews (SLR). This system offers some implementations of NLP techniques like for exeample text similarity and key word extraction tailored for the use in an SLR.
+reviews (SLR). This system offers some implementations of NLP techniques like for example text similarity and key word extraction tailored for the use in a SLR.
 Hereby the current state of the project is focused on aiding the author in the search of relevant studies and the
 selection of relevant studies.
 
@@ -96,7 +96,7 @@ Returns a dictionary with following format (If not all link types are available 
 
 ```json
 {
-  "id": "Id of refrence in the referencing paper",
+  "id": "Id of reference in the referencing paper",
   "entry": "Title of references",
   "crossref": "https://www.science.org/doi/10.1126/science.aba9757",
   "scholar_url": "https://scholar.google.co.uk/...", 
@@ -107,8 +107,8 @@ Returns a dictionary with following format (If not all link types are available 
 ```python 
 get_reference_abstracts(pdf)
 ```
-Calls the [get_refrenced_papers()](#get_refrenced_papers) function and passes the result to the [AbstractExtraction.get_abstracts_of_reference_links()](#get_abstracts_of_reference_links) links 
-to retieve available abstracts from the paper references.
+Calls the [get_referenced_papers()](#get_referenced_papers) function and passes the result to the [AbstractExtraction.get_abstracts_of_reference_links()](#get_abstracts_of_reference_links) links 
+to retrieve available abstracts from the paper references.
 
 **<span style="font-size:15px;">Input:</span>**   
 *pdf*: Link to pdf or Path to local pdf file.
@@ -126,7 +126,7 @@ also the references (see: [Abstractextraction.get_abstract_from_doi](#get_abstra
     }]
 }}
 ```
-If the references for the paper aren't available´, "refernces" will be "None"
+If the references for the paper aren't available´, "reference" will be "None"
 
 ### Abstract Extraction
 The Abstract Extraction Module implements the following 4 functions to extract abstracts from different sources.
@@ -139,14 +139,14 @@ To retrieve the abstract a request to the crossref API [(see API section)](#api-
 Since the crossref API offers also the references for some papers they are also returned if available.
 This is done mainly to safe time in the automatic snowballing.
 
-The crossref API offers abstracts of many free available papers. Nevertheless it is not possible to
-retrieve abstracst of all papers by this api. 
+The crossref API offers abstracts of many free available papers. Nevertheless, it is not possible to
+retrieve abstract of all papers by this api. 
 
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
-*doi*: The digital object identifier (doi) of the paper whichs abstract should be extracted
+*doi*: The digital object identifier (doi) of the paper which abstract should be extracted
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
-The ouput is a python dictionary with the following format:
+The output is a python dictionary with the following format:
 ```json
 {"title": "paper title", "abstract": "paper abstract", "references": [
     {
@@ -157,7 +157,7 @@ The ouput is a python dictionary with the following format:
 } 
 ```
 
-If the references for the paper aren't available, "refernces" will be "None"
+If the references for the paper aren't available, "reference" will be "None"
 
 #### get_abstract_from_arxiv_id
 ```python 
@@ -167,14 +167,14 @@ Returns the abstract and the title of any paper hosted by arXiv.org given by the
 To retrieve the abstract the arxiv API is used [(see API section)](#api-reference).
 
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
-*arxiv_id*: The arxiv_id of the paper whichs abstract should be extracted
+*arxiv_id*: The arxiv_id of the paper which's abstract should be extracted
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
 The output is a python dictionary with the following format:
 ```json
 {"title": "paper title", "abstract": "paper abstract", "references": "None"}
 ```
-Since arXiv doesn't offer referecnes of papers they are not returned like in [*get_abstract_from_doi(doi)*](#get_abstract_from_doi).
+Since arXiv doesn't offer references of papers they are not returned like in [*get_abstract_from_doi(doi)*](#get_abstract_from_doi).
 However, the key "references" is filled with "None" to have a consistent output format of across the functions.
 
 #### get_abstract_by_pdf
@@ -189,7 +189,7 @@ available. And then uses the respective *get_abstract* function specified above 
 *pdf*: Can either be the path to a local PDF file, or a URL to a PDF file. 
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
-The ouput is a python dictionary with the following format:
+The output is a python dictionary with the following format:
 ```python
 {"title": "paper title", "abstract": "paper abstract", "references": "None"} # if arXiv paper
 {"title": "paper title", "abstract": "paper abstract", "references": {"key":"e_1_3_2_21_2","doi-asserted-by":"publisher","DOI":"10.1016/example_doi"}
@@ -205,7 +205,7 @@ The get_abstracts_of_reference_links function is especially made to retrieve the
 The function tries to retrieve the abstracts for each retrieved references in the following three different ways:
 1. If for the reference a link of type "crossref" (meaning: https://dx.doi.org/10.1126/example_doi) is available, the doi is extracted from the link.
 The extracted doi is than passed to the [AbstractExtraction.get_abstracts_of_doi()](#get_abstract_from_doi) function to retrieve the abstract of the reference.
-2. If No crossref link is available it is checked if an arxiv link is available. In this case the arXiv_id is extracted is passed to the [AbstractExtract.get_abstract_from_arxiv_id()](#get_abstract_from_arxiv_id) function to retrieve the title an the abstract of the reference.
+2. If No crossref link is available it is checked if an arxiv link is available. In this case the arXiv_id is extracted is passed to the [AbstractExtract.get_abstract_from_arxiv_id()](#get_abstract_from_arxiv_id) function to retrieve the title and the abstract of the reference.
 3. If none of these links is available a get request to the "oa_query" link is made. If the "content-type" of the response is application/pdf the response url is passed to the [AbstractExtraction.get_abstract_by_pdf()](#get_abstract_by_pdf) function to try to extract the abstract from the pdf url. 
 If none of these 3 steps is successful no abstract for the reference is extracted.
 In case one of the steps is successful the retrieved abstract will be added to a dictionary with the respective link as key and the respective abstract dictionary as value.
@@ -240,7 +240,7 @@ of the SPECTER-Model enables to create SPECTER embeddings of titles and abstract
 ```python 
 specter_query_reference_similarity(corpus_set, query_set)
 ```
-This function generates the SPECTER embeddings and calucaltes the cosine similarity of each reference in query_set
+This function generates the SPECTER embeddings and calculates the cosine similarity of each reference in query_set
 with each reference in the corpus set and return the similarities. It uses the sentence_transformers.util.semantic_search
 from the [sentence-transformers/allenai-specter](https://huggingface.co/sentence-transformers/allenai-specter) model for this. 
 
@@ -260,7 +260,7 @@ from the [sentence-transformers/allenai-specter](https://huggingface.co/sentence
 ```
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
-Output is a dictionary containting the similarity score of each quer_set paper with each corpus_set paper with the following format:
+Output is a dictionary containing the similarity score of each query_set paper with each corpus_set paper with the following format:
 ```json
 {"10.1177/0093650214565914": [[{"corpus_id": 0, "score": 0.8752286434173584}, {"corpus_id": 1, "score": 0.6487678289413452}]]}
 ```
@@ -311,7 +311,7 @@ snowballing(seed_set_path, iterations, min_similarity=0.85, result_file="snowbal
 The snowballing function starts by extracting the abstracts of the seed set papers by using the [*get_abstract_by_pdf()*](#get_abstract_by_pdf) function of the
 *AbstractExtraction* module and adding them to the *corpus_set* variable. After extracting the seed set abstracts, the references of the seed set 
 and their respective abstracts are extracted by using the [*get_reference_abstracts*](#get_reference_abstracts) function of the *ReferenceExtraction* module.
-The reference abstracts are added to the *query_set* variable. Then the *corpus_set* and the *querry_set* are passed as parameters to the
+The reference abstracts are added to the *query_set* variable. Then the *corpus_set* and the *query_set* are passed as parameters to the
  [*get_similar_references*](#get_similar_references) function to retrieve the similarity of every retrieved abstract with every seed set abstract.
 Those references that exceed the specified similarity threshold are than added to two dictionary. The *result_set* and the *new_set*.
 The snowballing process is then continued in a while loop for the given number of iterations where in every iteration the *new_set* is appended to the
@@ -330,7 +330,7 @@ Save the json result of the snowballing in the *result_file*
 ```python 
 get_similar_references(corpus_set, query_set, min_similarity):
 ```
-Calcualtes the similaritys of each *query_set* (the new_references) paper with each *corpus_set* (seed_set/current result_set) paper
+Calculates the similarity's of each *query_set* (the new_references) paper with each *corpus_set* (seed_set/current result_set) paper
 and only returns those papers of the *query_set* (with their achieved similarity) that have a higher similarity than min_similarity with one of the *corpus_set*
 papers.
 
@@ -407,7 +407,7 @@ The function returns the object file of the plot. So it is possible to handle th
 snowballing_paper_importance(snowballing_result_path, keywords=[]):
 ```
 Calculates the paper importance like in [PaperSelection.paper_importance](#paper_importance)
-but for the snowballing results and adds the similarity with the keyords to the snowballing_result json.
+but for the snowballing results and adds the similarity with the keywords to the snowballing_result json.
 
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 *snowballing_result_path*: json file resulting from [PaperSearch.snowballing()](#Automatic-Snowballing)
@@ -419,7 +419,7 @@ Returns json file with keyword similarity of each paper in the file added.
 ```python 
 plot_snowballing_importance(snowballing_result_path)
 ```
-Plots the result of the [PaperSelection.snowballing_paper_importance](#snowballing_paper_importance), by tranforming the json to a pandas data frame and passing it to the PaperSelecton.plot_paper_selection function
+Plots the result of the [PaperSelection.snowballing_paper_importance](#snowballing_paper_importance), by transforming the json to a pandas data frame and passing it to the PaperSelecton.plot_paper_selection function
 
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>    
 *snowballing_result_path*: json file resulting from [PaperSelection.snowballing_paper_importance](#snowballing_paper_importance)
@@ -461,7 +461,7 @@ E.g.2 threshold -> high [Keyword, Extraction, Words out of text]
 As output this function returns a dictionary of all the phrases which you defined with "number_of_keyphrases" and the 
 score of it. 
 #### rake_phrase_extraction
-This function is a simple implementation to extract keyphrases out of an text. There are no more variables to define. 
+This function is a simple implementation to extract keyphrases out of a text. There are no more variables to define. 
 ```python 
 rake_phrase_extraction(text, number_of_keywords=10)
 ```
@@ -481,11 +481,11 @@ score of it.
 The summarization function is implemented with the function from
 https://gist.github.com/edubey/cc41dbdec508a051675daf8e8bba62c5 it creates a summarization out of a text. Therefor it 
 builds up a similarity matrix between all sentences and the text and takes the most valued sentences as sentences for
-the summarization. This file contain four functions for that: read_article, sentence_similarity, build_similarity_matrix
+the summarization. This file contains four functions for that: read_article, sentence_similarity, build_similarity_matrix
 and generate_summary.
 
 #### read_article
-This function reads the text and parse it into the single sentences and also it removes special characters out of the 
+This function reads the text and parse it into the single sentences, and also it removes special characters out of the 
 string.
 ```python 
 read_article(text)
@@ -497,7 +497,7 @@ The input of this function is a text(string) that you want to summarize.
 As an output it returns a list of all sentences without the special symbols in it.
 
 #### sentence_similarity
-This function compares two sentences with each other and returns a value of the similarity of those both. Also it removes 
+This function compares two sentences with each other and returns a value of the similarity of those both. Also, it removes 
 stopwords out of the sentences. This function is used to build up the similarity matrix. 
 ```python 
 sentence_similarity(sent1, sent2, stopwords=None)
@@ -530,7 +530,7 @@ generate_summary(file_name, top_n=5)
 ```
 <ins>**<span style="font-size:13px;">Input:</span>**</ins>   
 file_name: This is the input to give the function the Text you want to summarize  
-top_n: This parameter defines how long your summarize gonna be. E.g. top_n = 5, creates a summary out of the 5 highest
+top_n: This parameter defines how long your summarize going to be. E.g. top_n = 5, creates a summary out of the 5 highest
 valued. 
 
 <ins>**<span style="font-size:13px;">Output:</span>**</ins>  
@@ -647,7 +647,7 @@ pipenv run cli.py extract_keyphrases_pdf --pdf="path to pdf"
 
 
 ## Getting started
-To setup a development environment and to use the CLI, simply run the following commands:
+To set up a development environment and to use the CLI, simply run the following commands:
 
 ```console
 # Clone the project
@@ -717,7 +717,7 @@ as well as different links to the references. These links can be of 3 different 
 #### Crossref REST API
 The [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/) is an API which gives the user access to all kind of meta data of many papers
 by making a request with the doi of the paper. 
-We mainly use the meta data "reference" containing the references of the paper and "abstract", containing the abstract of the paper.
+We mainly use the metadata "reference" containing the references of the paper and "abstract", containing the abstract of the paper.
 For more information about the crossref API we recommend taking a look at it's documentation: [https://www.crossref.org/documentation/retrieve-metadata/rest-api/](https://www.crossref.org/documentation/retrieve-metadata/rest-api/)
 
 
